@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  gap: 16px;
+
+  padding: 12px 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 400;
+}
+
+.active {
+  text-decoration: underline;
+  font-weight: 600;
+}
