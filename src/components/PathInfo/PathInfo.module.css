@@ -28,5 +28,6 @@
 }
 
 .accentText {
+  display: inline-block;
   color: #050505;
 }

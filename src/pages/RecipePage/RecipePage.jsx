@@ -7,13 +7,6 @@ import RecipeInfo from '../../components/RecipeInfo/RecipeInfo.jsx';
 import styles from './RecipePage.module.css';
 import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';
 
-// Deleted after created common component
-const Container = ({ children }) => (
-  <div className={styles.container}>{children}</div>
-);
-
-// -------------------------------------------------------
-
 export const RecipePage = () => {
   const { id: recipeId } = useParams();
   const pageName = 'salmon';
@@ -25,12 +18,12 @@ export const RecipePage = () => {
 
   return (
     <section className={styles.section}>
-      <Container>
+      <div className="container">
         <h1 className={styles.title}>Recipe Page</h1>
-        <PathInfo currentPageName={pageName} />
+        <PathInfo className={styles.pathInfo} currentPageName={pageName} />
         {/* <RecipeInfo /> */}
         {/* <PopularRecipes /> */}
-      </Container>
+      </div>
     </section>
   );
 };

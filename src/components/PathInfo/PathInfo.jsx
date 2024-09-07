@@ -7,6 +7,6 @@ export const PathInfo = ({ currentPageName }) => (
       Home
     </NavLink>
     <span className={styles.delimiter}> / </span>
-    <span className={styles.accentText}>{currentPageName}</span>
+    <p className={styles.accentText}>{currentPageName}</p>
   </div>
 );
