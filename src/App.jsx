@@ -18,7 +18,7 @@ function App() {
         {/*<Route path="/create" element={<CreateRecipe />} />*/}
         <Route path="recipe/:id" element={<RecipePage />} />
 
-        {/* <Route path="*" element={<Home />} /> */}
+        <Route path="*" element={<Home />} />
       </Route>
     </Routes>
   );

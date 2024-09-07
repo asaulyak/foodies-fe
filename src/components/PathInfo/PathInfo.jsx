@@ -6,7 +6,7 @@ export const PathInfo = ({ currentPageName }) => (
     <NavLink className={styles.link} to="/">
       Home
     </NavLink>
-    <span className={styles.delimiter}> / </span>
+    {currentPageName && <span className={styles.delimiter}> / </span>}
     <p className={styles.accentText}>{currentPageName}</p>
   </div>
 );
