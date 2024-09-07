@@ -18,6 +18,7 @@ const RecipeInfo = ({ changeBreadCrumbs }) => {
   return (
     <div>
       <RecipeMainInfo
+        id={receipt.id}
         img={receipt.thumb}
         title={receipt.title}
         category={receipt.category.name}

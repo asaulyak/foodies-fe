@@ -11,12 +11,6 @@ export const RecipePage = () => {
 
   const changeBreadCrumbs = newValue => setBreadCrumbs(newValue);
 
-  //   const [receipt, setReceipt] = useState({ ...example });
-  //   const [popular, setPopular] = useState([]);
-  //   const dispatch = useDispatch();
-
-  //   useEffect(() => {}, []); getById get popular
-
   return (
     <section className={styles.section}>
       <div className="container">

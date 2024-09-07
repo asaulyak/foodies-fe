@@ -1,7 +1,9 @@
-import { Button } from '../Button/Button.jsx';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './RecipeMainInfo.module.css';
 
 const RecipeMainInfo = ({
+  id = '',
   img,
   title = 'Dish',
   category = 'Dish',
@@ -10,6 +12,24 @@ const RecipeMainInfo = ({
   authorName = 'John',
   authorAvatar = '',
 }) => {
+  // const isLoggedUser = useSelector();
+  const isLoggedUser = true;
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log('click');
+    if (!isLoggedUser) {
+      console.log('Unauthorized user');
+      console.log('Open signInModal');
+      //return dispatch(openModal())
+      return;
+    }
+    console.log('Authorized user');
+    console.log('Navigate to userpage');
+    navigate(`/user/${id}`);
+  };
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.hero}>
@@ -26,7 +46,7 @@ const RecipeMainInfo = ({
         </div>
 
         <p className={styles.description}>{description}</p>
-        <button type="button" className={styles.btn}>
+        <button type="button" className={styles.btn} onClick={handleClick}>
           <div className={styles.btnWrapper}>
             <img src={authorAvatar} alt="User Avatar" />
           </div>
