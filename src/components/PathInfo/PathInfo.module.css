@@ -1,0 +1,32 @@
+.pathInfo {
+  display: flex;
+  gap: 8px;
+
+  font-family: Mulish;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.24px;
+  text-transform: uppercase;
+}
+.link {
+  font-weight: inherit;
+  color: #bfbebe;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    color: #050505;
+  }
+  &:focus {
+    outline-offset: 4px;
+  }
+}
+.delimiter {
+  color: #bfbebe;
+}
+
+.accentText {
+  color: #050505;
+}

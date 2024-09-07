@@ -1,0 +1,39 @@
+/* delated after created component container */
+.container {
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+
+  @media screen and (min-width: 375px) {
+    width: 375px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding: 0 32px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 1440px;
+    padding: 0 80px;
+  }
+}
+/* --------------------------------- */
+
+/* PathInfo */
+
+/* visually hidden */
+.title {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.section {
+  padding: 40px 0 32px;
+  background-color: rgb(195, 141, 132);
+}

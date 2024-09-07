@@ -17,7 +17,11 @@
 * {
   box-sizing: border-box;
 }
-
+/* Must delet after position all elements */
+* {
+  outline: 1px solid red;
+}
+/* --------------------------------------- */
 body {
   margin: 0;
   display: flex;
