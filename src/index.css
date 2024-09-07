@@ -1,3 +1,4 @@
+@import url('css/reset.css');
 @import url('css/vars.css');
 
 :root {
@@ -36,4 +37,29 @@ ol {
 li,
 ol {
   list-style: none;
+}
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media only screen and (min-width: 370px) {
+  .container {
+    max-width: 375px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .container {
+    max-width: 1280px;
+  }
 }
