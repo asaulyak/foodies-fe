@@ -10,6 +10,7 @@ function App() {
 
   // Add lazy loaded pages here
   // const CreateRecipe = lazy(() => import('./pages/CreateRecipe/CreateRecipe.jsx'));
+  // const RecipePage = lazy(() => import('./pages/RecipePage/RecipePage.jsx'));
 
   return (
     <Routes>
