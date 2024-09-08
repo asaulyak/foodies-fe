@@ -6,11 +6,10 @@ import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
 import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
 import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 
-import { receipt } from './receipt.js';
+import { receipt } from '../../pages/RecipePage/db.js';
 
 export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const { id: recipeId } = useParams();
-  console.log(receipt);
   // const dispatch = useDispatch();
 
   useEffect(() => {

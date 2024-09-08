@@ -18,11 +18,7 @@
 * {
   box-sizing: border-box;
 }
-/* Must delet after position all elements */
-/* * {
-  outline: 1px solid red;
-} */
-/* --------------------------------------- */
+
 body {
   margin: 0;
   display: flex;
@@ -45,22 +41,25 @@ ol {
 .container {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 @media only screen and (min-width: 375px) {
   .container {
-    width: 375px;
+    max-width: 375px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
   }
 }
 @media only screen and (min-width: 768px) {
   .container {
-    width: 768px;
-    padding: 0 32px;
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 @media only screen and (min-width: 1440px) {
   .container {
-    width: 1440px;
-    padding: 0 80px;
+    max-width: 1280px;
   }
 }

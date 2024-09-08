@@ -9,15 +9,13 @@ const RecipeCard = ({ data }) => {
 // --------------------
 import styles from './PopularRecipes.module.css';
 
-const PopularRecipes = ({ recipes }) => {
+export const PopularRecipes = ({ recipes }) => {
   return (
     <section>
       <h2 className={styles.sectionTitle}>Popular recipes</h2>
-      {recipes.map(recipe => (
+      {/* {recipes.map(recipe => (
         <RecipeCard key={recipe.id} data={recipe} />
-      ))}
+      ))} */}
     </section>
   );
 };
-
-export default PopularRecipes;

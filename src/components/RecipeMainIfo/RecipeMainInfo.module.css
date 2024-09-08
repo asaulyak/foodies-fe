@@ -1,3 +1,6 @@
+.wrapper {
+}
+
 @media screen and (min-width: 1440px) {
   .wrapper {
     display: flex;
