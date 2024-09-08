@@ -14,6 +14,7 @@ jobs:
       - name: Set up .env file 📄
         run: |
           echo "VITE_API_BASE_URL=${{ vars.VITE_API_BASE_URL }}" > .env
+          cat .env
 
       - name: Install and build 🔧
         run: |
