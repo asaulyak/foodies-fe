@@ -1,6 +1,6 @@
-import { RecipeCard } from './RecipeCard/RecipeCard';
+import { RecipeCard } from '../RecipeCard/RecipeCard';
 
-export const RecipesList = ({ recipes }) => {
+export const RecipeList = ({ recipes }) => {
   const { data } = recipes;
 
   return (

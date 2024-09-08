@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { RecipesList } from './RecipesList';
+import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 
-export const RecipesSection = () => {
+export const Recipes = () => {
   return (
     <section>
       <div>
@@ -19,7 +19,7 @@ export const RecipesSection = () => {
         </p>
       </div>
       <div>
-        <RecipesList />
+        <RecipeList />
       </div>
     </section>
   );
