@@ -5,7 +5,7 @@ import styles from './RecipeMainInfo.module.css';
 export const RecipeMainInfo = ({
   children,
   id = '',
-  img,
+  img = '',
   title = 'Dish',
   category = 'Dish',
   time = '0',
@@ -35,7 +35,15 @@ export const RecipeMainInfo = ({
     <div className={styles.wrapper}>
       <section className={styles.hero}>
         <div className={styles.imgWrapper}>
-          <img src={img} alt={`Image ${title}`} />
+          <img
+            src={!img ? '' : img}
+            alt={`Image ${title}`}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src =
+                'https://placehold.co/552x552/BFBEBE/050505?text=Image not found';
+            }}
+          />
         </div>
       </section>
       <div>
@@ -49,7 +57,15 @@ export const RecipeMainInfo = ({
           <p className={styles.description}>{description}</p>
           <button type="button" className={styles.btn} onClick={handleClick}>
             <div className={styles.btnWrapper}>
-              <img src={authorAvatar} alt="User Avatar" />
+              <img
+                src={!authorAvatar ? '' : authorAvatar}
+                alt="User Avatar"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+                }}
+              />
             </div>
             <div className={styles.btnthumb}>
               <p className={styles.text}>Created by:</p>

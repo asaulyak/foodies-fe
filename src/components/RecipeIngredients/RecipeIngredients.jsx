@@ -13,7 +13,7 @@ export const RecipeIngredients = ({ ingredients }) => {
                 src={ingredient.image}
                 alt={`Image ${ingredient.title}`}
                 onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.onerror = null;
                   currentTarget.src =
                     'https://placehold.co/60x60/BFBEBE/050505?text=Image';
                 }}

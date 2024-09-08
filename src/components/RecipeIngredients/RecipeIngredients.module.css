@@ -4,6 +4,10 @@
     padding: 20px 0;
   }
 }
+.imgWrapper {
+  width: 551px;
+  height: 400px;
+}
 
 .title {
   margin-bottom: 20px;
@@ -40,7 +44,7 @@
     max-width: 178px;
   }
 }
-.imgWrapper {
+.btnWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
