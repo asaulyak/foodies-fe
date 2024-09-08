@@ -12,7 +12,6 @@ export const Icon = ({
     onClick={onClick}
     className={className}
     fill={fill}
-    xmlns="http://www.w3.org/2000/svg"
   >
     <use href={`${import.meta.env.BASE_URL}/icons.svg#icon-${iconId}`} />
   </svg>
