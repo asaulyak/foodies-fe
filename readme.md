@@ -33,6 +33,12 @@ experience.
 
 ## Usage
 
+Create a `.env` file by renaming `.env.example`:
+
+```bash
+mv .env.example .env
+```
+
 To start the development server:
 
 ```bash

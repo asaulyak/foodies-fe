@@ -1,0 +1,84 @@
+.user {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.32px;
+
+  background-color: var(--black-light);
+
+  border-radius: 30px;
+  padding-right: 14px;
+}
+
+.avatar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+
+  width: 50px;
+  height: 50px;
+
+  cursor: pointer;
+}
+
+.username {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profile {
+  position: relative;
+
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.links-wrapper {
+  position: relative;
+}
+
+.links {
+  position: absolute;
+
+  min-width: 148px;
+
+  border-radius: 15px;
+  border: 1px solid var(--white);
+
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+
+  cursor: pointer;
+
+  background-color: var(--black-light);
+}
+
+.user-icon {
+  stroke: var(--white);
+}
+
+.signout-icon {
+  fill: var(--white);
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+}
