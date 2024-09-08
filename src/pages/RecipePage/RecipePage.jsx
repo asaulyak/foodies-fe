@@ -5,7 +5,7 @@ import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';
 
 import styles from './RecipePage.module.css';
 
-export const RecipePage = () => {
+const RecipePage = () => {
   const [breadCrumbs, setBreadCrumbs] = useState('sda');
   const [popularReceipts, setPopularReceipts] = useState([]);
 
@@ -24,3 +24,4 @@ export const RecipePage = () => {
     </section>
   );
 };
+export default RecipePage;

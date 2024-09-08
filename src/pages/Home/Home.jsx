@@ -1,7 +1,9 @@
 import css from './Home.module.css';
 
-export const Home = () => (
+const Home = () => (
   <>
     <section className={css.hero}>HOME</section>
   </>
 );
+
+export default Home;
