@@ -15,7 +15,7 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
 
   useEffect(() => {
     // dispatch(openLoader())
-    changeBreadCrumbs(receipt.title);
+    changeBreadCrumbs(receipt.title); //update bread crumbs
     // dispatch(closeLoader());
   }, [receipt]);
 

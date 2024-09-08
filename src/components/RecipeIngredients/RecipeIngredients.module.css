@@ -4,14 +4,6 @@
     padding: 20px 0;
   }
 }
-.imgHeroWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 551px;
-  height: 400px;
-  overflow: hidden;
-}
 
 .title {
   margin-bottom: 20px;
@@ -45,10 +37,10 @@
   max-width: 152px;
   @media screen and (min-width: 768px) {
     gap: 14px;
-    max-width: 178px;
+    max-width: 180px;
   }
 }
-.btnWrapper {
+.imgWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,6 +68,7 @@
   font-weight: 500;
   line-height: 1.429;
   letter-spacing: -0.28px;
+  overflow: hidden;
   @media screen and (min-width: 768px) {
     font-size: 16px;
     line-height: 1.5;

@@ -15,12 +15,11 @@ export const RecipeMainInfo = ({
   authorAvatar = '',
 }) => {
   // const isLoggedUser = useSelector();
-  const isLoggedUser = true;
+  const isLoggedUser = false;
   // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log('click');
     if (!isLoggedUser) {
       console.log('Unauthorized user');
       console.log('Open signInModal');
@@ -31,12 +30,11 @@ export const RecipeMainInfo = ({
     console.log('Navigate to userpage');
     navigate(`/user/${id}`);
   };
-  // img = false;
+
   return (
     <div className={styles.wrapper}>
+      <RecipeHero image={img} title={title} />
       <div>
-        <RecipeHero image={img} title={title} />
-
         <section className={styles.infoSection}>
           <h2 className={styles.title}>{title}</h2>
           <div className={styles.thumb}>
@@ -45,6 +43,7 @@ export const RecipeMainInfo = ({
           </div>
 
           <p className={styles.description}>{description}</p>
+          {/* change after create recipe card btn */}
           <button type="button" className={styles.btn} onClick={handleClick}>
             <div className={styles.btnWrapper}>
               <img

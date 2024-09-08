@@ -12,9 +12,10 @@
 
 .section {
   padding: 40px 0 32px;
-  background-color: rgb(195, 141, 132);
-}
-
-.pathInfo {
-  margin-bottom: 32px;
+  @media screen and (min-width: 768px) {
+    padding: 28px 0 50px;
+  }
+  @media screen and (min-width: 1440px) {
+    padding: 40px 0 60px;
+  }
 }
