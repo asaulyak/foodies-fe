@@ -3,7 +3,7 @@ import { PopularRecipes } from '../../components/PopularRecipes/PopularRecipes.j
 import { RecipeInfo } from '../../components/RecipeInfo/RecipeInfo.jsx';
 import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';
 
-import styles from './RecipePage.module.css';
+import css from './RecipePage.module.css';
 
 const RecipePage = () => {
   const [breadCrumbs, setBreadCrumbs] = useState('sda');
@@ -14,9 +14,9 @@ const RecipePage = () => {
   useEffect(() => {}, []);
 
   return (
-    <section className={styles.section}>
+    <section className={css.section}>
       <div className="container">
-        <h1 className={styles.title}>Recipe Page</h1>
+        <h1 className="visually-hidden">Recipe Page</h1>
         <PathInfo currentPageName={breadCrumbs} />
         <RecipeInfo changeBreadCrumbs={changeBreadCrumbs} />
         <PopularRecipes receipt={popularReceipts} />

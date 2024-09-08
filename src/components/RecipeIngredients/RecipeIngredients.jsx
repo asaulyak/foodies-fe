@@ -1,17 +1,17 @@
-import styles from './RecipeIngredients.module.css';
+import css from './RecipeIngredients.module.css';
 
 export const RecipeIngredients = ({ ingredients }) => {
   return (
-    <section className={styles.section}>
-      <h2 className={styles.title}>Ingredients</h2>
-      <ul className={styles.list}>
+    <section className={css.section}>
+      <h2 className={css.title}>Ingredients</h2>
+      <ul className={css.list}>
         {ingredients.map(ingredient => (
-          <li key={ingredient.id} className={styles.item}>
-            <div className={styles.imgWrapper}>
+          <li key={ingredient.id} className={css.item}>
+            <div className={css.imgWrapper}>
               <img
-                className={styles.img}
+                className={css.img}
                 src={ingredient.image}
-                alt={`Image ${ingredient.title}`}
+                alt={`Ingredient ${ingredient.title}`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
                   currentTarget.src =
@@ -19,8 +19,8 @@ export const RecipeIngredients = ({ ingredients }) => {
                 }}
               />
             </div>
-            <div className={styles.textWrapper}>
-              <p className={styles.accentText}>{ingredient.name}</p>
+            <div className={css.textWrapper}>
+              <p className={css.accentText}>{ingredient.name}</p>
               <p>{ingredient.quantity || 'quantity'}</p>
             </div>
           </li>

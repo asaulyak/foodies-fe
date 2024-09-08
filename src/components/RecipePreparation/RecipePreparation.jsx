@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Button } from '../Button/Button.jsx';
-import styles from './RecipePreparation.module.css';
+import css from './RecipePreparation.module.css';
 
 export const RecipePreparation = ({ preparation }) => {
   // const isFavoriteReceipt = useSelector()
@@ -22,16 +22,18 @@ export const RecipePreparation = ({ preparation }) => {
   };
 
   return (
-    <section className={styles.section}>
-      <h2 className={styles.title}>Recipe preparation</h2>
-      <ul className={styles.list}>
+    <section className={css.section}>
+      <h2 className={css.title}>Recipe preparation</h2>
+      <ul className={css.list}>
         {preparation.split('\n').map((text, idx) => (
-          <p className={styles.item} key={`${Date.now()}-${idx}`}>
+          <p className={css.item} key={`${Date.now()}-${idx}`}>
             {text}
           </p>
         ))}
       </ul>
-      <Button text={btnTextContent} onClick={handleClick} styles={styles.btn} />
+      <Button onClick={handleClick} className={css.btn}>
+        {btnTextContent}
+      </Button>
     </section>
   );
 };

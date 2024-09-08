@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import styles from './RecipeMainInfo.module.css';
+// import { useSelector, useDispatch } from 'react-redux';
+import css from './RecipeMainInfo.module.css';
 import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
 
 export const RecipeMainInfo = ({
@@ -32,20 +32,20 @@ export const RecipeMainInfo = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={css.wrapper}>
       <RecipeHero image={img} title={title} />
       <div>
-        <section className={styles.infoSection}>
-          <h2 className={styles.title}>{title}</h2>
-          <div className={styles.thumb}>
-            <p className={styles.info}>{category}</p>
-            <p className={styles.info}>{time} min</p>
+        <section className={css.infoSection}>
+          <h2 className={css.title}>{title}</h2>
+          <div className={css.thumb}>
+            <p className={css.info}>{category}</p>
+            <p className={css.info}>{time} min</p>
           </div>
 
-          <p className={styles.description}>{description}</p>
+          <p className={css.description}>{description}</p>
           {/* change after create recipe card btn */}
-          <button type="button" className={styles.btn} onClick={handleClick}>
-            <div className={styles.btnWrapper}>
+          <button type="button" className={css.btn} onClick={handleClick}>
+            <div className={css.btnWrapper}>
               <img
                 src={!authorAvatar ? '' : authorAvatar}
                 alt="User Avatar"
@@ -56,9 +56,9 @@ export const RecipeMainInfo = ({
                 }}
               />
             </div>
-            <div className={styles.btnthumb}>
-              <p className={styles.text}>Created by:</p>
-              <p className={styles.accentText}>{authorName}</p>
+            <div className={css.btnThumb}>
+              <p className={css.text}>Created by:</p>
+              <p className={css.accentText}>{authorName}</p>
             </div>
           </button>
         </section>

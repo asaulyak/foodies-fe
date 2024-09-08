@@ -1,13 +1,13 @@
-import styles from './RecipeHero.module.css';
+import css from './RecipeHero.module.css';
 
 export const RecipeHero = ({ image, title }) => {
   return (
-    <section className={styles.hero}>
-      <div className={styles.imgWrapper}>
+    <section className={css.hero}>
+      <div className={css.imgWrapper}>
         <img
-          className={styles.img}
+          className={css.img}
           src={!image ? '' : image}
-          alt={`Image ${title}`}
+          alt={`Dish ${title}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src =

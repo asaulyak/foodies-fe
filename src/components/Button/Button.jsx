@@ -7,14 +7,14 @@ export const Button = ({
   style,
   disabled,
   type = 'button',
-  styles,
+  className,
 }) => {
   return (
     <button
       type={type}
       disabled={disabled}
       style={style}
-      className={clsx([css.button, css[variant], styles])}
+      className={clsx([css.button, css[variant], className])}
       onClick={onClick}
     >
       {children}

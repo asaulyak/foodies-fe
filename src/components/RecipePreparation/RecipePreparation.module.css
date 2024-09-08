@@ -44,16 +44,13 @@
 
 .btn {
   padding: 14px 20px;
-  border-radius: 30px;
   border: 1px solid var(--grey);
 
   color: var(--grey);
   line-height: 1.429;
-  letter-spacing: -0.28px;
 
   @media screen and (min-width: 768px) {
     padding: 16px 32px;
     line-height: 1.5;
-    letter-spacing: -0.32px;
   }
 }

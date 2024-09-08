@@ -11,7 +11,6 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const { id: recipeId } = useParams();
   const [receipt, setReceipt] = useState({});
   // const dispatch = useDispatch();
-  //
 
   useEffect(() => {
     async function fetchData(id) {
