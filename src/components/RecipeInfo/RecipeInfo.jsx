@@ -1,22 +1,26 @@
-import { useLocation, useParams } from 'react-router-dom';
-import RecipeIngredients from '../RecipeIngredients/RecipeIngredients.jsx';
-import RecipeMainInfo from '../RecipeMainIfo/RecipeMainInfo.jsx';
-import RecipePreparation from '../RecipePreparation/RecipePreparation.jsx';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+
+import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
+import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
+import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 
 import { receipt } from './receipt.js';
-import { useEffect } from 'react';
 
-console.log(receipt);
-
-const RecipeInfo = ({ changeBreadCrumbs }) => {
+export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const { id: recipeId } = useParams();
+  console.log(receipt);
+  // const dispatch = useDispatch();
 
   useEffect(() => {
+    // dispatch(openLoader())
     changeBreadCrumbs(receipt.title);
+    // dispatch(closeLoader());
   }, [receipt]);
 
   return (
-    <div>
+    <>
       <RecipeMainInfo
         id={receipt.id}
         img={receipt.thumb}
@@ -26,11 +30,10 @@ const RecipeInfo = ({ changeBreadCrumbs }) => {
         description={receipt.description}
         authorName={receipt.user.name}
         authorAvatar={receipt.user.avatar}
-      />
-      <RecipeIngredients />
-      <RecipePreparation />
-    </div>
+      >
+        <RecipeIngredients ingredients={receipt.ingredients} />
+        <RecipePreparation preparation={receipt.instructions} />
+      </RecipeMainInfo>
+    </>
   );
 };
-
-export default RecipeInfo;

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import PopularRecipes from '../../components/PopularRecipes/PopularRecipes.jsx';
-import RecipeInfo from '../../components/RecipeInfo/RecipeInfo.jsx';
+import { RecipeInfo } from '../../components/RecipeInfo/RecipeInfo.jsx';
 
 import styles from './RecipePage.module.css';
 import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';

@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './RecipeMainInfo.module.css';
 
-const RecipeMainInfo = ({
+export const RecipeMainInfo = ({
+  children,
   id = '',
   img,
   title = 'Dish',
@@ -37,27 +38,27 @@ const RecipeMainInfo = ({
           <img src={img} alt={`Image ${title}`} />
         </div>
       </section>
-
-      <section className={styles.infoSection}>
-        <h2 className={styles.title}>{title}</h2>
-        <div className={styles.thumb}>
-          <p className={styles.info}>{category}</p>
-          <p className={styles.info}>{time} min</p>
-        </div>
-
-        <p className={styles.description}>{description}</p>
-        <button type="button" className={styles.btn} onClick={handleClick}>
-          <div className={styles.btnWrapper}>
-            <img src={authorAvatar} alt="User Avatar" />
+      <div>
+        <section className={styles.infoSection}>
+          <h2 className={styles.title}>{title}</h2>
+          <div className={styles.thumb}>
+            <p className={styles.info}>{category}</p>
+            <p className={styles.info}>{time} min</p>
           </div>
-          <div className={styles.btnthumb}>
-            <p className={styles.text}>Created by:</p>
-            <p className={styles.accentText}>{authorName}</p>
-          </div>
-        </button>
-      </section>
+
+          <p className={styles.description}>{description}</p>
+          <button type="button" className={styles.btn} onClick={handleClick}>
+            <div className={styles.btnWrapper}>
+              <img src={authorAvatar} alt="User Avatar" />
+            </div>
+            <div className={styles.btnthumb}>
+              <p className={styles.text}>Created by:</p>
+              <p className={styles.accentText}>{authorName}</p>
+            </div>
+          </button>
+        </section>
+        {children}
+      </div>
     </div>
   );
 };
-
-export default RecipeMainInfo;
