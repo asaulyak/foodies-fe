@@ -1,5 +1,5 @@
 @import url('css/reset.css');
-@import 'node_modules/modern-normalize/modern-normalize.css';
+@import '/node_modules/modern-normalize/modern-normalize.css';
 @import url('css/vars.css');
 
 :root {
