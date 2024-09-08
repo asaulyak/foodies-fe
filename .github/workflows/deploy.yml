@@ -11,6 +11,10 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
 
+      - name: Set up .env file 📄
+        run: |
+          echo "VITE_API_BASE_URL=${{ vars.VITE_API_BASE_URL }}" > .env
+
       - name: Install and build 🔧
         run: |
           npm install
