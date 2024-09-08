@@ -29,7 +29,7 @@ export const ProfileWidget = () => {
         <div className={css.user}>
           <div className={css.avatar}>
             <img
-              src={user.avatar || `${import.meta.env.BASE_URL}/avatar.jpg`}
+              src={user.avatar || `${import.meta.env.BASE_URL}/avatar.png`}
               alt={user.name}
               width="50"
               height="50"
