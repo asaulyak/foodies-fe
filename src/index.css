@@ -25,6 +25,7 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Mulish', sans-serif;
 }
 
 ul,
