@@ -21,9 +21,8 @@ export const Header = () => {
   );
 
   return (
-    <div className={clsx([css.header, css.light])}>
+    <div className={clsx([css.header])}>
       <Logo />
-
       <nav className={css.nav}>
         {menu.map(item => (
           <NavLink

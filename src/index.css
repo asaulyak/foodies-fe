@@ -38,6 +38,7 @@ li,
 ol {
   list-style: none;
 }
+
 .visually-hidden {
   position: absolute;
   margin: -1px;
@@ -58,7 +59,7 @@ ol {
   padding-left: 16px;
   padding-right: 16px;
 }
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 370px) {
   .container {
     max-width: 375px;
   }
