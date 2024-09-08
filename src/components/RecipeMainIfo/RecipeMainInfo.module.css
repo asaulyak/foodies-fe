@@ -5,33 +5,6 @@
   }
 }
 
-.hero {
-  margin-bottom: 32px;
-  @media screen and (min-width: 768px) {
-    margin-bottom: 40px;
-  }
-}
-.imgWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  max-height: 318px;
-
-  border-radius: 30px;
-
-  background-color: var(--grey);
-  object-fit: cover;
-  text-align: center;
-  overflow: hidden;
-
-  @media screen and (min-width: 768px) {
-    max-height: 400px;
-  }
-  @media screen and (min-width: 1440px) {
-    min-width: 551px;
-  }
-}
 .infoSection {
   color: var(--grey);
   margin-bottom: 32px;

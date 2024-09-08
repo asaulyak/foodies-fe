@@ -1,0 +1,28 @@
+.hero {
+  padding: 32px 0 16px;
+  @media screen and (min-width: 768px) {
+    padding: 40px 0 20px;
+  }
+}
+
+.imgWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  max-height: 318px;
+
+  border-radius: 30px;
+
+  background-color: var(--grey);
+  object-fit: cover;
+  text-align: center;
+  overflow: hidden;
+
+  @media screen and (min-width: 768px) {
+    max-height: 400px;
+  }
+  @media screen and (min-width: 1440px) {
+    min-width: 551px;
+  }
+}

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './RecipeMainInfo.module.css';
+import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
 
 export const RecipeMainInfo = ({
   children,
@@ -30,23 +31,12 @@ export const RecipeMainInfo = ({
     console.log('Navigate to userpage');
     navigate(`/user/${id}`);
   };
-
+  // img = false;
   return (
     <div className={styles.wrapper}>
-      <section className={styles.hero}>
-        <div className={styles.imgWrapper}>
-          <img
-            src={!img ? '' : img}
-            alt={`Image ${title}`}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null;
-              currentTarget.src =
-                'https://placehold.co/552x552/BFBEBE/050505?text=Image not found';
-            }}
-          />
-        </div>
-      </section>
       <div>
+        <RecipeHero image={img} title={title} />
+
         <section className={styles.infoSection}>
           <h2 className={styles.title}>{title}</h2>
           <div className={styles.thumb}>

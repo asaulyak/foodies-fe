@@ -4,9 +4,13 @@
     padding: 20px 0;
   }
 }
-.imgWrapper {
+.imgHeroWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 551px;
   height: 400px;
+  overflow: hidden;
 }
 
 .title {
