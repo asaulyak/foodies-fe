@@ -20,16 +20,16 @@ export const UserInfo = () => (
             <path
               d="M8.5 3.3335V12.6668"
               stroke="white"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M3.83398 8H13.1673"
               stroke="white"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
