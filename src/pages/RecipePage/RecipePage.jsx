@@ -1,25 +1,46 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { PopularRecipes } from '../../components/PopularRecipes/PopularRecipes.jsx';
 import { RecipeInfo } from '../../components/RecipeInfo/RecipeInfo.jsx';
 import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';
+import { http } from '../../http/index.js';
 
 import css from './RecipePage.module.css';
 
 const RecipePage = () => {
-  const [breadCrumbs, setBreadCrumbs] = useState('sda');
-  const [popularReceipts, setPopularReceipts] = useState([]);
+  const [breadCrumbs, setBreadCrumbs] = useState('');
+  const [popularRecipes, setPopularRecipes] = useState([]);
+  const [recipe, setRecipe] = useState({});
 
-  const changeBreadCrumbs = newValue => setBreadCrumbs(newValue);
+  const { id: recipeId } = useParams();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function fetchReceipt(id) {
+      const response = await http.get(`/recipes/${id}`);
+      return response.data;
+    }
+
+    async function fetchPopular() {
+      const response = await http.get('/recipes/popular');
+      return response.data;
+    }
+
+    // dispatch(openLoader())
+    fetchReceipt(recipeId).then(data => {
+      setRecipe(data);
+      setBreadCrumbs(data.title);
+    });
+    // dispatch(setError(error.message))
+    // dispatch(closeLoader())
+  }, [recipeId]);
 
   return (
     <section className={css.section}>
       <div className="container">
         <h1 className="visually-hidden">Recipe Page</h1>
         <PathInfo currentPageName={breadCrumbs} />
-        <RecipeInfo changeBreadCrumbs={changeBreadCrumbs} />
-        <PopularRecipes receipt={popularReceipts} />
+        {!!Object.keys(recipe).length && <RecipeInfo recipe={recipe} />}
+        {/* <PopularRecipes receipt={popularRecipes} /> */}
       </div>
     </section>
   );

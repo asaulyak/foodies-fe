@@ -59,7 +59,8 @@ ol {
   padding-left: 16px;
   padding-right: 16px;
 }
-@media only screen and (min-width: 370px) {
+
+@media only screen and (min-width: 375px) {
   .container {
     max-width: 375px;
   }
