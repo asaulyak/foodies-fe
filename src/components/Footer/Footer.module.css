@@ -1,0 +1,56 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  margin-top: auto;
+}
+
+.networkLinks {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.networkLink {
+  align-items: center;
+}
+
+.networkLink:hover {
+  background-color: #847d7d;
+}
+
+.copyright {
+  color: #1a1a1a;
+  text-align: center;
+  font-family: Mulish;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
+}
+
+@media only screen and (min-width: 768px) {
+  copyright {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+.iconThumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  border: 1px solid #bfbebe;
+}
+.iconImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
