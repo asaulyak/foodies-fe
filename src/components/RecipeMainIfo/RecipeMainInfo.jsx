@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux'; //TODO:  uncomment when using Redux
+
 import css from './RecipeMainInfo.module.css';
 import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
 
@@ -14,20 +15,16 @@ export const RecipeMainInfo = ({
   authorName = 'John',
   authorAvatar = '',
 }) => {
-  // const isLoggedUser = useSelector();
-  const isLoggedUser = false;
-  // const dispatch = useDispatch();
+  // const isLoggedUser = useSelector();  //TODO:  uncomment when using selector is authorized user
+  const isLoggedUser = false; //TODO:  delete after using selector is authorized user
+  // const dispatch = useDispatch(); //TODO:  uncomment when using dispatch
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (!isLoggedUser) {
-      console.log('Unauthorized user');
-      console.log('Open signInModal');
-      //return dispatch(openModal())
+      //return dispatch(openModal()) //TODO:  uncomment when using dispatch and open modal signIn action
       return;
     }
-    console.log('Authorized user');
-    console.log('Navigate to userpage');
     navigate(`/user/${id}`);
   };
 
@@ -41,9 +38,8 @@ export const RecipeMainInfo = ({
             <p className={css.info}>{category}</p>
             <p className={css.info}>{time} min</p>
           </div>
-
           <p className={css.description}>{description}</p>
-          {/* change after create recipe card btn */}
+          //TODO: change button after create recipe card btn
           <button type="button" className={css.btn} onClick={handleClick}>
             <div className={css.btnWrapper}>
               <img

@@ -1,4 +1,4 @@
-// Delete after created component
+//TODO: In development, Delete after created component
 const RecipeCard = ({ data }) => {
   return (
     <li>
@@ -13,6 +13,7 @@ export const PopularRecipes = ({ recipes }) => {
   return (
     <section>
       <h2 className={styles.sectionTitle}>Popular recipes</h2>
+      //TODO: in development
       {/* {recipes.map(recipe => (
         <RecipeCard key={recipe.id} data={recipe} />
       ))} */}

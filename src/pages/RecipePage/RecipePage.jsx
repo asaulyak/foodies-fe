@@ -25,13 +25,13 @@ const RecipePage = () => {
       return response.data;
     }
 
-    // dispatch(openLoader())
+    // dispatch(openLoader())//TODO: in development
     fetchReceipt(recipeId).then(data => {
       setRecipe(data);
       setBreadCrumbs(data.title);
     });
-    // dispatch(setError(error.message))
-    // dispatch(closeLoader())
+    // dispatch(setError(error.message))//TODO: in development
+    // dispatch(closeLoader())//TODO: in development
   }, [recipeId]);
 
   return (
@@ -40,6 +40,7 @@ const RecipePage = () => {
         <h1 className="visually-hidden">Recipe Page</h1>
         <PathInfo currentPageName={breadCrumbs} />
         {!!Object.keys(recipe).length && <RecipeInfo recipe={recipe} />}
+        //TODO: in development
         {/* <PopularRecipes receipt={popularRecipes} /> */}
       </div>
     </section>

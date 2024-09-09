@@ -3,7 +3,6 @@ import { Layout } from './components/Layout/Layout.jsx';
 import { lazy } from 'react';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
-// import RecipePage from './pages/RecipePage/RecipePage.jsx';
 
 function App() {
   Modal.setAppElement('#modal-placeholder');
