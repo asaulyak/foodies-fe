@@ -5,9 +5,9 @@ export const RecipeList = ({ recipes }) => {
   const { data } = recipes;
 
   return (
-    <ul className={styles.recipes_list_wrap}>
+    <ul className={styles.recipesListWrap}>
       {data.map(recipe => {
-        return <RecipeCard key={recipe._id} recipe={recipe} />;
+        return <RecipeCard key={recipe.id} recipe={recipe} />;
       })}
     </ul>
   );

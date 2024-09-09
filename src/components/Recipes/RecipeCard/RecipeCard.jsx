@@ -4,23 +4,23 @@ import { HiMiniArrowUpRight } from 'react-icons/hi2';
 import styles from './RecipeCard.module.css';
 
 export const RecipeCard = ({ recipe }) => {
-  const { _id, title, owner, description, thumb } = recipe;
+  const { id, title, user, description, thumb } = recipe;
 
   return (
     <>
       <li className={styles.recipeCard}>
-        <Link to={`/recipe/${_id}`}>
+        <Link to={`/recipe/${id}`}>
           <img src={thumb} alt={title} className={styles.recipeImage} />
         </Link>
         <div className={styles.textWrap}>
-          <h3 className={styles.header_card}>{title}</h3>
+          <h3 className={styles.headerCard}>{title}</h3>
           <p className={styles.recipeDescription}>{description}</p>
         </div>
         <div>
-          <Link to={`/user/${owner._id}`} className={styles.avatarWrapper}>
+          <Link to={`/user/${user.id}`} className={styles.avatarWrapper}>
             <img
-              src={owner.avatar}
-              alt={`${owner.name} avatar`}
+              src={user.avatar}
+              alt={`${user.name} avatar`}
               className={styles.avatar}
             />
           </Link>
@@ -29,7 +29,7 @@ export const RecipeCard = ({ recipe }) => {
               <FaRegHeart size={18} />
             </li>
             <li>
-              <Link to={`/recipe/${_id}`} className={styles.iconWrapper}>
+              <Link to={`/recipe/${id}`} className={styles.iconWrapper}>
                 <HiMiniArrowUpRight size={18} />
               </Link>
             </li>
