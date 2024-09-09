@@ -1,0 +1,67 @@
+.recipeCard {
+  width: 343px;
+}
+
+.headerCard {
+  display: block; /* або 'inline-block' */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.recipeImage {
+  width: 100%;
+  height: 230px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  object-fit: cover;
+}
+
+.textWrap {
+  margin-bottom: 8px;
+  height: 72px;
+}
+
+.recipeDescription {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(2 * 1.6em);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.iconList {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border-radius: 50%;
+
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
