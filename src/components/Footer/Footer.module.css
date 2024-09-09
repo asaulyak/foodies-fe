@@ -5,6 +5,7 @@
   padding: 20px;
   border-bottom: 1px solid #e8e8e8;
   margin-top: auto;
+  padding-bottom: 40px;
 }
 
 .networkLinks {
@@ -31,6 +32,7 @@
   font-weight: 500;
   line-height: 1.42;
   letter-spacing: -0.02em;
+  padding-top: 40px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -44,8 +46,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 100px;
   border: 1px solid #bfbebe;
 }
