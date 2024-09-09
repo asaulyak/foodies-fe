@@ -23,8 +23,9 @@
 body {
   min-width: 320px;
   min-height: 100vh;
-
-  padding: 20px;
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: 500;
 }
 
 ul,
@@ -59,7 +60,17 @@ ol {
   padding-left: 16px;
   padding-right: 16px;
 }
-
+.form-label {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.error-form {
+  color: red;
+  font-size: 12px;
+}
 @media only screen and (min-width: 375px) {
   .container {
     max-width: 375px;
@@ -70,6 +81,10 @@ ol {
     max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
+  }
+  body {
+    font-size: 16px;
+    line-height: 1.5;
   }
 }
 @media only screen and (min-width: 1440px) {

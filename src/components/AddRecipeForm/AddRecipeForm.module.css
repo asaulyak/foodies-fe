@@ -2,10 +2,45 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  margin-top: 32px;
+}
+.form_info .field_title {
+  margin-bottom: 32px;
+}
+.field_title .title {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.3;
+  border-bottom: none;
+}
+.title::placeholder {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.wrapper_btn {
+  margin-top: 32px;
+  display: flex;
+  gap: 8px;
 }
 @media only screen and (min-width: 768px) {
   .form {
     gap: 80px;
+    margin-top: 40px;
+  }
+  .title::placeholder {
+    font-size: 24px;
+    line-height: 1.17;
+  }
+  .form_info .field_title {
+    margin-bottom: 40px;
+  }
+  .field_title .title {
+    font-size: 24px;
+    line-height: 1.17;
   }
 }
 
@@ -13,10 +48,10 @@
   .form {
     flex-direction: row;
   }
-  .form_file,
   .form_info {
     width: calc((100% - 80px) / 2);
   }
-}
-.input-file {
+  .wrapper_btn {
+    margin-top: 80px;
+  }
 }
