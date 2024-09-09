@@ -13,3 +13,31 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+export const fetchDetailInfoUser = createAsyncThunk(
+  'user/fetchDetailInfoUser',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await http.get(`${'/users/info/' + id}`);
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const patchAvatar = createAsyncThunk(
+  'user/patchAvatar',
+  async (file, { rejectWithValue }) => {
+    try {
+      const { data } = await http.patch('/users/avatar/', file, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
