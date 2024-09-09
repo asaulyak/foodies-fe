@@ -1,31 +1,36 @@
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa6';
 import { HiMiniArrowUpRight } from 'react-icons/hi2';
+import styles from './RecipeCard.module.css';
 
 export const RecipeCard = ({ recipe }) => {
   const { _id, title, owner, description, thumb } = recipe;
 
   return (
     <>
-      <li>
+      <li className={styles.recipeCard}>
         <Link to={`/recipe/${_id}`}>
-          <img src={thumb} alt={title} />
+          <img src={thumb} alt={title} className={styles.recipeImage} />
         </Link>
-        <div>
-          <SectionSubtitle text={title} />
-          <p>{description}</p>
+        <div className={styles.textWrap}>
+          <h3 className={styles.header_card}>{title}</h3>
+          <p className={styles.recipeDescription}>{description}</p>
         </div>
         <div>
-          <Link to={`/user/${owner._id}`}>
-            <img src={owner.avatar} alt={`${owner.name} avatar`} />
+          <Link to={`/user/${owner._id}`} className={styles.avatarWrapper}>
+            <img
+              src={owner.avatar}
+              alt={`${owner.name} avatar`}
+              className={styles.avatar}
+            />
           </Link>
-          <ul>
+          <ul className={styles.iconList}>
             <li>
-              <FaRegHeart width="18" height="18" />
+              <FaRegHeart size={18} />
             </li>
             <li>
-              <Link to={`/recipe/${_id}`}>
-                <HiMiniArrowUpRight width="18" height="18" />
+              <Link to={`/recipe/${_id}`} className={styles.iconWrapper}>
+                <HiMiniArrowUpRight size={18} />
               </Link>
             </li>
           </ul>
