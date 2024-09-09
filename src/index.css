@@ -37,12 +37,28 @@ li,
 ol {
   list-style: none;
 }
+
+.visually-hidden {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  -webkit-clip-path: inset(100%);
+}
+
 .container {
   max-width: 100%;
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
 }
+
 @media only screen and (min-width: 370px) {
   .container {
     max-width: 375px;
