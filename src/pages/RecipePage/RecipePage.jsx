@@ -40,7 +40,7 @@ const RecipePage = () => {
         <h1 className="visually-hidden">Recipe Page</h1>
         <PathInfo currentPageName={breadCrumbs} />
         {!!Object.keys(recipe).length && <RecipeInfo recipe={recipe} />}
-        //TODO: in development
+        {/* //TODO: in development */}
         {/* <PopularRecipes receipt={popularRecipes} /> */}
       </div>
     </section>

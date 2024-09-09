@@ -39,7 +39,7 @@ export const RecipeMainInfo = ({
             <p className={css.info}>{time} min</p>
           </div>
           <p className={css.description}>{description}</p>
-          //TODO: change button after create recipe card btn
+          {/* //TODO: change button after create recipe card btn */}
           <button type="button" className={css.btn} onClick={handleClick}>
             <div className={css.btnWrapper}>
               <img
