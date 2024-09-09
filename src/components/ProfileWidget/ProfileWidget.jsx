@@ -7,6 +7,7 @@ import { Button } from '../Button/Button.jsx';
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../Icon/Icon.jsx';
 import clsx from 'clsx';
+import { openModal } from '../../redux/modal/modal.slice.js';
 
 export const ProfileWidget = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ export const ProfileWidget = () => {
 
   const handleUserClick = () => {
     setProfileVisible(prevState => !prevState);
+  };
+
+  const openModaSign = () => {
+    dispatch(openModal());
   };
 
   if (user) {
@@ -75,7 +80,9 @@ export const ProfileWidget = () => {
 
   return (
     <>
-      <Button variant="light">SIGNIN</Button>
+      <Button onClick={openModaSign} variant="light">
+        SIGNIN
+      </Button>
     </>
   );
 };
