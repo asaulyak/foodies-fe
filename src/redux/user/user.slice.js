@@ -38,15 +38,7 @@ const userSlice = createSlice({
 const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState: {
-    info: {
-      name: '',
-      email: '',
-      avatar: '',
-      totalFavoritesRecipes: 0,
-      totalFollowers: 0,
-      totalFollowings: 0,
-      totalRecipes: 0,
-    },
+    info: null,
     isLoading: false,
     error: null,
   },
