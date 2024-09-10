@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #bfbebe;
+  border: 1px solid var(--grey);
   border-radius: 30px;
   padding: 5%;
 }
@@ -33,7 +33,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #050505;
+  background-color: var(--black);
   border: 0;
   cursor: pointer;
 }
@@ -51,11 +51,9 @@
 .userDetailInfo {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  color: #bfbebe;
+  color: var(--grey);
   font-size: 12px;
   line-height: 18px;
-  /* gap: 6px; */
   font-weight: 500;
 }
 .userDetailsInfoNumber {
@@ -103,6 +101,6 @@
   display: none;
 }
 .userImgBtnIcon {
-  fill: #fff;
-  stroke: #fff;
+  fill: var(--white);
+  stroke: var(--white);
 }
