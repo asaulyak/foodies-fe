@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import css from './UserInfo.module.css';
 import { patchAvatar } from '../../redux/user/user.actions';
+import { Icon } from '../Icon/Icon.jsx';
 
 export const UserInfo = ({
   name,
@@ -37,28 +38,8 @@ export const UserInfo = ({
               onChange={handleFileChange}
             />
             <label htmlFor="file-upload" className={css.userImgBtn}>
-              <svg
-                width="17"
-                height="16"
-                viewBox="0 0 17 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.5 3.3335V12.6668"
-                  stroke="white"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M3.83398 8H13.1673"
-                  stroke="white"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              {/* width="17" height="16" Icon */}
+              <Icon iconId="plus" width={17} height={16} />
             </label>
           </div>
         </div>
