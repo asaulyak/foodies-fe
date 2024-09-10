@@ -34,11 +34,10 @@ export const UserInfo = ({
             <input
               id="file-upload"
               type="file"
-              style={{ display: 'none' }} // Скрываем стандартный элемент input
+              style={{ display: 'none' }}
               onChange={handleFileChange}
             />
             <label htmlFor="file-upload" className={css.userImgBtn}>
-              {/* width="17" height="16" Icon */}
               <Icon iconId="plus" width={17} height={16} />
             </label>
           </div>
