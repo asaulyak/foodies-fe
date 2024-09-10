@@ -1,0 +1,106 @@
+.userWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--grey);
+  border-radius: 30px;
+  padding: 5%;
+}
+@media screen and (min-width: 375px) {
+  .userWrap {
+    max-width: 345px;
+    padding: 30px 54px 30px 54px;
+  }
+}
+.userImgWrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+.userImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.userImgBtn {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--black);
+  border: 0;
+  cursor: pointer;
+}
+.userName {
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.userDetailInfo {
+  display: flex;
+  align-items: center;
+  color: var(--grey);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.userDetailsInfoNumber {
+  margin-left: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--black);
+}
+
+@media screen and (min-width: 768px) {
+  .userWrap {
+    max-width: 394px;
+    padding: 40px 80px 40px 80px;
+  }
+  .userImgWrap {
+    margin-bottom: 16px;
+  }
+  .userImg {
+    width: 120px;
+    height: 120px;
+  }
+  .userImgBtn {
+    width: 38px;
+    height: 38px;
+  }
+  .userName {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+  .userDetails {
+    gap: 8px;
+  }
+  .userDetailInfo {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .userDetailsInfoNumber {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+.userImgInput {
+  display: none;
+}
+.userImgBtnIcon {
+  fill: var(--white);
+  stroke: var(--white);
+}

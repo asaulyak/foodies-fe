@@ -1,0 +1,35 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  margin: 0 8px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  width: 343px;
+}
+
+@media only screen and (min-width: 768px) {
+  .categories {
+    gap: 40px;
+
+    margin: 0 16px;
+  }
+
+  .text {
+    gap: 20px;
+
+    width: 531px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .categories {
+    margin: 0 60px;
+  }
+}
