@@ -13,6 +13,7 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
 export const fetchDetailInfoUser = createAsyncThunk(
   'user/fetchDetailInfoUser',
   async (id, { rejectWithValue }) => {
@@ -36,6 +37,21 @@ export const patchAvatar = createAsyncThunk(
       });
 
       return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      await http.post('/users/signout');
+
+      localStorage.removeItem('authToken');
+
+      dispatch({ type: 'user/clearCurrentUser' });
     } catch (error) {
       return rejectWithValue(error.message);
     }
