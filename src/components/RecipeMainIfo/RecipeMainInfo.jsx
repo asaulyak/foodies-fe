@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux'; //TODO:  uncomment when using Redux
+import { useSelector, useDispatch } from 'react-redux';
 
 import css from './RecipeMainInfo.module.css';
 import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
+import { Button } from '../Button/Button.jsx';
+import { openModal } from '../../redux/modal/modal.slice.js';
 
 export const RecipeMainInfo = ({
   children,
@@ -17,13 +19,12 @@ export const RecipeMainInfo = ({
 }) => {
   // const isLoggedUser = useSelector();  //TODO:  uncomment when using selector is authorized user
   const isLoggedUser = false; //TODO:  delete after using selector is authorized user
-  // const dispatch = useDispatch(); //TODO:  uncomment when using dispatch
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (!isLoggedUser) {
-      //return dispatch(openModal()) //TODO:  uncomment when using dispatch and open modal signIn action
-      return;
+      return dispatch(openModal());
     }
     navigate(`/user/${id}`);
   };
@@ -40,7 +41,7 @@ export const RecipeMainInfo = ({
           </div>
           <p className={css.description}>{description}</p>
           {/* //TODO: change button after create recipe card btn */}
-          <button type="button" className={css.btn} onClick={handleClick}>
+          <Button type="button" className={css.btn} onClick={handleClick}>
             <div className={css.btnWrapper}>
               <img
                 src={!authorAvatar ? '' : authorAvatar}
@@ -56,7 +57,7 @@ export const RecipeMainInfo = ({
               <p className={css.text}>Created by:</p>
               <p className={css.accentText}>{authorName}</p>
             </div>
-          </button>
+          </Button>
         </section>
         {children}
       </div>

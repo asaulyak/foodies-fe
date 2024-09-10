@@ -32,9 +32,6 @@
     flex-wrap: wrap;
     gap: 40px 20px;
   }
-  @media screen and (min-width: 1440px) {
-    /* width: 1280px; */
-  }
 }
 
 .item:not(:last-child) {
