@@ -26,8 +26,6 @@ const userSlice = createSlice({
     builder
       .addCase(fetchCurrentUser.pending, handlePending)
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        console.log(action.payload);
-
         state.isLoading = false;
         state.info = action.payload;
 
@@ -66,8 +64,6 @@ const userInfoSlice = createSlice({
       .addCase(patchAvatar.rejected, handleRejected)
       .addCase(patchAvatar.pending, handlePending)
       .addCase(patchAvatar.fulfilled, (state, action) => {
-        console.log(action.payload);
-
         state.isLoading = false;
         state.info.avatar = action.payload;
         state.error = null;
