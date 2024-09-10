@@ -8,8 +8,6 @@ import { http } from '../../http/index.js';
 import css from './RecipePage.module.css';
 
 const RecipePage = () => {
-  const [breadCrumbs, setBreadCrumbs] = useState('');
-  const [popularRecipes, setPopularRecipes] = useState([]);
   const [recipe, setRecipe] = useState({});
 
   const { id: recipeId } = useParams();
@@ -25,23 +23,26 @@ const RecipePage = () => {
       return response.data;
     }
 
-    // dispatch(openLoader())//TODO: in development
-    fetchReceipt(recipeId).then(data => {
-      setRecipe(data);
-      setBreadCrumbs(data.title);
+    async function fetchData(id) {
+      return Promise.allSettled([fetchReceipt(id), fetchPopular()]);
+    }
+
+    fetchData(recipeId).then(data => {
+      setRecipe(data[0].value);
     });
-    // dispatch(setError(error.message))//TODO: in development
-    // dispatch(closeLoader())//TODO: in development
+    //TODO: in development
+    // .catch(
+    //   e => dispatch(setError(e.message))
+    // )
   }, [recipeId]);
 
   return (
     <section className={css.section}>
       <div className="container">
         <h1 className="visually-hidden">Recipe Page</h1>
-        <PathInfo currentPageName={breadCrumbs} />
+        <PathInfo currentPageName={recipe.title || ''} />
         {!!Object.keys(recipe).length && <RecipeInfo recipe={recipe} />}
-        {/* //TODO: in development */}
-        {/* <PopularRecipes receipt={popularRecipes} /> */}
+        {<PopularRecipes />}
       </div>
     </section>
   );
