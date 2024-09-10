@@ -1,5 +1,5 @@
 import { MainTitle } from '../MainTitle/MainTitle';
-import { SubTitle } from '../SubTitle/SubTitle';
+import { SubTitle } from '../Subtitle/Subtitle';
 import css from './Categories.module.css';
 import clsx from 'clsx';
 
