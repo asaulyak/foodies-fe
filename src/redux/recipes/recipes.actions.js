@@ -3,45 +3,43 @@ import { http } from '../../http/index.js';
 
 export const fetchIngredients = createAsyncThunk(
   'recipes/fetchIngredients',
-  async () => {
+  async (_, thunkAPI) => {
     try {
       const response = await http.get('/api/ingredients');
       return response.data;
     } catch (error) {
-      return error.message
+      return thunkAPI.rejectWithValue(error.message);
     }
-    
   }
 );
+
 export const fetchRegions = createAsyncThunk(
-  'recipes/fetchRegions',
-  async () => {
+  'recipes/fetchAreas',
+  async (_, thunkAPI) => {
     try {
-      const response = await http.get('/api/regions');
+      const response = await http.get('/api/areas');
       return response.data;
     } catch (error) {
-      return error.message;
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const fetchRecipes = createAsyncThunk(
   'recipes/fetchRecipes',
-  async (_, { getState }) => {
+  async ({ category, ingredients, area, limit, page }, thunkAPI) => {
     try {
-      const state = getState().recipes;
-      const { selectedIngredientIds, selectedRegionId, page } = state;
-
       const params = new URLSearchParams();
-      if (selectedRegionId) params.append('areaId', selectedRegionId);
-      selectedIngredientIds.forEach(id => params.append('ingredientIds[]', id));
+      if (category) params.append('category', category);
+      if (ingredients) params.append('ingredients', ingredients);
+      if (area) params.append('area', area);
+      if (limit) params.append('limit', limit);
+      if (page) params.append('page', page);
 
-      const response = await http.get(
-        `/api/recipes/search?${params.toString()}`
-      );
+      const response = await http.get(`/api/recipes/?${params.toString()}`);
       return response.data;
     } catch (error) {
-      return error.message;
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

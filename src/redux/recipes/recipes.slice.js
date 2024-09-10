@@ -1,12 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchIngredients,
-  fetchRecipes,
-  fetchRegions,
-} from './recipes.actions';
+import { fetchIngredients, fetchRecipes, fetchAreas } from './recipes.actions';
 
 const handlePending = state => {
   state.isLoading = true;
+  state.isError = false;
 };
 
 const handleRejected = (state, action) => {
@@ -17,23 +14,23 @@ const handleRejected = (state, action) => {
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState: {
+    category: [],
     ingredients: [],
-    regions: [],
+    areas: [],
     recipes: [],
-    selectedIngredientIds: [],
-    selectedRegionId: '',
+    selectedIngredientIds: '',
+    selectedAreaId: '',
     page: 1,
+    limit: 12,
     isLoading: false,
     error: null,
   },
   reducers: {
     setSelectedIngredient: (state, action) => {
       state.selectedIngredientIds = action.payload;
-      state.page = 1;
     },
-    setSelectedRegion: (state, action) => {
-      state.selectedRegionId = action.payload;
-      state.page = 1;
+    setSelectedArea: (state, action) => {
+      state.selectedAreaId = action.payload;
     },
     setPage: (state, action) => {
       state.page = action.payload;
@@ -44,22 +41,25 @@ const recipesSlice = createSlice({
       .addCase(fetchIngredients.pending, handlePending)
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.ingredients = action.payload;
+        state.isLoading = false;
       })
       .addCase(fetchIngredients.rejected, handleRejected)
-
-      .addCase(fetchRegions.pending, handlePending)
-      .addCase(fetchRegions.fulfilled, (state, action) => {
-        state.regions = action.payload;
+      .addCase(fetchAreas.pending, handlePending)
+      .addCase(fetchAreas.fulfilled, (state, action) => {
+        state.areas = action.payload;
+        state.isLoading = false;
       })
-      .addCase(fetchRegions.rejected, handleRejected)
+      .addCase(fetchAreas.rejected, handleRejected)
       .addCase(fetchRecipes.pending, handlePending)
       .addCase(fetchRecipes.fulfilled, (state, action) => {
         state.recipes = action.payload;
+        state.isLoading = false;
       })
       .addCase(fetchRecipes.rejected, handleRejected);
   },
 });
-export const { setSelectedIngredient, setSelectedRegion, setPage } =
+
+export const { setSelectedIngredient, setSelectedArea, setPage } =
   recipesSlice.actions;
 
 export const recipeReducer = recipesSlice.reducer;
