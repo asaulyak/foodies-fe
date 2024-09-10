@@ -99,3 +99,6 @@
     line-height: 24px;
   }
 }
+.userImgInput {
+  display: none;
+}

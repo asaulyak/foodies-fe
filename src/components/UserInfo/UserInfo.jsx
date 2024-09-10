@@ -34,7 +34,7 @@ export const UserInfo = ({
             <input
               id="file-upload"
               type="file"
-              style={{ display: 'none' }}
+              className={css.userImgInput}
               onChange={handleFileChange}
             />
             <label htmlFor="file-upload" className={css.userImgBtn}>
