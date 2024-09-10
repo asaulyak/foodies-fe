@@ -15,6 +15,7 @@
 }
 .userImgWrap {
   position: relative;
+  margin-bottom: 16px;
 }
 .userImg {
   width: 80px;
@@ -37,13 +38,12 @@
   cursor: pointer;
 }
 .userName {
-  margin-top: 16px;
+  margin-bottom: 16px;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
 }
 .userDetails {
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -71,6 +71,9 @@
     max-width: 394px;
     padding: 40px 80px 40px 80px;
   }
+  .userImgWrap {
+    margin-bottom: 16px;
+  }
   .userImg {
     width: 120px;
     height: 120px;
@@ -80,12 +83,11 @@
     height: 38px;
   }
   .userName {
-    margin-top: 20px;
     font-size: 20px;
     line-height: 24px;
+    margin-bottom: 20px;
   }
   .userDetails {
-    margin-top: 20px;
     gap: 8px;
   }
   .userDetailInfo {

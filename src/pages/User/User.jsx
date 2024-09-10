@@ -17,7 +17,6 @@ export const User = () => {
 
   return (
     <>
-      {/* Header */}
       <div className={css.containerUser}>
         <h1 className={css.title}>User</h1>
         <UserInfo {...currentUser}></UserInfo>

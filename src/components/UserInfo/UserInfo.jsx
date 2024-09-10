@@ -12,7 +12,6 @@ export const UserInfo = ({
   totalRecipes,
 }) => {
   const dispatch = useDispatch();
-  // Обработчик изменения файла и сразу же отправки
   const handleFileChange = async e => {
     const file = e.target.files[0];
 
