@@ -1,0 +1,125 @@
+.hero {
+  padding: 0 8px;
+  /* background-color: #000; */
+  color: #fff;
+  /* height: 100vh;  */
+  /* Adjust to take full screen if needed */
+}
+.heroContent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 140px;
+  padding-bottom: 100px;
+  background-color: #000;
+}
+
+.heroTitle {
+  color: #fff;
+  text-align: center;
+
+  /* Mobile/H1 */
+  font-family: Mulish;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 40px; /* 100% */
+  letter-spacing: -0.8px;
+  text-transform: uppercase;
+  /* font-size: 28px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-top: 140px; */
+}
+
+.heroDescription {
+  color: #fff;
+  text-align: center;
+
+  /* Mobile/Main text */
+  font-family: Mulish;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.28px;
+  width: 326px;
+  margin-top: 20px;
+  /* font-size: 16px;
+  margin: 15px 0;
+  color: #ccc; */
+}
+
+.addRecipeBtn {
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 30px;
+  margin-top: 20px;
+}
+
+.heroImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+/* .mainPicture,
+.sidePicture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.mainDish,
+.sideDish {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; /* Ensures the image maintains its aspect ratio */
+  border-radius: 15px;
+}
+
+.mainDish {
+  width: 70%;
+  /* max-width: 100%;
+  height: auto;
+  border-radius: 15px; */
+}
+
+.sideDish {
+  /* position: absolute;
+  top: 50%;
+  left: 10px; */
+  width: 20%;
+  /* max-width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  border-radius: 10px; */
+}
+
+@media (max-width: 768px) {
+  .mainDish {
+    width: 90%;
+  }
+
+  .sideDish {
+    width: 30%;
+  }
+}
+
+@media (max-width: 375px) {
+  .mainDish {
+    width: 100%;
+  }
+
+  .sideDish {
+    width: 100%;
+  }
+}
