@@ -1,0 +1,12 @@
+.sectionTitle {
+  padding-bottom: 32px;
+
+  color: var(--black);
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.333;
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
+}
