@@ -17,6 +17,29 @@ const handleRejected = (state, action) => {
 const userSlice = createSlice({
   name: 'user',
   initialState: {
+    info: null,
+    isLoading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(fetchCurrentUser.pending, handlePending)
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        console.log(action.payload);
+
+        state.isLoading = false;
+        state.info = action.payload;
+
+        state.error = null;
+      })
+      .addCase(fetchCurrentUser.rejected, handleRejected);
+  },
+});
+
+const userInfoSlice = createSlice({
+  name: 'userInfo',
+  initialState: {
     info: {
       name: '',
       email: '',
@@ -31,20 +54,6 @@ const userSlice = createSlice({
   },
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(fetchCurrentUser.pending, handlePending)
-      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        console.log(action.payload);
-
-        state.isLoading = false;
-        state.info.name = action.payload.name;
-        state.info.email = action.payload.email;
-        state.info.avatar = action.payload.avatar;
-
-        state.error = null;
-      })
-      .addCase(fetchCurrentUser.rejected, handleRejected);
-
     builder
       .addCase(fetchDetailInfoUser.rejected, handleRejected)
       .addCase(fetchDetailInfoUser.pending, handlePending)
@@ -65,5 +74,5 @@ const userSlice = createSlice({
       });
   },
 });
-
 export const userReducer = userSlice.reducer;
+export const userInfoReducer = userInfoSlice.reducer;
