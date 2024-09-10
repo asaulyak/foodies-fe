@@ -102,3 +102,7 @@
 .userImgInput {
   display: none;
 }
+.userImgBtnIcon {
+  fill: #fff;
+  stroke: #fff;
+}

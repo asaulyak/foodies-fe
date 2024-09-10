@@ -38,7 +38,12 @@ export const UserInfo = ({
               onChange={handleFileChange}
             />
             <label htmlFor="file-upload" className={css.userImgBtn}>
-              <Icon iconId="plus" width={17} height={16} />
+              <Icon
+                iconId="plus"
+                className={css.userImgBtnIcon}
+                width={17}
+                height={16}
+              />
             </label>
           </div>
         </div>
