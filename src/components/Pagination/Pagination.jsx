@@ -20,6 +20,21 @@ const Pagination = ({ total, limit }) => {
     return maxButtons;
   };
 
+  // Update maxVisibleButtons on initial load and on window resize
+  useEffect(() => {
+    setMaxVisibleButtons(getMaxVisibleButtons());
+
+    const handleResize = () => {
+      setMaxVisibleButtons(getMaxVisibleButtons());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get('page')) || 1;
 
