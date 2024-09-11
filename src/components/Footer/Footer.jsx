@@ -6,6 +6,7 @@ import { AiFillInstagram } from 'react-icons/ai';
 import { ImYoutube } from 'react-icons/im';
 
 export const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className={css.footer}>
       <div className={css.footerTop}>
@@ -47,7 +48,7 @@ export const Footer = () => {
         </ul>
       </div>
       <div className={css.copyright}>
-        <p>@2024, Foodies. All rights reserved</p>
+        <p>@{currentYear}, Foodies. All rights reserved</p>
       </div>
     </footer>
   );
