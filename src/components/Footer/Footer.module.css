@@ -1,10 +1,14 @@
 .footer {
+  margin: 40px 16px 16px;
+}
+
+.footerTop {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  /* margin-bottom: 40px; */
+  /* padding: 0 16px; */
   border-bottom: 1px solid #e8e8e8;
-  margin-top: auto;
   padding-bottom: 40px;
 }
 
@@ -25,6 +29,10 @@
 }
 
 .copyright {
+  display: flex;
+  margin: auto;
+  width: 261px;
+  flex-shrink: 0;
   color: #1a1a1a;
   text-align: center;
   font-family: Mulish;
@@ -51,6 +59,13 @@
   border-radius: 100px;
   border: 1px solid #bfbebe;
 }
+
+.iconThumb:hover,
+.iconThumb:focus {
+  scale: 1.2;
+  stroke: #bfbebe;
+}
+
 .iconImg {
   display: flex;
   align-items: center;

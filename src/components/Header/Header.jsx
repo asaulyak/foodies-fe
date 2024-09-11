@@ -22,7 +22,7 @@ export const Header = () => {
 
   return (
     <div className={clsx([css.header])}>
-      <Logo />
+      {/* <Logo />
       <nav className={css.nav}>
         {menu.map(item => (
           <NavLink
@@ -35,7 +35,7 @@ export const Header = () => {
         ))}
       </nav>
 
-      <ProfileWidget />
+      <ProfileWidget /> */}
     </div>
   );
 };

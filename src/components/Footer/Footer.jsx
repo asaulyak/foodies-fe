@@ -10,8 +10,8 @@ import { ImYoutube } from 'react-icons/im';
 
 export const Footer = () => {
   return (
-    <footer>
-      <div className={css.footer}>
+    <footer className={css.footer}>
+      <div className={css.footerTop}>
         <div>
           <Logo />
         </div>
