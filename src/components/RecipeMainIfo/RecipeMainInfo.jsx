@@ -5,6 +5,7 @@ import css from './RecipeMainInfo.module.css';
 import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
 import { Button } from '../Button/Button.jsx';
 import { openModal } from '../../redux/modal/modal.slice.js';
+import { selectInfoUser } from '../../redux/user/user.selectors.js';
 
 export const RecipeMainInfo = ({
   children,
@@ -17,14 +18,13 @@ export const RecipeMainInfo = ({
   authorName = 'John',
   authorAvatar = '',
 }) => {
-  // const isLoggedUser = useSelector();  //TODO:  uncomment when using selector is authorized user
-  const isLoggedUser = false; //TODO:  delete after using selector is authorized user
+  const isLoggedUser = useSelector(selectInfoUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (!isLoggedUser) {
-      return dispatch(openModal());
+      return dispatch(openModal()); //TODO: must open signin modal
     }
     navigate(`/user/${id}`);
   };
@@ -40,7 +40,6 @@ export const RecipeMainInfo = ({
             <p className={css.info}>{time} min</p>
           </div>
           <p className={css.description}>{description}</p>
-          {/* //TODO: change button after create recipe card btn */}
           <Button type="button" className={css.btn} onClick={handleClick}>
             <div className={css.btnWrapper}>
               <img

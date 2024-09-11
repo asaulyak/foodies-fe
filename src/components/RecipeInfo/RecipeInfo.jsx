@@ -15,13 +15,12 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
       return response.data;
     }
 
-    fetchReceipt(recipeId).then(data => {
-      setRecipe(data);
-      changeBreadCrumbs(data.title);
-    });
-    //TODO: in development
-    // .catch(
-    //   e => dispatch(setError(e.message))
+    fetchReceipt(recipeId)
+      .then(data => {
+        setRecipe(data);
+        changeBreadCrumbs(data.title);
+      })
+      .catch(e => console.log(e.message));
   }, [recipeId, changeBreadCrumbs]);
   return (
     <>
@@ -37,7 +36,10 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
           authorAvatar={recipe.user.avatar}
         >
           <RecipeIngredients ingredients={recipe.ingredients} />
-          <RecipePreparation preparation={recipe.instructions} />
+          <RecipePreparation
+            preparation={recipe.instructions}
+            recipeId={recipe.id}
+          />
         </RecipeMainInfo>
       )}
     </>
