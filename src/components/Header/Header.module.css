@@ -1,10 +1,15 @@
+.section {
+  padding: 8px 8px 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   border-radius: 30px 30px 0 0;
-  letter-spacing: -0.32px;
+  letter-spacing: -0.02em;
+  line-height: 18px;
 
   padding: 16px;
 
@@ -15,10 +20,10 @@
 }
 
 .nav {
-  display: flex;
+  display: none;
   gap: 16px;
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .light {
@@ -31,11 +36,63 @@
 .nav a {
   text-decoration: none;
   color: var(--white);
-  padding: 10px 14px;
+  padding: 14px;
   text-transform: uppercase;
 }
 
 .active {
   border: 1px solid var(--border);
   border-radius: 30px;
+}
+
+.menu {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 28px;
+  height: 28px;
+}
+
+.menu-icon {
+  stroke: var(--white);
+}
+
+.right {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+  }
+
+  .section {
+    padding: 16px 16px 0;
+  }
+
+  .header {
+    padding: 20px 32px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .nav {
+    font-size: 18px;
+  }
+
+  .section {
+    padding: 20px 20px 0;
+  }
+
+  .header {
+    padding: 20px 60px;
+  }
 }

@@ -1,6 +1,8 @@
 :root {
   --black: #050505;
-  --black-light: #1A1A1A;
-  --grey: #BFBEBE;
+  --black-light: #1a1a1a;
+  --grey: #bfbebe;
+  --almost-white: #f5f5f5;
   --white: #ffffff;
+  --transition-fast: ease-in-out 200ms;
 }
