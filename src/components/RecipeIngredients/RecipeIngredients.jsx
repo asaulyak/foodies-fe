@@ -2,8 +2,8 @@ import css from './RecipeIngredients.module.css';
 
 export const RecipeIngredients = ({ ingredients }) => {
   return (
-    <section className={css.section}>
-      <h2 className={css.title}>Ingredients</h2>
+    <div className={css.wrapper}>
+      <h3 className={css.title}>Ingredients</h3>
       <ul className={css.list}>
         {ingredients.map(ingredient => (
           <li key={ingredient.id} className={css.item}>
@@ -26,6 +26,6 @@ export const RecipeIngredients = ({ ingredients }) => {
           </li>
         ))}
       </ul>
-    </section>
+    </div>
   );
 };
