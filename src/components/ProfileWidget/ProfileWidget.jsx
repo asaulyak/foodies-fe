@@ -1,17 +1,17 @@
 import css from './ProfileWidget.module.css';
 import { selectUser } from '../../redux/user/user.selectors.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser } from '../../redux/user/user.actions.js';
+import { fetchCurrentUser, logoutUser } from '../../redux/user/user.actions.js';
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button.jsx';
-import { NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../Icon/Icon.jsx';
 import clsx from 'clsx';
 import { openModal } from '../../redux/modal/modal.slice.js';
 
 export const ProfileWidget = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -24,8 +24,16 @@ export const ProfileWidget = () => {
     setProfileVisible(prevState => !prevState);
   };
 
-  const openModaSign = () => {
+  const openModalSign = () => {
     dispatch(openModal());
+  };
+
+  const handleLogout = e => {
+    e.stopPropagation();
+
+    dispatch(logoutUser())
+      .unwrap()
+      .then(() => navigate('/'));
   };
 
   if (user) {
@@ -59,10 +67,10 @@ export const ProfileWidget = () => {
             })}
           >
             <li>
-              <NavLink to="/profile">Profile</NavLink>
+              <Link to="/profile">Profile</Link>
             </li>
             <li>
-              <a href="" className={css['icon-text']}>
+              <span className={css['icon-text']} onClick={handleLogout}>
                 Log out{' '}
                 <Icon
                   iconId="arrow-up"
@@ -70,7 +78,7 @@ export const ProfileWidget = () => {
                   height={9}
                   className={css['signout-icon']}
                 />
-              </a>
+              </span>
             </li>
           </ul>
         </div>
@@ -80,7 +88,7 @@ export const ProfileWidget = () => {
 
   return (
     <>
-      <Button onClick={openModaSign} variant="light">
+      <Button onClick={openModalSign} variant="light">
         SIGNIN
       </Button>
     </>

@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
 import { AddRecipe } from './pages/AddRecipe/AddRecipe.jsx';
+import { User } from './pages/User/User.jsx';
 
 function App() {
   Modal.setAppElement('#modal-placeholder');
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         {/*<Route path="/create" element={<CreateRecipe />} />*/}
+        <Route path="/user/:id" element={<User />} />
         <Route path="recipe/:id" element={<RecipePage />} />
         <Route path="/recipe/add" element={<AddRecipe />} />
 
