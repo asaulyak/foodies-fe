@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 32px;
   margin-top: 32px;
+  margin-bottom: 64px;
 }
 .form_info .field_title {
   margin-bottom: 32px;
@@ -21,15 +22,80 @@
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
-.wrapper_btn {
+.wrap_field {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+.wrap_btn {
   margin-top: 32px;
   display: flex;
   gap: 8px;
 }
+.textarea_bottom {
+  margin-top: 64px;
+}
+.input_bottom {
+  margin-top: 32px;
+}
+.css-13cymwt-control {
+  border: 1px solid var(--grey);
+  border-radius: 30px;
+  padding: 14px;
+  height: 48px;
+  width: 100%;
+}
+.add_ingredients {
+  border: 1px solid var(--grey);
+  border-radius: 30px;
+  width: 186px;
+  height: 48px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--black);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+.cooking_controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--grey);
+}
+.circle_button {
+  border: 1px solid var(--grey);
+  border-radius: 30px;
+  padding: 16px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+}
+.time_display {
+  min-width: 45px;
+}
+
 @media only screen and (min-width: 768px) {
   .form {
     gap: 80px;
     margin-top: 40px;
+    margin-bottom: 100px;
   }
   .title::placeholder {
     font-size: 24px;
@@ -42,6 +108,41 @@
     font-size: 24px;
     line-height: 1.17;
   }
+  .wrap_field {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 19px;
+  }
+  .wrap_field > div {
+    width: calc((100% - 19px) / 2);
+  }
+  .wrapper {
+    gap: 60px;
+    margin-top: 60px;
+  }
+  .textarea_bottom {
+    margin-top: 80px;
+  }
+  .add_ingredients {
+    font-size: 16px;
+    width: 229px;
+    margin-top: 40px;
+  }
+  .circle_button {
+    width: 56px;
+    height: 56px;
+  }
+  .cooking_controls {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .input_bottom {
+    margin-top: 40px;
+  }
+  .css-13cymwt-control {
+    height: 56px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -53,5 +154,11 @@
   }
   .wrapper_btn {
     margin-top: 80px;
+  }
+  .form_info {
+    margin-top: -13px;
+  }
+  .wrap_field {
+    gap: 20px;
   }
 }

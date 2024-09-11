@@ -41,6 +41,7 @@ export const UploadFile = () => {
           className={css.input_file}
           accept="image/*"
           onChange={handleImageChange}
+          id="input-file"
           name="input-file"
         />
       </>
