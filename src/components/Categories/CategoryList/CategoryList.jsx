@@ -10,12 +10,10 @@ export const CategoryList = () => {
     <>
       <ul className={styles.category_list}>
         {categories &&
-          categories
-            .slice()
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map(category => <CategoryCard category={category} />)}
+          categories.map(category => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
       </ul>
     </>
   );
-  // return <>Category</>;
 };

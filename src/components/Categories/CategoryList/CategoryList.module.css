@@ -4,15 +4,21 @@
   gap: 20px;
   justify-items: stretch;
   align-items: start;
+
+  max-height: calc((250px * 8) + (20px * 7));
+
+  overflow: clip;
+  overflow-clip-margin: 20px;
 }
 
-/* @media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .category_list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(auto, 1fr));
-    grid-template-rows: auto;
-    gap: 20px;
-    justify-items: stretch;
-    align-items: start;
+    max-height: calc((369px * 7) + (20px * 6));
   }
-} */
+}
+
+@media only screen and (min-width: 1440px) {
+  .category_list {
+    max-height: calc((369px * 4) + (20px * 3));
+  }
+}

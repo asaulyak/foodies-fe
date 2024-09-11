@@ -8,5 +8,8 @@ export const Home = () => (
   <>
     <Hero />
     <section className={css.hero}>HOME</section>
+    <div className={css.homeBody}>
+      <Categories />
+    </div>
   </>
 );
