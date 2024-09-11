@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import { selectIsAuthenticated } from '../../redux/user/user.selectors'; // Selector to check if user is authenticated
+import { selectUser } from '../../redux/user/user.selectors'; // Selector to check if user is authenticated“
 import { openModal } from '../../redux/modal/modal.slice'; // Action to show modal
 import styles from './Hero.module.css';
 
@@ -16,8 +16,7 @@ import sideDishLarge from '../../assets/images/side-dish-large.png';
 const Hero = () => {
   const navigate = useNavigate(); // React Router hook for navigation
   const dispatch = useDispatch();
-  // const isAuthenticated = useSelector(selectIsAuthenticated); // Get auth state from Redux
-  const isAuthenticated = true;
+  const isAuthenticated = useSelector(selectUser); // Get auth state from Redux
 
   // Handle Add Recipe button click
   const handleAddRecipeClick = () => {
