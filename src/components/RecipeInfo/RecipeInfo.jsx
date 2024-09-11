@@ -6,7 +6,7 @@ import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 import { http } from '../../http/index.js';
 
 export const RecipeInfo = ({ changeBreadCrumbs }) => {
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState(null);
   const { id: recipeId } = useParams();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
   }, [recipeId, changeBreadCrumbs]);
   return (
     <>
-      {!!Object.keys(recipe).length && (
+      {!!recipe && (
         <RecipeMainInfo
           id={recipe.id}
           img={recipe.thumb}
