@@ -1,0 +1,28 @@
+.testimonials {
+  text-align: center;
+  padding: 2rem;
+}
+
+.subheading {
+  color: #555;
+  font-size: 1.5rem;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.slide {
+  padding: 1rem;
+}
+
+.text {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.author {
+  font-weight: bold;
+  margin-top: 1rem;
+}
