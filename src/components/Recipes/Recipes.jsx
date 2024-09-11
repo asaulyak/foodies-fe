@@ -4,7 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
 import MainTitle from '../MainTitle/MainTitle';
 import styles from '../MainTitle/MainTitle.module.css';
-import Subtitle from '../Subtitle/Subtitle';
+import Subtitle from '../SubTitle/SubTitle';
 
 export const Recipes = () => {
   return (
