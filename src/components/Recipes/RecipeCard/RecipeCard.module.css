@@ -1,7 +1,3 @@
-.recipeCard {
-  width: 343px;
-}
-
 .headerCard {
   display: block; /* або 'inline-block' */
   overflow: hidden;
