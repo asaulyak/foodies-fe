@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa6';
 import { HiMiniArrowUpRight } from 'react-icons/hi2';
+import clsx from 'clsx';
 import styles from './RecipeCard.module.css';
 import avatar from '/public/avatar.png';
 
-export const RecipeCard = ({ recipe }) => {
+export const RecipeCard = ({ recipe, className }) => {
   const { id, title, user, description, thumb } = recipe;
 
   return (
-    <li className={styles.recipeCard}>
+    <li className={clsx([styles.recipeCard, className])}>
       <Link to={`/recipe/${id}`}>
         <img
           src={thumb}
