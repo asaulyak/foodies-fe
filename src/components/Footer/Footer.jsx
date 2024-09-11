@@ -1,10 +1,7 @@
 import React from 'react';
 import { Logo } from '../Logo/Logo';
 import css from './Footer.module.css';
-// import { Link } from 'react-router-dom';
-import { FaFacebookF } from 'react-icons/fa';
 import { ImFacebook } from 'react-icons/im';
-import { LiaFacebook } from 'react-icons/lia';
 import { AiFillInstagram } from 'react-icons/ai';
 import { ImYoutube } from 'react-icons/im';
 
@@ -24,16 +21,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className={css.networkLink}
             >
-              {/* <svg className={css.icon} width="20" height="20">
-                <use href="../Footer/icon/sprite.svg#icon-facebook"></use>
-              </svg> */}
-              <div className={css.iconThumb}>
-                <div className={css.iconImg}>
-                  <ImFacebook />
-                </div>
-              </div>
-              {/* <FaFacebookF />
-              <LiaFacebook /> */}
+              <ImFacebook className={css.iconImg} />
             </a>
           </li>
           <li>
@@ -43,11 +31,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className={css.networkLink}
             >
-              <div className={css.iconThumb}>
-                <div className={css.iconImg}>
-                  <AiFillInstagram />
-                </div>
-              </div>
+              <AiFillInstagram className={css.iconImg} />
             </a>
           </li>
           <li>
@@ -57,11 +41,7 @@ export const Footer = () => {
               rel="noopener noreferrer"
               className={css.networkLink}
             >
-              <div className={css.iconThumb}>
-                <div className={css.iconImg}>
-                  <ImYoutube />
-                </div>
-              </div>
+              <ImYoutube className={css.iconImg} />
             </a>
           </li>
         </ul>
