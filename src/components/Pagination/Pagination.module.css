@@ -1,0 +1,52 @@
+.pagination-container {
+  --max-visible-buttons: 3;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .pagination-container {
+    --max-visible-buttons: 5;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .pagination-container {
+    --max-visible-buttons: 10;
+  }
+}
+
+/* TODO: finish styles */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid transparent;
+  border-radius: 100%;
+
+  background-color: transparent;
+  opacity: 1;
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.btn:hover {
+  background-color: var(--almost-white);
+}
+
+.active {
+  border: 1px solid var(--black);
+}
+
+.disabled {
+  opacity: 0;
+  pointer-events: none;
+}
