@@ -1,4 +1,11 @@
 .logo {
-    font-size: 24px;
-    font-weight: 900;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 28px;
+  letter-spacing: -0.48px;
+  text-transform: lowercase;
+}
+
+@media only screen and (min-width: 768px) {
+  font-size: 24px;
 }
