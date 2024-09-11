@@ -1,26 +1,24 @@
-// import { useSelector,useDispatch } from 'react-redux';//TODO: uncomment when using store
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../Button/Button.jsx';
+import { selectInfoUser } from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
 
-export const RecipePreparation = ({ preparation }) => {
-  // const isFavoriteReceipt = useSelector()//TODO: uncomment when using store
-  // const isLoggedUser =useSelector()//TODO: uncomment when using store
-  // const dispatch = useDispatch(); //TODO:  uncomment when using dispatch
-  const isFavoriteReceipt = false; //TODO: delete when using store
-  const isLoggedUser = false; //TODO: delete when using store
-  const { id: recipeId } = useParams();
+export const RecipePreparation = ({ preparation, recipeId }) => {
+  const dispatch = useDispatch();
+  const isLoggedUser = useSelector(selectInfoUser);
+  // const favoritesReceipts=useSelector(selectFavoritesReceipts);//TODO: uncomment when using store
+  // const isFavoriteRecipe = favoritesReceipts.includes(recipeId); //TODO: uncomment when using store
+  const isFavoriteRecipe = false; //TODO: delete when using store
 
-  const btnTextContent = isFavoriteReceipt
+  const btnTextContent = isFavoriteRecipe
     ? 'Remove from favorites'
     : 'Add to favorites';
 
   const handleClick = () => {
     if (!isLoggedUser) {
-      //return dispatch(openModal()) //TODO:  uncomment when using dispatch and open modal signIn action
-      return; //TODO: delete when using dispatch
+      return dispatch(openModal());
     }
-    if (!isFavoriteReceipt) {
+    if (!isFavoriteRecipe) {
       // return dispatch(addToFavorites(recipeId));//TODO:  uncomment when using dispatch and add to favorites action
       return; //TODO: delete when using dispatch
     }
@@ -29,8 +27,8 @@ export const RecipePreparation = ({ preparation }) => {
   };
 
   return (
-    <section className={css.section}>
-      <h2 className={css.title}>Recipe preparation</h2>
+    <section className={css.wrapper}>
+      <h3 className={css.title}>Recipe preparation</h3>
       <ul className={css.list}>
         {preparation.split('\n').map((text, idx) => (
           <p className={css.item} key={`${Date.now()}-${idx}`}>
