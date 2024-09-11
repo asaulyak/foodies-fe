@@ -1,0 +1,32 @@
+.category_card {
+  width: 343px;
+  height: 250px;
+}
+
+@media only screen and (min-width: 768px) {
+  .category_card {
+    width: 342px;
+    height: 369px;
+  }
+
+  .category_card:nth-child(3),
+  .category_card:nth-child(4),
+  .category_card:nth-child(8),
+  .category_card:nth-child(10) {
+    width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .category_card {
+    width: 325px;
+    height: 369px;
+  }
+
+  .category_card:nth-child(3),
+  .category_card:nth-child(4),
+  .category_card:nth-child(8),
+  .category_card:nth-child(10) {
+    width: 590px;
+  }
+}

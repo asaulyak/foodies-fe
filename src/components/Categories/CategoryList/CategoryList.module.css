@@ -1,0 +1,18 @@
+.category_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-items: stretch;
+  align-items: start;
+}
+
+/* @media only screen and (min-width: 768px) {
+  .category_list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    grid-template-rows: auto;
+    gap: 20px;
+    justify-items: stretch;
+    align-items: start;
+  }
+} */
