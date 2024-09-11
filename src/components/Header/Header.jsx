@@ -32,7 +32,7 @@ export const Header = () => {
   );
 
   return (
-    <div className="container">
+    <div className={css.section}>
       <div className={clsx([css.header])}>
         <Logo />
         {shouldHideMenu ? (

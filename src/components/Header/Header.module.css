@@ -1,3 +1,7 @@
+.section {
+  padding: 8px 8px 0;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -7,7 +11,7 @@
   letter-spacing: -0.02em;
   line-height: 18px;
 
-  padding: 20px 60px;
+  padding: 16px;
 
   background-color: var(--black);
   color: var(--white);
@@ -69,10 +73,26 @@
   .nav {
     display: flex;
   }
+
+  .section {
+    padding: 16px 16px 0;
+  }
+
+  .header {
+    padding: 20px 32px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
   .nav {
     font-size: 18px;
+  }
+
+  .section {
+    padding: 20px 20px 0;
+  }
+
+  .header {
+    padding: 20px 60px;
   }
 }
