@@ -1,0 +1,35 @@
+.UserCardSection {
+  margin: 100px 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+  gap: 16px;
+}
+
+.UserAvatarImage {
+  width: 60px;
+  height: 60px;
+}
+
+/* .recipeImageSection {
+  display: flex;
+  gap: 12px;
+} */
+
+.recipeImage {
+  width: 100px;
+  height: 100px;
+}
+
+.networkLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  border: 1px solid var(--grey);
+}
