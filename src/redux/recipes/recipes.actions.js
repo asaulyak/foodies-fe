@@ -13,7 +13,7 @@ export const fetchIngredients = createAsyncThunk(
   }
 );
 
-export const fetchRegions = createAsyncThunk(
+export const fetchAreas = createAsyncThunk(
   'recipes/fetchAreas',
   async (_, thunkAPI) => {
     try {

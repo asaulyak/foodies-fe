@@ -1,0 +1,25 @@
+.recipesFilterWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.recipeFilterSelect {
+  width: 100%;
+  max-width: 315px;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid var(--black-light);
+  font-size: 16px;
+  background-color: white;
+  color: var(--black);
+  appearance: none; /* Removes the default browser dropdown arrow */
+}
+
+.recipeFilterSelectFocus {
+  border-color: var(--black);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--black-light);
+}

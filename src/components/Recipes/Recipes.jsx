@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
+import { RecipeFilter } from '../RecipeFilter/RecipeFilter';
 
 export const Recipes = () => {
   return (
@@ -20,6 +21,7 @@ export const Recipes = () => {
       </div>
 
       <div className={styles.recipesListWrap}>
+        <RecipeFilter />
         <RecipeList />
       </div>
     </section>
