@@ -1,4 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+// import { selectIsAuthenticated } from '../../redux/user/user.selectors'; // Selector to check if user is authenticated
+import { openModal } from '../../redux/modal/modal.slice'; // Action to show modal
 import styles from './Hero.module.css';
 
 import mainDishSmall from '../../assets/images/main-dish-small.png';
@@ -10,6 +14,22 @@ import sideDishMedium from '../../assets/images/side-dish-medium.png';
 import sideDishLarge from '../../assets/images/side-dish-large.png';
 
 const Hero = () => {
+  const navigate = useNavigate(); // React Router hook for navigation
+  const dispatch = useDispatch();
+  // const isAuthenticated = useSelector(selectIsAuthenticated); // Get auth state from Redux
+  const isAuthenticated = true;
+
+  // Handle Add Recipe button click
+  const handleAddRecipeClick = () => {
+    if (isAuthenticated) {
+      // Redirect to Add Recipe Page
+      navigate('/create');
+    } else {
+      // Show sign-in modal if the user is not authenticated
+      dispatch(openModal());
+    }
+  };
+
   return (
     <section className={styles.hero}>
       <div className={styles.heroContent}>
@@ -18,7 +38,9 @@ const Hero = () => {
           Amazing recipes for beginners in the world of cooking, enveloping you
           in the aromas and tastes of various cuisines.
         </p>
-        <button className={styles.addRecipeBtn}>Add Recipe</button>
+        <button className={styles.addRecipeBtn} onClick={handleAddRecipeClick}>
+          Add Recipe
+        </button>
 
         <div className={styles.heroImages}>
           <picture className={styles.sidePicture}>
