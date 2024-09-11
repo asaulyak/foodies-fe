@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { http } from '../../http/index.js';
 import { RecipeCard } from '../Recipes/RecipeCard/RecipeCard.jsx';
-import { SubTitle } from '../Subtitle/Subtitle.jsx';
 import css from './PopularRecipes.module.css';
 
 export const PopularRecipes = () => {
