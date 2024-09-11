@@ -15,12 +15,11 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
       return response.data;
     }
 
-    fetchReceipt(recipeId)
-      .then(data => {
-        setRecipe(data);
-        changeBreadCrumbs(data.title);
-      })
-      .catch(e => console.log(e.message));
+    fetchReceipt(recipeId).then(data => {
+      setRecipe(data);
+      changeBreadCrumbs(data.title);
+    });
+    // .catch(e => console.log(e.message));//TODO: in development
   }, [recipeId, changeBreadCrumbs]);
   return (
     <>

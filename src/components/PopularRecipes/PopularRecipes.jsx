@@ -23,9 +23,6 @@ export const PopularRecipes = () => {
   return (
     <section className={css.section}>
       <h2 className={css.sectionTitle}>Popular recipes</h2>
-      {!popularRecipes.length && (
-        <SubTitle>Sorry.This section in development</SubTitle>
-      )}
       {!!popularRecipes.length && (
         <ul className={css.list}>
           {popularRecipes.map(recipe => (
