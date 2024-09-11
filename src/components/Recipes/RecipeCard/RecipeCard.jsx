@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa6';
 import { HiMiniArrowUpRight } from 'react-icons/hi2';
 import styles from './RecipeCard.module.css';
-import dishPlaceholder from '/public/dish-placeholder.png';
 import avatar from '/public/avatar.png';
 
 export const RecipeCard = ({ recipe }) => {
@@ -12,7 +11,7 @@ export const RecipeCard = ({ recipe }) => {
     <li className={styles.recipeCard}>
       <Link to={`/recipe/${id}`}>
         <img
-          src={thumb || dishPlaceholder}
+          src={thumb}
           alt={title || 'Untitled Recipe'}
           className={styles.recipeImage}
         />
