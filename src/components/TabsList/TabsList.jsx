@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { http } from '../../http';
 import css from './TabsList.module.css';
+import Pagination from '../Pagination/Pagination';
 
 export const TabsList = ({ isOwner, id }) => {
   const [activeTab, setActiveTab] = useState(isOwner ? 'recipes' : 'info');
@@ -66,23 +67,30 @@ export const TabsList = ({ isOwner, id }) => {
       </div>
 
       <div className="list-items">
-        {console.log(listItems)}
-
         {listItems.length === 0 ? (
           <p>
             Nothing has been added to your recipes list yet. Please browse our
             recipes and add your favorites for easy access in the future.
           </p>
         ) : (
-          listItems.map((item, index) => {
-            console.log(item);
-
-            return <div key={index}>{item.title}</div>;
+          listItems.map(item => {
+            if (
+              activeTab === 'recipes' ||
+              activeTab === 'favorites' ||
+              activeTab === 'info'
+            ) {
+              return;
+              //  RECIPES PREVIEW
+            } else {
+              return;
+              //  FOLLOWERS FOLLOWING PREVIEW
+            }
           })
         )}
       </div>
 
       {/* PAGINATION */}
+      <Pagination></Pagination>
     </div>
   );
 };
