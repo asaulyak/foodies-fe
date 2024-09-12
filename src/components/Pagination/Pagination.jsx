@@ -5,9 +5,11 @@ import clsx from 'clsx';
 import css from './Pagination.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
-const Pagination = ({ total, limit }) => {
-  const totalPages = Math.ceil(total / limit);
+const Pagination = ({ total, limit = 10 }) => {
   const [maxVisibleButtons, setMaxVisibleButtons] = useState(3);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const totalPages = Math.ceil(total / limit);
+  const currentPage = parseInt(searchParams.get('page')) || 1;
 
   const getMaxVisibleButtons = () => {
     const paginationContainer = document.querySelector(
@@ -35,8 +37,12 @@ const Pagination = ({ total, limit }) => {
     };
   }, []);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = parseInt(searchParams.get('page')) || 1;
+  // Automatically redirect the user if the current page becomes invalid
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setSearchParams({ page: totalPages });
+    }
+  }, [currentPage, totalPages, setSearchParams]);
 
   const handlePageQuery = page => {
     if (page >= 1 && page <= totalPages) {
