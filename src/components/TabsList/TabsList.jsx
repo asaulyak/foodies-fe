@@ -7,7 +7,14 @@ export const TabsList = ({ isOwner, id }) => {
   const [activeTab, setActiveTab] = useState(isOwner ? 'recipes' : 'info');
   const [page, setPage] = useState(1);
   const [listItems, setListItems] = useState([]);
-
+  const tabsMap = {
+    recipes: 'My Recipes',
+    favorites: 'My Favorite',
+    followers: 'Followers',
+    following: 'Following',
+    info: 'Recipes',
+    // other tabs go here
+  };
   const tabs = isOwner
     ? ['recipes', 'favorites', 'followers', 'following']
     : ['info', 'followers'];
@@ -52,7 +59,7 @@ export const TabsList = ({ isOwner, id }) => {
               className={`${css.tabItem} ${activeTab === tab ? css.tabItemActive : ''}`}
               onClick={() => handleTabClick(tab)}
             >
-              {tab === 'recipes'
+              {/* {tab === 'recipes'
                 ? 'My Recipes'
                 : tab === 'favorites'
                   ? 'My Favorites'
@@ -60,7 +67,8 @@ export const TabsList = ({ isOwner, id }) => {
                     ? 'Followers'
                     : tab === 'following'
                       ? 'Following'
-                      : 'Recipes'}
+                      : 'Recipes'} */}
+              {tabsMap[tab]}
             </button>
           ))}
         </div>
