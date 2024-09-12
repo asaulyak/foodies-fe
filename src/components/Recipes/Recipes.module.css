@@ -1,4 +1,4 @@
-.categorySection {
+.category_section {
   max-width: 343px;
   margin: 0 auto;
   margin-bottom: 64px;
@@ -15,17 +15,6 @@
   gap: 6px;
 }
 
-.categoryTitle {
-  font-size: 28px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.categoryDescription {
-  color: var(--black-light);
-  font-size: 14px;
-}
-
 .categoryInfoWrap {
   display: flex;
   flex-direction: column;
@@ -33,4 +22,17 @@
   gap: 16px;
   margin-top: 64px;
   margin-bottom: 32px;
+}
+@media screen and (min-width: 768px) {
+  .categorySection {
+    max-width: 704px;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .categorySection {
+    max-width: 1280px;
+    margin-bottom: 120px;
+  }
 }
