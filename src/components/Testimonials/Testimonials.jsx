@@ -40,7 +40,6 @@ export const Testimonials = () => {
           <SwiperSlide key={testimonial.id}>
             <div className={css.slide}>
               <p className={css.text}>{testimonial.testimonial}</p>
-              {/* <p className={css.author}>- {testimonial.author}</p> */}
             </div>
           </SwiperSlide>
         ))}
