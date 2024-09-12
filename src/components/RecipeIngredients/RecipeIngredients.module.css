@@ -1,4 +1,4 @@
-.section {
+.wrapper {
   padding: 16px 0;
   @media screen and (min-width: 768px) {
     padding: 20px 0;

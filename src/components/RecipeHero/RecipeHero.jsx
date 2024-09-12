@@ -2,7 +2,7 @@ import css from './RecipeHero.module.css';
 
 export const RecipeHero = ({ image, title }) => {
   return (
-    <section className={css.hero}>
+    <div className={css.hero}>
       <div className={css.imgWrapper}>
         <img
           className={css.img}
@@ -16,6 +16,6 @@ export const RecipeHero = ({ image, title }) => {
           loading="lazy"
         />
       </div>
-    </section>
+    </div>
   );
 };

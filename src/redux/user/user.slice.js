@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchCurrentUser,
   fetchDetailInfoUser,
+  logoutUser,
   patchAvatar,
 } from './user.actions.js';
 
@@ -31,7 +32,18 @@ const userSlice = createSlice({
 
         state.error = null;
       })
-      .addCase(fetchCurrentUser.rejected, handleRejected);
+      .addCase(fetchCurrentUser.rejected, handleRejected)
+      .addCase(logoutUser.pending, state => {
+        state.loading = true;
+      })
+      .addCase(logoutUser.fulfilled, state => {
+        state.loading = false;
+        state.info = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
