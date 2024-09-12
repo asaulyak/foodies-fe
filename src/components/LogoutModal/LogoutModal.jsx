@@ -19,6 +19,7 @@ const LogoutModal = () => {
         onClose();
       });
   };
+  
   return (
     <div className={styles.container}>
       <Button onClick={handleLogout} className={styles.btnPrimary}>
