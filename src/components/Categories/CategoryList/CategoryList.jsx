@@ -29,6 +29,8 @@ export const CategoryList = () => {
 
   // const [categories, setCategories] = useState(useSelector(fetchCategories));
 
+  categories && console.log(categories);
+
   const processCategories = categories => {
     // const { md, lg } = useMediaQueries();
 
