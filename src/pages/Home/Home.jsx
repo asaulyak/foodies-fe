@@ -11,5 +11,6 @@ export const Home = () => (
     <section className={css.hero}>HOME</section>
     <Modal children={<SignModal />} />
     <Categories />
+    <Testimonials />
   </>
 );
