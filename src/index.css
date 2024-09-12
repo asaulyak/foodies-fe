@@ -85,6 +85,10 @@ ol {
   line-height: 1.43;
   letter-spacing: -0.02em;
   color: var(--grey);
+  cursor: pointer;
+}
+.css-b62m3t-container .css-13cymwt-control:hover {
+  border: 1px solid var(--hoverInput);
 }
 .css-b62m3t-container .css-1jqq78o-placeholder {
   color: var(--grey);

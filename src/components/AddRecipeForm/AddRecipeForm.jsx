@@ -134,7 +134,6 @@ export const AddRecipeForm = () => {
     }));
     try {
       const imageUrl = await http.post('/recipes/thumb', formData, {
-        // TODO: remove Authorization token
         headers: {
           'Content-Type': 'multipart/form-data',
         },

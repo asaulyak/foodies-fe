@@ -8,18 +8,17 @@
   line-height: 1.43;
   letter-spacing: -0.02em;
   color: var(--grey);
+  transition: border 250ms ease;
 }
 
 .input_form:hover {
+  border-bottom: 1px solid var(--hoverInput);
 }
 .input_form::placeholder {
   font-size: 14px;
   line-height: 1.43;
   letter-spacing: -0.02em;
   color: var(--grey);
-}
-
-.field_title {
 }
 @media only screen and (min-width: 768px) {
   .input_form {

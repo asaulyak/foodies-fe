@@ -13,6 +13,9 @@
   padding-bottom: 16px;
   padding-right: 56px;
 }
+.textarea:hover {
+  border-bottom: 1px solid var(--hoverInput);
+}
 .textarea::placeholder {
   font-size: 14px;
   line-height: 1.43;
