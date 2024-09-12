@@ -10,7 +10,10 @@ import {
   fetchAreas,
   fetchIngredients,
 } from '../../redux/recipes/recipes.actions';
-import { setSelectedIngredient as setSelectedIngredientAction } from '../../redux/recipes/recipes.slice';
+import {
+  setSelectedIngredient as setSelectedIngredientAction,
+  setSelectedArea as setSelectedAreaAction,
+} from '../../redux/recipes/recipes.slice';
 
 export const RecipeFilter = ({ handleSelectChange }) => {
   const dispatch = useDispatch();
@@ -18,9 +21,6 @@ export const RecipeFilter = ({ handleSelectChange }) => {
   const areas = useSelector(selectAreas);
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
-
-  // const [selectedIngredient, setSelectedIngredient] = React.useState('');
-  const [selectedArea, setSelectedArea] = React.useState('');
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -34,7 +34,7 @@ export const RecipeFilter = ({ handleSelectChange }) => {
 
   const handleAreaChange = e => {
     console.log(e.target.value);
-    dispatch(setSelectedArea(e.target.value));
+    dispatch(setSelectedAreaAction(e.target.value));
   };
 
   return (
