@@ -14,11 +14,11 @@ const handleRejected = (state, action) => {
 const recipesSlice = createSlice({
   name: 'recipes',
   initialState: {
-    category: [],
+    category: '',
     ingredients: [],
     areas: [],
     recipes: [],
-    selectedIngredientIds: '',
+    selectedIngredientIds: [],
     selectedAreaId: '',
     page: 1,
     limit: 12,
@@ -40,18 +40,22 @@ const recipesSlice = createSlice({
     builder
       .addCase(fetchIngredients.pending, handlePending)
       .addCase(fetchIngredients.fulfilled, (state, action) => {
+        console.log('Fetched Ingredients:', action.payload);
         state.ingredients = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchIngredients.rejected, handleRejected)
       .addCase(fetchAreas.pending, handlePending)
       .addCase(fetchAreas.fulfilled, (state, action) => {
+        console.log('Fetched areas:', action.payload);
         state.areas = action.payload;
         state.isLoading = false;
       })
+
       .addCase(fetchAreas.rejected, handleRejected)
       .addCase(fetchRecipes.pending, handlePending)
       .addCase(fetchRecipes.fulfilled, (state, action) => {
+        console.log('Fetched Recipes:', action.payload);
         state.recipes = action.payload;
         state.isLoading = false;
       })

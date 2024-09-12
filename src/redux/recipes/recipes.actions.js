@@ -6,6 +6,7 @@ export const fetchIngredients = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await http.get('/api/ingredients');
+      console.log('Ingredients Response:', response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -18,6 +19,7 @@ export const fetchAreas = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await http.get('/api/areas');
+      console.log('Ingredients Response:', response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -27,16 +29,21 @@ export const fetchAreas = createAsyncThunk(
 
 export const fetchRecipes = createAsyncThunk(
   'recipes/fetchRecipes',
-  async ({ category, ingredients, area, limit, page }, thunkAPI) => {
+  async ({ category, area, ingredients, limit, page }, thunkAPI) => {
     try {
       const params = new URLSearchParams();
-      if (category) params.append('category', category);
-      if (ingredients) params.append('ingredients', ingredients);
-      if (area) params.append('area', area);
+
+      if (category) params.append('categoryId', category);
+      if (area) params.append('areaId', area);
+      if (ingredients && Array.isArray(ingredients)) {
+        ingredients.forEach(id => params.append('ingredientIds[]', id));
+      }
       if (limit) params.append('limit', limit);
       if (page) params.append('page', page);
 
-      const response = await http.get(`/api/recipes/?${params.toString()}`);
+      const response = await http.get(
+        `/api/recipes/search?${params.toString()}`
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

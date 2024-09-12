@@ -26,6 +26,9 @@ export const RecipeFilter = ({ handleSelectChange }) => {
     dispatch(fetchAreas());
   }, [dispatch]);
 
+  console.log('Ingredients:', ingredients);
+  console.log('Areas:', areas);
+
   const handleIngredientChange = e => {
     setSelectedIngredient(e.target.value);
     handleSelectChange('ingredient', e.target.value);
@@ -46,7 +49,7 @@ export const RecipeFilter = ({ handleSelectChange }) => {
       >
         <option value="">Ingredients</option>
         {ingredients.map(ingredient => (
-          <option key={ingredient.id} value={ingredient.id}>
+          <option key={ingredient.id} value={ingredient.name}>
             {ingredient.name}
           </option>
         ))}
@@ -60,7 +63,7 @@ export const RecipeFilter = ({ handleSelectChange }) => {
       >
         <option value="">Areas</option>
         {areas.map(area => (
-          <option key={area.id} value={area.id}>
+          <option key={area.id} value={area.name}>
             {area.name}
           </option>
         ))}
