@@ -11,5 +11,6 @@ export const Home = () => (
     <div className={css.homeBody}>
       <Categories />
     </div>
+    <Testimonials />
   </>
 );
