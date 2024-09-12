@@ -14,14 +14,14 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route path="/" element={<Layout />}> */}
-      <Route index element={<Home />} />
-      {/*<Route path="/create" element={<CreateRecipe />} />*/}
-      <Route path="/user/:id" element={<User />} />
-      <Route path="recipe/:id" element={<RecipePage />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        {/*<Route path="/create" element={<CreateRecipe />} />*/}
+        <Route path="/user/:id" element={<User />} />
+        <Route path="recipe/:id" element={<RecipePage />} />
 
-      <Route path="*" element={<Home />} />
-      {/* </Route> */}
+        <Route path="*" element={<Home />} />
+      </Route>
     </Routes>
   );
 }
