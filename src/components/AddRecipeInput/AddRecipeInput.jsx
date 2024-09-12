@@ -3,7 +3,6 @@ import css from './AddRecipeInput.module.css';
 import clsx from 'clsx';
 
 export const AddRecipeInput = ({
-  disabled,
   type,
   className,
   parentClassName,
@@ -12,7 +11,9 @@ export const AddRecipeInput = ({
   placeholder,
   id,
   onChange,
-  isCount = false,
+  disabled = false,
+  register = () => {},
+  error,
 }) => {
   const handleChange = event => {
     onChange(event.target.value);
@@ -27,8 +28,10 @@ export const AddRecipeInput = ({
         placeholder={placeholder}
         className={clsx([css.input_form, className])}
         onChange={handleChange}
+        disabled={disabled}
+        {...register(name)}
       />
-      <span className={'error-form'}>This field is required</span>
+      {error && <span className={'error-form'}>{error.message}</span>}
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { Layout } from './components/Layout/Layout.jsx';
 import { lazy } from 'react';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
-import { AddRecipe } from './pages/AddRecipe/AddRecipe.jsx';
 import { User } from './pages/User/User.jsx';
 
 function App() {
@@ -12,6 +11,7 @@ function App() {
   // Add lazy loaded pages here
   // const CreateRecipe = lazy(() => import('./pages/CreateRecipe/CreateRecipe.jsx'));
   const RecipePage = lazy(() => import('./pages/RecipePage/RecipePage.jsx'));
+  const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
 
   return (
     <Routes>

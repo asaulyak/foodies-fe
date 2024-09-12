@@ -2,42 +2,100 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoriesList } from '../../redux/categories/categories.actions';
 import { fetchIngredientsList } from '../../redux/ingredients/ingredients.actions';
+import { fetchAreasList } from '../../redux/areas/areas.actions';
 
 import { Button } from '../Button/Button';
 import css from './AddRecipeForm.module.css';
 import clsx from 'clsx';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { UploadFile } from '../UploadFile/UploadFile';
 import { AddRecipeInput } from '../AddRecipeInput/AddRecipeInput';
 import { AddRecipeTextarea } from '../AddRecipeTextarea/AddRecipeTextarea';
 import Select from 'react-select';
-import {
-  categoriesList,
-  listIsLoading,
-  listError,
-} from '../../redux/categories/categories.selectors';
-import {
-  ingredientsList,
-  ingredientsListIsLoading,
-  ingredientsListError,
-} from '../../redux/ingredients/ingredients.selectors';
+import { categoriesList } from '../../redux/categories/categories.selectors';
+import { ingredientsList } from '../../redux/ingredients/ingredients.selectors';
+import { areasList } from '../../redux/areas/areas.selectors';
+import { IngredientCard } from '../IngredientCard/IngredientCard';
+
+import { http } from '../../http/index';
+
+const schema = yup.object().shape({
+  image: yup
+    .mixed()
+    .test('required', 'Image is required', value => {
+      return value && value.length > 0;
+    })
+    .test('fileSize', 'File size is too large', value => {
+      return value && value[0] && value[0].size <= 5000000;
+    }),
+  title: yup.string().required('The title field is required'),
+  description: yup.string().required('The description field is required'),
+  preparation: yup.string().required('The preparation field is required'),
+  category: yup
+    .object()
+    .shape({
+      value: yup.string().required('Category is required'),
+      label: yup.string(),
+    })
+    .nullable()
+    .required('Category is required'),
+  area: yup
+    .object()
+    .shape({
+      value: yup.string().required('Area is required'),
+      label: yup.string(),
+    })
+    .nullable()
+    .required('Area is required'),
+  time: yup
+    .number()
+    .min(1, 'Time needs to be over than 0')
+    .required('Time is required'),
+  ingredients: yup
+    .array()
+    .min(1, 'At least one ingredient is required')
+    .required('Ingredients are required'),
+});
 
 export const AddRecipeForm = () => {
-  // const [selectedImage, setSelectedImage] = useState(null);
-
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
-  } = useForm();
+    setValue,
+    getValues,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      time: 0,
+      ingredients: [],
+    },
+  });
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionIngredients, setSelectedOptionIngredients] =
+    useState(null);
+  const [selectedOptionAreas, setSelectedOptionAreas] = useState(null);
+  const [time, setTime] = useState(0);
+  const [selectedListIngredients, setSelectedListIngredients] = useState([]);
+  const [ingredientsQuantity, setIngredientsQuantity] = useState(null);
+  const [errorsQuantity, setErrorsQuantity] = useState({});
+  const [errorIngredientsSelect, setErrorIngredientsSelect] = useState(false);
 
   const dispatch = useDispatch();
   const categories = useSelector(categoriesList);
   const ingredients = useSelector(ingredientsList);
+  const areas = useSelector(areasList);
 
-  const isLoading = useSelector(listIsLoading);
-  const error = useSelector(listError);
+  useEffect(() => {
+    dispatch(fetchCategoriesList());
+    dispatch(fetchIngredientsList());
+    dispatch(fetchAreasList());
+  }, [dispatch]);
 
   const categoriesOptions = categories?.map(category => ({
     value: category.id,
@@ -49,20 +107,55 @@ export const AddRecipeForm = () => {
     label: ingredient.name,
   }));
 
-  useEffect(() => {
-    dispatch(fetchCategoriesList());
-    dispatch(fetchIngredientsList());
-  }, [dispatch]);
+  const areasOptions = areas?.map(area => ({
+    value: area.id,
+    label: area.name,
+  }));
 
-  const [selectedOption, setSelectedOption] = useState([]);
-  const [selectedOptionIngredients, setSelectedOptionIngredients] =
-    useState(null);
-  const [time, setTime] = useState(0);
-  const [selectedListIngredients, setSelectedListIngredients] = useState([]);
-  const [ingredientsQuantity, setIngredientsQuantity] = useState(null);
-
-  const onSubmit = data => console.log(data);
-  // console.log(watch('example')); // watch input value by passing the name of it
+  const onSubmit = async data => {
+    const {
+      area,
+      category,
+      description,
+      image,
+      ingredients,
+      preparation,
+      time,
+      title,
+    } = data;
+    const file = image[0];
+    const formData = new FormData();
+    formData.append('thumb', file);
+    try {
+      const imageUrl = await http.post('/recipes/thumb', formData, {
+        // TODO: remove Authorization token
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          //Authorization:
+          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjYxNDY3MTksIm5hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QubmV0IiwiaWQiOiJhMjRlYjU5Yi03NjNjLTQ2YzEtYWUzMi1mMjVjYjFlZjdmZmIiLCJleHAiOjE3MjYxNTAzMTl9.OexATqNj8eQJKThgKZ4LS3lR2EJXobUhrbWeX7Tb9uU',
+        },
+      });
+      const addRecipeData = {
+        title,
+        instructions: preparation,
+        description,
+        thumb: imageUrl.data,
+        time,
+        categoryId: category.value,
+        areaId: area.value,
+        ingredients,
+      };
+      const addRecipeResponse = await http.post('/recipes', addRecipeData, {
+        // TODO: remove Authorization token
+        // headers: {
+        //   Authorization:
+        //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjYxNDY3MTksIm5hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QubmV0IiwiaWQiOiJhMjRlYjU5Yi03NjNjLTQ2YzEtYWUzMi1mMjVjYjFlZjdmZmIiLCJleHAiOjE3MjYxNTAzMTl9.OexATqNj8eQJKThgKZ4LS3lR2EJXobUhrbWeX7Tb9uU',
+        // },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleIncrease = () => {
     setTime(prevTime => prevTime + 10);
@@ -75,6 +168,14 @@ export const AddRecipeForm = () => {
   };
 
   const handleSelectIngredients = () => {
+    !ingredientsQuantity
+      ? setErrorsQuantity({
+          message: 'The quantity field is required',
+        })
+      : setErrorsQuantity({});
+    !selectedOptionIngredients
+      ? setErrorIngredientsSelect(true)
+      : setErrorIngredientsSelect(false);
     if (
       selectedOptionIngredients &&
       ingredientsQuantity &&
@@ -89,18 +190,30 @@ export const AddRecipeForm = () => {
         ...selectedListIngredients,
         { ...findIngredient, quantity: ingredientsQuantity },
       ]);
+      setValue('ingredients', [
+        ...getValues('ingredients'),
+        { ...findIngredient, quantity: ingredientsQuantity },
+      ]);
     }
   };
 
   const handleIngredientsDelete = id => {
+    const updatedList = selectedListIngredients.filter(item => item.id !== id);
     setSelectedListIngredients(prev => prev.filter(el => el.id !== id));
+    setValue('ingredients', updatedList);
   };
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <UploadFile></UploadFile>
+      <UploadFile
+        name="image"
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+        register={register}
+      ></UploadFile>
+      {errors.image && (
+        <span className="error-form">{errors.image.message}</span>
+      )}
       <div className={css.form_info}>
         <AddRecipeInput
           type={'text'}
@@ -108,36 +221,100 @@ export const AddRecipeForm = () => {
           placeholder={'The name of the recipe'}
           parentClassName={css.field_title}
           className={css.title}
+          register={register}
+          error={errors.title}
+          name={'title'}
         ></AddRecipeInput>
         <AddRecipeTextarea
+          name={'description'}
           type={'text'}
           id={'description'}
           placeholder={'Enter a description of the dish'}
           maxLength={200}
+          register={register}
+          error={errors.description}
         ></AddRecipeTextarea>
-
         <div className={css.wrapper}>
           <div className={css.wrap_field}>
             <div className="field">
               <p className="form-label">category</p>
-              <Select
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
-                options={categoriesOptions}
-                placeholder="Select a category"
+              <Controller
+                name="category"
+                control={control}
+                defaultValue={null}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    options={categoriesOptions}
+                    placeholder="Select a category"
+                    onChange={selectedOption => field.onChange(selectedOption)}
+                  />
+                )}
               />
+              {errors.category && (
+                <span className={'error-form'}>{errors.category.message}</span>
+              )}
             </div>
             <div className={css.cooking_time}>
               <h3 className="form-label">COOKING TIME</h3>
               <div className={css.cooking_controls}>
-                <button className={css.circle_button} onClick={handleDecrease}>
-                  -
-                </button>
-                <span className={css.time_display}>{time} min</span>
-                <button className={css.circle_button} onClick={handleIncrease}>
-                  +
-                </button>
+                <Controller
+                  name="time"
+                  control={control}
+                  render={({ field }) => (
+                    <>
+                      <button
+                        type="button"
+                        className={css.circle_button}
+                        onClick={() => {
+                          handleDecrease();
+                          field.onChange(time - 10);
+                        }}
+                        disabled={time <= 0}
+                      >
+                        -
+                      </button>
+                      <span className={css.time_display}>{time} min</span>
+                      <button
+                        type="button"
+                        className={css.circle_button}
+                        onClick={() => {
+                          handleIncrease();
+                          field.onChange(time + 10);
+                        }}
+                      >
+                        +
+                      </button>
+                    </>
+                  )}
+                />
               </div>
+              {errors.time && (
+                <span className={'error-form'}>{errors.time.message}</span>
+              )}
+            </div>
+          </div>
+          <div className={css.wrap_field}>
+            <div className="field">
+              <p className="form-label">Area</p>
+              <Controller
+                name="area"
+                control={control}
+                defaultValue={null}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    options={areasOptions}
+                    placeholder="Select an area"
+                    onChange={setSelectedOptionAreas =>
+                      field.onChange(setSelectedOptionAreas)
+                    }
+                  />
+                )}
+              />
+              {errors.area && (
+                <span className={'error-form'}>{errors.area.message}</span>
+              )}
             </div>
           </div>
           <div>
@@ -150,11 +327,16 @@ export const AddRecipeForm = () => {
                   options={ingredientsOptions}
                   placeholder="Add the ingredient"
                 />
+                {errorIngredientsSelect && (
+                  <span className={'error-form'}>Select an ingredient</span>
+                )}
               </div>
               <AddRecipeInput
                 type={'text'}
+                name="quantity"
                 placeholder={'Enter quantity'}
                 onChange={setIngredientsQuantity}
+                error={errorsQuantity}
               ></AddRecipeInput>
             </div>
             <button
@@ -173,38 +355,41 @@ export const AddRecipeForm = () => {
                 <path
                   d="M11 4.58325V17.4166"
                   stroke="#050505"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M4.58301 11H17.4163"
                   stroke="#050505"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
-            <ul>
-              {selectedListIngredients.map(elem => {
-                return (
-                  <li key={elem.id}>
-                    <img src={elem.image} alt={elem.name} />
-                    <span>{elem.name}</span>
-                    <span>{elem.quantity}</span>
-                    <span onClick={() => handleIngredientsDelete(elem.id)}>
-                      x
+            <Controller
+              name="ingredients"
+              control={control}
+              render={({ field }) => (
+                <>
+                  {errors.ingredients && (
+                    <span className={'error-form'}>
+                      {errors.ingredients.message}
                     </span>
-                  </li>
-                );
-              })}
-            </ul>
+                  )}
+                  <IngredientCard
+                    list={selectedListIngredients}
+                    handleIngredientsDelete={handleIngredientsDelete}
+                  />
+                </>
+              )}
+            />
           </div>
         </div>
-
         <AddRecipeTextarea
           type={'text'}
+          name={'preparation'}
           id={'recipe-preparation'}
           placeholder={'Enter recipe'}
           labelFor={'recipe-preparation'}
@@ -212,11 +397,11 @@ export const AddRecipeForm = () => {
           maxLength={200}
           parentClassName={css.textarea_bottom}
           className={css.input_bottom}
+          register={register}
+          error={errors.preparation}
         ></AddRecipeTextarea>
-
         <div className={css.wrap_btn}>
           <button className={css.circle_button}>+</button>
-
           <Button
             type="submit"
             variant={'color'}
@@ -225,14 +410,6 @@ export const AddRecipeForm = () => {
           ></Button>
         </div>
       </div>
-      {/* <div className={css.form_info}></div> */}
-
-      {/* include validation with required or other standard HTML validation rules */}
-      {/* <input {...register('exampleRequired', { required: true })} /> */}
-      {/* errors will return when field validation fails  */}
-      {/* {errors.exampleRequired && <span>This field is required</span>} */}
-
-      {/* <input type="submit" /> */}
     </form>
   );
 };

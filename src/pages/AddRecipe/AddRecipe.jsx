@@ -4,7 +4,7 @@ import { SubTitle } from '../../components/SubTitle/SubTitle';
 
 import { AddRecipeForm } from '../../components/AddRecipeForm/AddRecipeForm';
 
-export const AddRecipe = () => (
+const AddRecipe = () => (
   <>
     <section className="container">
       <MainTitle className={css.form_mainTitle}>{'Add recipe'}</MainTitle>
@@ -17,3 +17,4 @@ export const AddRecipe = () => (
     </section>
   </>
 );
+export default AddRecipe;

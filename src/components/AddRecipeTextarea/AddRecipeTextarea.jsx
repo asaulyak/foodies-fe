@@ -1,42 +1,47 @@
 import css from './AddRecipeTextarea.module.css';
 import clsx from 'clsx';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const AddRecipeTextarea = ({
-  disabled,
+  disabled = false,
   type,
   className,
   parentClassName,
   value,
   name,
   placeholder,
-  isCount = false,
   labelFor,
   labelText,
   id,
   maxLength,
+  register,
+  error,
 }) => {
   const [text, setText] = useState('');
   const [hasTyped, setHasTyped] = useState(false);
-  const textareaRef = useRef(null);
 
   const handleInput = e => {
+    const textarea = e.target;
     setText(e.target.value);
     if (e.target.value.length > 0 && !hasTyped) {
       setHasTyped(true);
     }
-    adjustTextareaHeight();
+    if (textarea) {
+      adjustTextareaHeight(textarea);
+    }
   };
 
-  const adjustTextareaHeight = () => {
-    const textarea = textareaRef.current;
+  const adjustTextareaHeight = textarea => {
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
   useEffect(() => {
-    adjustTextareaHeight();
-  }, [text]);
+    const textarea = document.getElementById(id);
+    if (textarea) {
+      adjustTextareaHeight(textarea);
+    }
+  }, [text, id]);
 
   return (
     <div className={parentClassName}>
@@ -45,25 +50,26 @@ export const AddRecipeTextarea = ({
       </label>
       <div className={css.wrapper_textarea}>
         <textarea
-          ref={textareaRef}
           type={type}
           id={id}
           name={name}
           placeholder={placeholder}
           className={clsx([css.textarea, className])}
-          onChange={handleInput}
           rows={1}
           maxLength={maxLength}
+          disabled={disabled}
+          {...register(name, {
+            onChange: handleInput,
+          })}
         />
         <div className={css.count}>
-          {' '}
           <span className={clsx({ [css.count_bold]: hasTyped })}>
             {text.length}
           </span>
           /{maxLength}
         </div>
       </div>
-      <span className={'error-form'}>This field is required</span>
+      {error && <span className={'error-form'}>{error.message}</span>}
     </div>
   );
 };

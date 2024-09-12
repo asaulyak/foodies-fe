@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import css from './UploadFile.module.css';
 import clsx from 'clsx';
-export const UploadFile = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
-
+export const UploadFile = ({
+  selectedImage,
+  setSelectedImage,
+  name,
+  register = () => {},
+}) => {
   const handleImageChange = e => {
     const file = e.target.files[0];
     if (file) {
@@ -37,30 +40,16 @@ export const UploadFile = () => {
           </div>
         </label>
         <input
+          name={name}
           type="file"
           className={css.input_file}
           accept="image/*"
-          onChange={handleImageChange}
           id="input-file"
-          name="input-file"
+          {...register(name, {
+            onChange: handleImageChange,
+          })}
         />
       </>
-
-      {/* <span className={css.upload_description}>Upload another photo</span> */}
-      {/* {!selectedImage && (
-        <>
-          <div className={css.file_info}>
-            <img
-              src={`${import.meta.env.BASE_URL}/upload-file.png`}
-              alt="upload-file"
-              width="64"
-              height="64"
-              className={css.default_img}
-            />
-            <span className={css.upload_description}>Upload a photo</span>
-          </div>
-        </>
-      )} */}
     </div>
   );
 };
