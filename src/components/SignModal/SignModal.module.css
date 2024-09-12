@@ -1,0 +1,22 @@
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.64px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.bottomText {
+  color: var(--grey);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.28px;
+  text-align: center;
+}
+
+.nameForm {
+  color: var(--black);
+  cursor: pointer;
+}
