@@ -7,6 +7,7 @@ import { SubTitle } from '../SubTitle/SubTitle';
 import { RecipeFilter } from '../RecipeFilter/RecipeFilter';
 
 export const Recipes = () => {
+  // export const Recipes = ({category}) => {
   return (
     <section className={styles.categorySection}>
       <div className={styles.categoryInfoWrap}>
@@ -15,11 +16,15 @@ export const Recipes = () => {
           <span>Back</span>
         </Link>
         <MainTitle>Category</MainTitle>
+        {/* <MainTitle>{category.name}</MainTitle> */}
         <SubTitle>
           Go on a taste journey, where every sip is a sophisticated creative
           chord, and every dessert is an expression of the most refined
           gastronomic desires.
         </SubTitle>
+        {/* <SubTitle>
+         {category.description}
+        </SubTitle> */}
       </div>
 
       <div className={styles.recipesListWrap}>
