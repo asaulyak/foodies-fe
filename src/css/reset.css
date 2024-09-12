@@ -35,3 +35,7 @@ img {
   width: 100%;
   height: auto;
 }
+input:focus,
+textarea:focus {
+  outline: none;
+}
