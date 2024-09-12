@@ -2,6 +2,16 @@
   margin: 100px 16px;
   display: flex;
   justify-content: space-between;
+  position: relative;
+}
+
+.UserCardSection:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: 1px solid var(--grey);
 }
 
 .userInfo {

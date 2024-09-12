@@ -1,8 +1,19 @@
 import React from 'react';
 import css from './UserCard.module.css';
 import { MdArrowOutward } from 'react-icons/md';
+// import { useLocation } from 'react-router-dom';//TODO: uncoment when using normal tabs
+import { useDispatch } from 'react-redux';
 
-export const UserCard = () => {
+export const UserCard = ({ user }) => {
+  // const location = useLocation();//TODO: uncomment when using normal tabs
+  // const activeTab = location.pathname.split('/').at(-1);//TODO: uncomment when using normal tabs
+
+  const dispatch = useDispatch();
+
+  const activeTab = 'followers';
+
+  const btnName = activeTab === 'followers' ? 'follow' : 'following';
+
   const baseURL = import.meta.env.BASE_URL;
   const images = [
     'src/components/UserCard/tempImages/recipe1.jpg',
@@ -10,18 +21,28 @@ export const UserCard = () => {
     'src/components/UserCard/tempImages/recipe3.jpg',
     'src/components/UserCard/tempImages/recipe4.jpg',
   ];
+
+  const handleClick = () => {
+    if (activeTab === 'followers') {
+      dispatchEvent();
+    }
+  };
+
   return (
     <div className={css.UserCardSection}>
       <div className={css.userInfo}>
         <img
           className={css.UserAvatarImage}
-          src={`${baseURL}/src/components/UserCard/tempImages/userAvatar.jpg`}
+          src={`${baseURL}/src/components/UserCard/tempImages/userAvatar1.jpg`}
           alt=""
         />
+
         <div className={css.userDetails}>
           <h3>Victor</h3>
           <p>"Own recipes: ${}"</p>
-          <button>FOLLOW</button>
+          <button type="button" onClick={handleClick}>
+            {btnName}
+          </button>
         </div>
       </div>
       <div className={css.recipeImageSection} hidden>
