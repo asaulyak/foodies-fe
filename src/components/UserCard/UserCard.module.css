@@ -2,16 +2,6 @@
   margin: 100px 16px;
   display: flex;
   justify-content: space-between;
-  position: relative;
-}
-
-.UserCardSection:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  border: 1px solid var(--grey);
 }
 
 .userInfo {
@@ -42,4 +32,20 @@
   height: 36px;
   border-radius: 100px;
   border: 1px solid var(--grey);
+}
+
+.mainBtn {
+  padding: 8px 16px;
+  height: 38px;
+  color: var(--grey);
+  border-radius: 30px;
+  border: 1px solid var(--grey);
+  text-transform: uppercase;
+  @media screen and (min-width: 768px) {
+    padding: 10px 24px;
+    height: 46px;
+  }
+  @media screen and (min-width: 1440px) {
+    color: var(--black);
+  }
 }
