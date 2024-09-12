@@ -1,5 +1,14 @@
+.section {
+  padding-top: 32px;
+  @media screen and (min-width: 768px) {
+    padding-top: 50px;
+  }
+  @media screen and (min-width: 1440px) {
+    padding-top: 60px;
+  }
+}
 .sectionTitle {
-  padding-bottom: 32px;
+  margin-bottom: 32px;
 
   color: var(--black);
 
@@ -9,4 +18,34 @@
   line-height: 1.333;
   letter-spacing: -0.36px;
   text-transform: uppercase;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 40px;
+    font-size: 24px;
+    line-height: 1.167;
+    letter-spacing: -0.48px;
+  }
+}
+
+.list {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 20px;
+  }
+}
+
+.item:not(:last-child) {
+  @media screen and (max-width: 767px) {
+    margin-bottom: 20px;
+  }
+}
+
+.item {
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 20px) / 2);
+  }
+  @media screen and (min-width: 1440px) {
+    width: calc((100% - (20px * 3)) / 4);
+  }
 }

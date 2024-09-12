@@ -79,14 +79,20 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 3px 8px 3px 0;
+  padding: 0 16px 0 0;
   border-radius: 32px;
   border: none;
   background-color: transparent;
-}
-
-.btn:hover {
-  outline: 2px solid var(--black);
+  height: 34px;
+  text-transform: none;
+  @media screen and (min-width: 768px) {
+    height: 50px;
+  }
+  &:hover .accentText,
+  &:focus .accentText,
+  &:focus-visible .accentText {
+    color: var(--grey);
+  }
 }
 
 .btnWrapper {

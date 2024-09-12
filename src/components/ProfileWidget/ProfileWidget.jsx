@@ -55,29 +55,27 @@ export const ProfileWidget = () => {
           </div>
         </div>
 
-        <div className={css['links-wrapper']}>
-          <ul
-            className={clsx({
-              [css.links]: true,
-              'visually-hidden': !profileVisible,
-            })}
-          >
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <span className={css['icon-text']} onClick={handleLogout}>
-                Log out{' '}
-                <Icon
-                  iconId="arrow-up"
-                  width={9}
-                  height={9}
-                  className={css['signout-icon']}
-                />
-              </span>
-            </li>
-          </ul>
-        </div>
+        <ul
+          className={clsx({
+            [css.links]: true,
+            'visually-hidden': !profileVisible,
+          })}
+        >
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <span className={css['icon-text']} onClick={handleLogout}>
+              Log out{' '}
+              <Icon
+                iconId="arrow-up"
+                width={9}
+                height={9}
+                className={css['signout-icon']}
+              />
+            </span>
+          </li>
+        </ul>
       </div>
     );
   }
