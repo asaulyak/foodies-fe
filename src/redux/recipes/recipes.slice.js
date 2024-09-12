@@ -3,7 +3,7 @@ import { fetchIngredients, fetchRecipes, fetchAreas } from './recipes.actions';
 
 const handlePending = state => {
   state.isLoading = true;
-  state.isError = false;
+  state.isError = null;
 };
 
 const handleRejected = (state, action) => {
