@@ -6,6 +6,7 @@ import { fetchDetailInfoUser } from '../../redux/user/user.actions';
 import { selectInfoUser } from '../../redux/user/user.selectors';
 import { useParams } from 'react-router-dom';
 import { TabsList } from '../../components/TabsList/TabsList';
+import { SubTitle } from '../../components/SubTitle/SubTitle';
 
 export const User = () => {
   const { id } = useParams();
@@ -19,7 +20,8 @@ export const User = () => {
   return (
     <>
       <div className={css.containerUser}>
-        <h1 className={css.title}>User</h1>
+        {/* Component TITLE  */}
+        <SubTitle>Profile</SubTitle>
         <UserInfo {...currentUser}></UserInfo>
         <TabsList isOwner id={id}></TabsList>
       </div>
