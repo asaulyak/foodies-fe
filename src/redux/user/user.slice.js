@@ -33,17 +33,12 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCurrentUser.rejected, handleRejected)
-      .addCase(logoutUser.pending, state => {
-        state.loading = true;
-      })
+      .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.fulfilled, state => {
-        state.loading = false;
+        state.isLoading = false;
         state.info = null;
       })
-      .addCase(logoutUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+      .addCase(logoutUser.rejected, handleRejected);
   },
 });
 
