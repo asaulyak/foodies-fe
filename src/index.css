@@ -1,6 +1,7 @@
 @import url('css/reset.css');
 @import '/node_modules/modern-normalize/modern-normalize.css';
 @import url('css/vars.css');
+@import 'react-toastify/dist/ReactToastify.css';
 
 :root {
   font-family: Mulish, system-ui, Helvetica, Arial, sans-serif;
@@ -23,6 +24,9 @@
 body {
   min-width: 320px;
   min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: 500;
 }
 
 ul,
@@ -57,6 +61,63 @@ ol {
   padding-left: 16px;
   padding-right: 16px;
 }
+.form-label {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.error-form {
+  color: red;
+  font-size: 12px;
+}
+.css-b62m3t-container .css-13cymwt-control,
+.css-b62m3t-container .css-t3ipsp-control {
+  border: 1px solid var(--grey);
+  border-radius: 30px;
+  padding: 0 14px;
+  height: 48px;
+  box-shadow: none;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--grey);
+  cursor: pointer;
+}
+.css-b62m3t-container .css-13cymwt-control:hover {
+  border: 1px solid var(--hoverInput);
+}
+.css-b62m3t-container .css-1jqq78o-placeholder {
+  color: var(--grey);
+}
+
+.css-1u9des2-indicatorSeparator {
+  display: none;
+}
+.css-1xc3v61-indicatorContainer svg {
+  color: var(--black);
+}
+.css-b62m3t-container .css-1nmdiq5-menu {
+  border-radius: 15px;
+  padding: 16px 18px;
+  height: 286px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  overflow: hidden;
+}
+.css-b62m3t-container .css-d7l1ni-option {
+  background-color: #bfbebe29;
+}
+.css-b62m3t-container .css-t3ipsp-control:hover {
+  border-color: unset;
+}
 
 @media only screen and (min-width: 375px) {
   .container {
@@ -68,6 +129,19 @@ ol {
     max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
+  }
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .form-label {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .css-b62m3t-container .css-13cymwt-control,
+  .css-b62m3t-container .css-t3ipsp-control {
+    height: 56px;
   }
 }
 @media only screen and (min-width: 1440px) {
