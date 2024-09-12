@@ -14,7 +14,7 @@ export const selectAreas = createSelector(
   recipes => recipes.areas
 );
 
-// export const selectIngredients = state =>
-//   state.recipes.ingredients.map(ingredient => ingredient.name);
+export const selectSelectedIngredientId = state =>
+  state.recipes.selectedIngredientIds;
 
-// export const selectAreas = state => state.recipes.areas.map(area => area.name);
+export const selectSelectedAreaId = state => state.recipes.selectedAreaId;

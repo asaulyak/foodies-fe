@@ -10,6 +10,7 @@ import {
   fetchAreas,
   fetchIngredients,
 } from '../../redux/recipes/recipes.actions';
+import { setSelectedIngredient as setSelectedIngredientAction } from '../../redux/recipes/recipes.slice';
 
 export const RecipeFilter = ({ handleSelectChange }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export const RecipeFilter = ({ handleSelectChange }) => {
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
 
-  const [selectedIngredient, setSelectedIngredient] = React.useState('');
+  // const [selectedIngredient, setSelectedIngredient] = React.useState('');
   const [selectedArea, setSelectedArea] = React.useState('');
 
   useEffect(() => {
@@ -26,44 +27,34 @@ export const RecipeFilter = ({ handleSelectChange }) => {
     dispatch(fetchAreas());
   }, [dispatch]);
 
-  console.log('Ingredients:', ingredients);
-  console.log('Areas:', areas);
-
   const handleIngredientChange = e => {
-    setSelectedIngredient(e.target.value);
-    handleSelectChange('ingredient', e.target.value);
+    console.log(e.target.value);
+    dispatch(setSelectedIngredientAction(e.target.value));
   };
 
   const handleAreaChange = e => {
-    setSelectedArea(e.target.value);
-    handleSelectChange('area', e.target.value);
+    console.log(e.target.value);
+    dispatch(setSelectedArea(e.target.value));
   };
 
   return (
     <div className={styles.recipesFilterWrap}>
-      {/* Ingredients Filter */}
       <select
-        value={selectedIngredient}
         onChange={handleIngredientChange}
         className={styles.recipeFilterSelect}
       >
         <option value="">Ingredients</option>
         {ingredients.map(ingredient => (
-          <option key={ingredient.id} value={ingredient.name}>
+          <option key={ingredient.id} value={ingredient.id}>
             {ingredient.name}
           </option>
         ))}
       </select>
 
-      {/* Areas Filter */}
-      <select
-        value={selectedArea}
-        onChange={handleAreaChange}
-        className={styles.recipeFilterSelect}
-      >
+      <select onChange={handleAreaChange} className={styles.recipeFilterSelect}>
         <option value="">Areas</option>
         {areas.map(area => (
-          <option key={area.id} value={area.name}>
+          <option key={area.id} value={area.id}>
             {area.name}
           </option>
         ))}
