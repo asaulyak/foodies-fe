@@ -82,13 +82,7 @@ export const TabsList = ({ isOwner, id }) => {
         )}
       </div>
 
-      <div className="pagination">
-        <button onClick={() => setPage(prev => Math.max(prev - 1, 1))}>
-          Previous
-        </button>
-        <span>Page: {page}</span>
-        <button onClick={() => setPage(prev => prev + 1)}>Next</button>
-      </div>
+      {/* PAGINATION */}
     </div>
   );
 };
