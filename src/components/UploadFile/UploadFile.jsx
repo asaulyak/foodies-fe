@@ -6,6 +6,7 @@ export const UploadFile = ({
   setSelectedImage,
   name,
   register = () => {},
+  errors,
 }) => {
   const handleImageChange = e => {
     const file = e.target.files[0];
@@ -50,6 +51,7 @@ export const UploadFile = ({
           })}
         />
       </>
+      {errors && <span className="error-form">{errors.message}</span>}
     </div>
   );
 };

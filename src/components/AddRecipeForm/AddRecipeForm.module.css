@@ -51,6 +51,9 @@
   height: 48px;
   width: 100%;
 }
+.css-1nmdiq5-menu {
+  overflow: hidden;
+}
 .add_ingredients {
   border: 1px solid var(--grey);
   border-radius: 30px;
@@ -86,6 +89,9 @@
   width: 48px;
   height: 48px;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .time_display {
   min-width: 45px;

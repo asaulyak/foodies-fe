@@ -2,6 +2,9 @@
   margin-bottom: 16px;
   margin-top: 40px;
 }
+.section {
+  margin-top: 64px;
+}
 @media only screen and (min-width: 768px) {
   .form_mainTitle {
     margin-bottom: 20px;
@@ -9,5 +12,10 @@
   }
   .form_subTitle {
     max-width: 500px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .section {
+    margin-top: 80px;
   }
 }

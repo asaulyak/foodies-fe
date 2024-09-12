@@ -105,6 +105,13 @@ ol {
   line-height: 1.43;
   letter-spacing: -0.02em;
   color: var(--black);
+  overflow: hidden;
+}
+.css-b62m3t-container .css-d7l1ni-option {
+  background-color: #bfbebe29;
+}
+.css-b62m3t-container .css-t3ipsp-control:hover {
+  border-color: unset;
 }
 
 @media only screen and (min-width: 375px) {
@@ -126,6 +133,10 @@ ol {
     font-size: 20px;
     line-height: 1.2;
     margin-bottom: 16px;
+  }
+  .css-b62m3t-container .css-13cymwt-control,
+  .css-b62m3t-container .css-t3ipsp-control {
+    height: 56px;
   }
 }
 @media only screen and (min-width: 1440px) {

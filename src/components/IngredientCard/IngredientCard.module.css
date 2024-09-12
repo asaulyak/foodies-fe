@@ -53,6 +53,7 @@
   }
   .card_ingredients {
     gap: 14px;
+    width: calc((100% - 28px) / 2);
   }
   .image_item {
     width: 90px;

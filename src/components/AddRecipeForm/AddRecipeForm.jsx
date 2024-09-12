@@ -20,7 +20,8 @@ import { areasList } from '../../redux/areas/areas.selectors';
 import { IngredientCard } from '../IngredientCard/IngredientCard';
 
 import { http } from '../../http/index';
-
+import { useNavigate } from 'react-router-dom';
+import { Icon } from '../Icon/Icon';
 const schema = yup.object().shape({
   image: yup
     .mixed()
@@ -90,6 +91,7 @@ export const AddRecipeForm = () => {
   const categories = useSelector(categoriesList);
   const ingredients = useSelector(ingredientsList);
   const areas = useSelector(areasList);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCategoriesList());
@@ -126,13 +128,15 @@ export const AddRecipeForm = () => {
     const file = image[0];
     const formData = new FormData();
     formData.append('thumb', file);
+    const ingredientsFormData = ingredients.map(ingredient => ({
+      id: ingredient.id,
+      quantity: ingredient.quantity,
+    }));
     try {
       const imageUrl = await http.post('/recipes/thumb', formData, {
         // TODO: remove Authorization token
         headers: {
           'Content-Type': 'multipart/form-data',
-          //Authorization:
-          //'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjYxNDY3MTksIm5hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QubmV0IiwiaWQiOiJhMjRlYjU5Yi03NjNjLTQ2YzEtYWUzMi1mMjVjYjFlZjdmZmIiLCJleHAiOjE3MjYxNTAzMTl9.OexATqNj8eQJKThgKZ4LS3lR2EJXobUhrbWeX7Tb9uU',
         },
       });
       const addRecipeData = {
@@ -140,19 +144,16 @@ export const AddRecipeForm = () => {
         instructions: preparation,
         description,
         thumb: imageUrl.data,
-        time,
+        time: time.toString(),
         categoryId: category.value,
         areaId: area.value,
-        ingredients,
+        ingredients: ingredientsFormData,
       };
-      const addRecipeResponse = await http.post('/recipes', addRecipeData, {
-        // TODO: remove Authorization token
-        // headers: {
-        //   Authorization:
-        //     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjYxNDY3MTksIm5hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QubmV0IiwiaWQiOiJhMjRlYjU5Yi03NjNjLTQ2YzEtYWUzMi1mMjVjYjFlZjdmZmIiLCJleHAiOjE3MjYxNTAzMTl9.OexATqNj8eQJKThgKZ4LS3lR2EJXobUhrbWeX7Tb9uU',
-        // },
-      });
+      const addRecipeResponse = await http.post('/recipes', addRecipeData, {});
+      // TODO: navigate to UserPage
+      // navigate('/user');
     } catch (error) {
+      // TODO: show errors to user
       console.log(error);
     }
   };
@@ -203,6 +204,16 @@ export const AddRecipeForm = () => {
     setValue('ingredients', updatedList);
   };
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected
+        ? '#bfbebe29'
+        : provided.backgroundColor,
+      color: state.isSelected ? '#1a1a1a' : provided.color,
+    }),
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
       <UploadFile
@@ -210,10 +221,9 @@ export const AddRecipeForm = () => {
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
         register={register}
+        errors={errors.image}
       ></UploadFile>
-      {errors.image && (
-        <span className="error-form">{errors.image.message}</span>
-      )}
+
       <div className={css.form_info}>
         <AddRecipeInput
           type={'text'}
@@ -248,6 +258,7 @@ export const AddRecipeForm = () => {
                     options={categoriesOptions}
                     placeholder="Select a category"
                     onChange={selectedOption => field.onChange(selectedOption)}
+                    styles={customStyles}
                   />
                 )}
               />
@@ -272,8 +283,14 @@ export const AddRecipeForm = () => {
                         }}
                         disabled={time <= 0}
                       >
-                        -
+                        <Icon
+                          iconId={'minus'}
+                          width={24}
+                          stroke={'#050505'}
+                          height={24}
+                        ></Icon>
                       </button>
+
                       <span className={css.time_display}>{time} min</span>
                       <button
                         type="button"
@@ -283,7 +300,12 @@ export const AddRecipeForm = () => {
                           field.onChange(time + 10);
                         }}
                       >
-                        +
+                        <Icon
+                          iconId={'plus'}
+                          width={24}
+                          stroke={'#050505'}
+                          height={24}
+                        ></Icon>
                       </button>
                     </>
                   )}
@@ -306,6 +328,7 @@ export const AddRecipeForm = () => {
                     {...field}
                     options={areasOptions}
                     placeholder="Select an area"
+                    styles={customStyles}
                     onChange={setSelectedOptionAreas =>
                       field.onChange(setSelectedOptionAreas)
                     }
@@ -326,6 +349,7 @@ export const AddRecipeForm = () => {
                   onChange={setSelectedOptionIngredients}
                   options={ingredientsOptions}
                   placeholder="Add the ingredient"
+                  styles={customStyles}
                 />
                 {errorIngredientsSelect && (
                   <span className={'error-form'}>Select an ingredient</span>
@@ -345,28 +369,12 @@ export const AddRecipeForm = () => {
               onClick={handleSelectIngredients}
             >
               Add ingredient
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11 4.58325V17.4166"
-                  stroke="#050505"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M4.58301 11H17.4163"
-                  stroke="#050505"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <Icon
+                iconId={'plus'}
+                width={22}
+                stroke={'#050505'}
+                height={22}
+              ></Icon>
             </button>
             <Controller
               name="ingredients"
