@@ -11,6 +11,7 @@ function App() {
   // Add lazy loaded pages here
   // const CreateRecipe = lazy(() => import('./pages/CreateRecipe/CreateRecipe.jsx'));
   const RecipePage = lazy(() => import('./pages/RecipePage/RecipePage.jsx'));
+  const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
 
   return (
     <Routes>
@@ -19,6 +20,7 @@ function App() {
         {/*<Route path="/create" element={<CreateRecipe />} />*/}
         <Route path="/user/:id" element={<User />} />
         <Route path="recipe/:id" element={<RecipePage />} />
+        <Route path="/recipe/add" element={<AddRecipe />} />
 
         <Route path="*" element={<Home />} />
       </Route>
