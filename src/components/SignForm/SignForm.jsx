@@ -12,13 +12,13 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import styles from './SignForm.module.css';
 import { ToastContainer, Zoom } from 'react-toastify';
 
-const SignForm = ({ typeForm }) => {
+const SignForm = ({ modalType }) => {
   const [showPassword, setShowPassword] = useState(false);
   const validationSchema = useMemo(() => {
-    return typeForm === 'signup'
+    return modalType === 'signup'
       ? signUpValidationSchema
       : signInValidationSchema;
-  }, [typeForm]);
+  }, [modalType]);
 
   const {
     register,
@@ -30,7 +30,7 @@ const SignForm = ({ typeForm }) => {
   });
 
   useErrorHandling(errors);
-  const { onSubmit } = useAuth(typeForm, reset);
+  const { onSubmit } = useAuth(modalType, reset);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
@@ -40,7 +40,7 @@ const SignForm = ({ typeForm }) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputFieldsContainer}>
-          {typeForm === 'signup' && (
+          {modalType === 'signup' && (
             <input
               className={styles.inputField}
               placeholder="Name*"
@@ -66,13 +66,13 @@ const SignForm = ({ typeForm }) => {
               type="button"
               onClick={togglePasswordVisibility}
             >
-              {showPassword ? <FiEye /> : <FiEyeOff />}
+              {showPassword ? <FiEye size={18} /> : <FiEyeOff size={18} />}
             </button>
           </div>
         </div>
 
         <Button type="submit" className={styles.button}>
-          {typeForm === 'signup' ? 'Create Account' : 'Sign In'}
+          {modalType === 'signup' ? 'Create Account' : 'Sign In'}
         </Button>
       </form>
       <ToastContainer transition={Zoom} />

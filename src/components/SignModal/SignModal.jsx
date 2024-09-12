@@ -1,22 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './SignModal.module.css';
-import SignForm from '../SignForm/SignForm';
+import SignForm from '../SignForm/SignForm.jsx';
+import LogoutModal from '../LogoutModal/LogoutModal.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectModalType } from '../../redux/modal/modal.selectors.js';
+import { switchTypeModal } from '../../redux/modal/modal.slice';
+import { MODAL_TYPE } from '../../utils/constants.js';
 
 const SignModal = () => {
-  const [typeForm, setTypeForm] = useState('signup');
+  const dispatch = useDispatch();
+  const modalType = useSelector(selectModalType);
+  const { signup, signin, logout } = MODAL_TYPE;
 
   const toggleType = () => {
-    setTypeForm(prevType => (prevType === 'signup' ? 'signin' : 'signup'));
+    const newType = modalType === signup ? signin : signup;
+    dispatch(switchTypeModal(newType));
   };
 
-  return (
-    <>
+  // Modal Title
+  const renderTitle = () => {
+    if (modalType === logout) {
+      return (
+        <>
+          <h2 className={styles.titleLogout}>Are you logging out?</h2>
+          <p className={styles.logoutText}>
+            You can always log back in at any time.
+          </p>
+        </>
+      );
+    }
+    return (
       <h2 className={styles.title}>
-        {typeForm === 'signup' ? 'Sign up' : 'Sign in'}
+        {modalType === signup ? 'Sign up' : 'Sign in'}
       </h2>
-      <SignForm typeForm={typeForm} />
+    );
+  };
+
+  // Content modal
+  const renderContent = () => {
+    return modalType === logout ? (
+      <LogoutModal />
+    ) : (
+      <SignForm modalType={modalType} />
+    );
+  };
+
+  // switch modal
+  const renderSwitchText = () => {
+    if (modalType === logout) return null;
+    return (
       <p className={styles.bottomText}>
-        {typeForm === 'signup' ? (
+        {modalType === signup ? (
           <>
             I already have an account?{' '}
             <span className={styles.nameForm} onClick={toggleType}>
@@ -32,6 +66,14 @@ const SignModal = () => {
           </>
         )}
       </p>
+    );
+  };
+
+  return (
+    <>
+      {renderTitle()}
+      {renderContent()}
+      {renderSwitchText()}
     </>
   );
 };

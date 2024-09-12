@@ -12,12 +12,15 @@
   padding: 16px 18px;
 
   color: var(--black-light);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.32px;
 }
 
+.inputField:focus {
+  outline-color: var(--black);
+}
 .passwordContainer {
   position: relative;
 }
@@ -43,4 +46,10 @@
   color: var(--white);
   width: 100%;
   margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .inputField {
+    font-size: 16px;
+  }
 }
