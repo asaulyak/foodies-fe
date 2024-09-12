@@ -3,6 +3,7 @@ import { fetchCategories } from '../../../redux/categories/categories.selectors'
 import { CategoryCard } from '../CategoryCard/CategoryCard';
 import styles from './CategoryList.module.css';
 import React, { useEffect, useMemo, useState } from 'react';
+import { v4 as uuidv4, v4 } from 'uuid';
 
 const useMediaQuery = query => {
   const mediaQuery = useMemo(() => window.matchMedia(query), [query]);
@@ -22,45 +23,51 @@ const useMediaQuery = query => {
 const useMediaQueries = () => {
   const md = useMediaQuery('(min-width: 768px)');
   const lg = useMediaQuery('(min-width: 1440px)');
+
+  return { md, lg };
 };
 
 export const CategoryList = () => {
   const categories = useSelector(fetchCategories);
+  const { md, lg } = useMediaQueries();
 
-  // const [categories, setCategories] = useState(useSelector(fetchCategories));
+  const [categoriesRender, setCategoriesRender] = useState([]);
 
-  categories && console.log(categories);
+  useEffect(() => {
+    if (categories) {
+      const arr = [...categories];
+      if (md) {
+        setCategoriesRender([
+          ...arr.slice(0, 11),
+          {
+            id: v4(),
+            name: 'ALL CATEGORIES',
+            description:
+              'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
+          },
+        ]);
+      } else {
+        setCategoriesRender([
+          ...arr.slice(0, 7),
+          {
+            id: v4(),
+            name: 'ALL CATEGORIES',
+            description:
+              'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
+          },
+        ]);
+      }
+    }
+  }, [categories, md, lg]);
+
+  console.log(categoriesRender);
 
   const processCategories = categories => {
-    // const { md, lg } = useMediaQueries();
-
-    // console.log(md);
-    // console.log(lg);
-    // // for (let el = 0; el <= categories.length; el++) {
-    // //   if (lg) {
-    // //     console.log('large');
-    // //   }
-    // //   if (md) {
-    // //     console.log('medium');
-    // //   }
-    // //   console.log('mobile');
-    // // }
-
-    // if (lg) {
-    //   setCategories(categories.slice(0, 11));
-    // }
-    // if (md) {
-    //   setCategories(categories.slice(0, 11));
-    // }
-    // setCategories(categories.slice(0, 7));
-
-    // console.log(categories);
-
     return categories.map(category => processCategory(category));
   };
 
   const processCategory = category => {
-    console.log(category);
+    // console.log(category);
 
     return <CategoryCard key={category.id} category={category} />;
   };
@@ -77,7 +84,7 @@ export const CategoryList = () => {
     <>
       <ul className={styles.category_list}>
         {
-          categories && processCategories(categories)
+          categoriesRender && processCategories(categoriesRender)
           // <CategoryCard key={category.id} category={category} />
         }
       </ul>

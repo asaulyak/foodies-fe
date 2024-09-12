@@ -1,0 +1,55 @@
+.inputFieldsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.inputField {
+  border-radius: 30px;
+  border: 1px solid var(--grey);
+  width: 100%;
+  padding: 16px 18px;
+
+  color: var(--black-light);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+}
+
+.inputField:focus {
+  outline-color: var(--black);
+}
+.passwordContainer {
+  position: relative;
+}
+
+.btnEye {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button {
+  background-color: var(--grey);
+  border-color: var(--grey);
+  color: var(--white);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .inputField {
+    font-size: 16px;
+  }
+}
