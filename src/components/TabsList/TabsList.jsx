@@ -72,11 +72,7 @@ export const TabsList = ({ isOwner, id }) => {
           </p>
         ) : (
           listItems.map(item => {
-            if (
-              activeTab === 'recipes' ||
-              activeTab === 'favorites' ||
-              activeTab === 'info'
-            ) {
+            if (activeTab === 'recipes' || activeTab === 'favorites') {
               return (
                 <RecipePreview
                   key={item.id}
