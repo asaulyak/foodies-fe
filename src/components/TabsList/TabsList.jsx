@@ -77,7 +77,13 @@ export const TabsList = ({ isOwner, id }) => {
               activeTab === 'favorites' ||
               activeTab === 'info'
             ) {
-              return <RecipePreview key={item.id} {...item}></RecipePreview>;
+              return (
+                <RecipePreview
+                  key={item.id}
+                  {...item}
+                  isOwner={isOwner}
+                ></RecipePreview>
+              );
               //  RECIPES PREVIEW
             } else {
               return;

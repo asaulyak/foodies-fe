@@ -3,7 +3,7 @@ import { Icon } from '../Icon/Icon.jsx';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const RecipePreview = ({ title, description, thumb, id }) => {
+export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
   const [maxLengthDescription, setMaxLengthDescription] = useState(50); // дефолт для мобильных
   const [maxLengthTitle, setMaxLengthTitle] = useState(13); // дефолт для мобильных
 
@@ -61,17 +61,21 @@ export const RecipePreview = ({ title, description, thumb, id }) => {
             stroke={'#050505'}
           ></Icon>
         </NavLink>
-        <button className={css.recipePreviewBtn}>
-          <Icon
-            iconId="trash"
-            className={css.recipePreviewIcon}
-            width={18}
-            height={18}
-            stroke={'#050505'}
-          >
-            {' '}
-          </Icon>
-        </button>
+        {isOwner ? (
+          <button className={css.recipePreviewBtn}>
+            <Icon
+              iconId="trash"
+              className={css.recipePreviewIcon}
+              width={18}
+              height={18}
+              stroke={'#050505'}
+            >
+              {' '}
+            </Icon>
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </li>
   );
