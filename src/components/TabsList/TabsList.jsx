@@ -59,15 +59,6 @@ export const TabsList = ({ isOwner, id }) => {
               className={`${css.tabItem} ${activeTab === tab ? css.tabItemActive : ''}`}
               onClick={() => handleTabClick(tab)}
             >
-              {/* {tab === 'recipes'
-                ? 'My Recipes'
-                : tab === 'favorites'
-                  ? 'My Favorites'
-                  : tab === 'followers'
-                    ? 'Followers'
-                    : tab === 'following'
-                      ? 'Following'
-                      : 'Recipes'} */}
               {tabsMap[tab]}
             </button>
           ))}
