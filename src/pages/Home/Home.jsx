@@ -5,11 +5,10 @@ import Hero from '../../components/Hero/Hero';
 import { Recipes } from '../../components/Recipes/Recipes.jsx';
 
 export const Home = () => (
-  <>
+  <div className={css.home_container}>
     <Hero />
-    <section className={css.hero}>HOME</section>
     <Categories />
     <Recipes />
     <Testimonials />
-  </>
+  </div>
 );
