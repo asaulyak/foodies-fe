@@ -5,11 +5,11 @@ import clsx from 'clsx';
 import styles from './RecipeCard.module.css';
 import avatar from '/public/avatar.png';
 
-export const RecipeCard = ({ recipe, className }) => {
+export const RecipeCard = ({ recipe }) => {
   const { id, title, user, description, thumb } = recipe;
 
   return (
-    <li className={clsx([styles.recipeCard, className])}>
+    <li className={clsx([styles.recipeCard, styles.card])}>
       <Link to={`/recipe/${id}`}>
         <img
           src={thumb}
@@ -23,7 +23,7 @@ export const RecipeCard = ({ recipe, className }) => {
           {description || 'No description'}
         </p>
       </div>
-      <div>
+      <div className={styles.avatarIconsRow}>
         <Link to={`/user/${user?.id}`} className={styles.avatarWrapper}>
           <img
             src={user?.avatar || avatar}

@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const selectIsLoading = state => state.recipes.isLoading;
 export const selectError = state => state.recipes.error;
 
-const selectRecipesState = state => state.recipes;
+export const selectRecipesState = state => state.recipes;
 
 export const selectIngredients = createSelector(
   [selectRecipesState],

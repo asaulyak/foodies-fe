@@ -31,28 +31,43 @@ export const fetchRecipes = createAsyncThunk(
     try {
       const params = new URLSearchParams();
       const response = await http.get('/recipes/search', data);
+
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
   }
 );
-// async ({ category, area, ingredients, limit, page }, thunkAPI) => {
-//   try {
-//     const params = new URLSearchParams();
 
-//     if (category) params.append('categoryId', category);
-//     if (area) params.append('areaId', area);
-//     if (ingredients && Array.isArray(ingredients)) {
-//       ingredients.forEach(id => params.append('ingredientIds[]', id));
-//     }
-//     if (limit) params.append('limit', limit);
-//     if (page) params.append('page', page);
+// export const fetchRecipes = createAsyncThunk(
+//   'recipes/fetchRecipes',
+//   async (data, thunkApi) => {
+//     try {
+//       // Create an instance of URLSearchParams
+//       const params = new URLSearchParams();
+
+//       // Append parameters if they are provided
+//       if (data.categoryId) {
+//         params.append('categoryId', data.categoryId);
+//       }
+//       if (data.areaId) {
+//         params.append('areaId', data.areaId);
+//       }
+//       if (data.ingredientIds) {
+//         data.ingredientIds.forEach(id => params.append('ingredientIds[]', id));
+//       }
+//       if (data.limit) {
+//         params.append('limit', data.limit);
+//       }
+//       if (data.offset) {
+//         params.append('offset', data.offset);
+//       }
 
 //       const response = await http.get(`/recipes/search?${params.toString()}`);
 //       return response.data;
 //     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
+//       return thunkApi.rejectWithValue(error.message);
 //     }
 //   }
 // );

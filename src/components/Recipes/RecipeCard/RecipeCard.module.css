@@ -1,3 +1,13 @@
+.card {
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 20px) / 2);
+  }
+  @media screen and (min-width: 1440px) {
+    width: calc((100% - (20px * 2)) / 3);
+  }
+}
+
 .headerCard {
   display: block;
   overflow: hidden;
@@ -28,6 +38,12 @@
   white-space: normal;
 }
 
+.avatarIconsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .avatarWrapper {
   display: flex;
   align-items: center;
@@ -43,6 +59,7 @@
 .iconList {
   list-style: none;
   display: flex;
+  flex-direction: row;
   gap: 10px;
   margin-left: auto;
 }
@@ -77,10 +94,5 @@
   .iconWrapper {
     width: 42px;
     height: 42px;
-  }
-}
-@media screen and (min-width: 1440px) {
-  .recipeCard {
-    width: 290px;
   }
 }

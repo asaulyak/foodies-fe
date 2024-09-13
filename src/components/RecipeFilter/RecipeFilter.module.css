@@ -4,6 +4,14 @@
   align-items: center;
   gap: 14px;
   margin-bottom: 32px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 18px;
+  }
+  @media screen and (min-width: 1280px) {
+    flex-direction: column;
+    gap: 14px;
+  }
 }
 
 .recipeFilterSelect {
@@ -15,7 +23,13 @@
   font-size: 16px;
   background-color: white;
   color: var(--black);
-  appearance: none; /* Removes the default browser dropdown arrow */
+  appearance: none;
+  @media screen and (min-width: 768px) {
+    max-width: 345px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 330px;
+  }
 }
 
 .recipeFilterSelectFocus {

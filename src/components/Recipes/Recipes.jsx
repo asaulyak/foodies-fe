@@ -12,21 +12,23 @@ import {
   selectSelectedAreaId,
   selectSelectedIngredientId,
 } from '../../redux/recipes/recipes.selectors';
+import Pagination from '../../components/Pagination/Pagination';
 
+// export const Recipes = ({category}) => {
+// const exampleCategoryId = '7dde122e-ea07-461f-84fc-0b9dff87081b';
+// const exampleAreaId = 'ecbe58ba-4090-4b26-8f02-b720564d51f1';
+// const exampleIngredientIds = ['6c72abf1-f51b-4077-8875-40fbe555e7cb'];
+// categoryId: '7dde122e-ea07-461f-84fc-0b9dff87081b',
+// categoryId: '',
+// categoryId: exampleCategoryId,
+// areaId: exampleAreaId,
+// ingredientIds: exampleIngredientIds,
 export const Recipes = () => {
-  // export const Recipes = ({category}) => {
   const dispatch = useDispatch();
   const filter = {
-    categoryId: '7dde122e-ea07-461f-84fc-0b9dff87081b',
-    // categoryId: '',
     areaId: useSelector(selectSelectedAreaId),
     ingredientIds: [useSelector(selectSelectedIngredientId)],
   };
-  // const [filter, setFilter] = useState({
-  //   categoryId: '',
-  //   areaId: '',
-  //   ingredientIds: [''],
-  // });
 
   useEffect(() => {
     dispatch(fetchRecipes(filter));
@@ -54,6 +56,7 @@ export const Recipes = () => {
       <div className={styles.recipesListWrap}>
         <RecipeFilter />
         <RecipeList />
+        <Pagination total={16} limit={8} />
       </div>
     </section>
   );
