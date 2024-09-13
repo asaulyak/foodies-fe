@@ -27,11 +27,12 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+  // console.log(owner);
 
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
     dispatch(fetchCurrentUser());
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -44,12 +45,18 @@ export const User = () => {
         </SubTitle>
         <div className={css.userWrapper}>
           <div className={css.userInfoButtonWrapper}>
-            {userCardLoading ? (
+            {userCardLoading || isLoading ? (
               <Loader></Loader>
             ) : (
-              <UserInfo {...currentUser}></UserInfo>
+              <UserInfo {...currentUser} isOwner={owner.id === id}></UserInfo>
             )}
-            <Button className={css.logOutBtn}>Log Out</Button>
+            {isLoading ? (
+              <Loader></Loader>
+            ) : owner.id === id ? (
+              <Button className={css.logOutBtn}>Log Out</Button>
+            ) : (
+              <Button className={css.logOutBtn}>Follow</Button>
+            )}
           </div>
           {isLoading ? (
             <Loader></Loader>
