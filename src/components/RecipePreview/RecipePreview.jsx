@@ -40,11 +40,7 @@ export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
 
   return (
     <li className={css.recipePreviewItem}>
-      <img
-        className={css.recipePreviewImg}
-        src={thumb ? thumb : '../../assets/images/defaultimg.jpg'}
-        alt=""
-      />
+      <img className={css.recipePreviewImg} src={thumb} alt="" />
       <div className={css.recipePreviewOverlay}>
         <p className={css.recipePreviewTitle}>{truncatedTitleText}</p>
         <p className={css.recipePreviewDescription}>
