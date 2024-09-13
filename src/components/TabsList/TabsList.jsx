@@ -44,6 +44,9 @@ export const TabsList = ({ isOwner, id }) => {
     following: 'Following',
     // other tabs go here
   };
+  const handleDeleteRecipe = recipeId => {
+    setListItems(prevItems => prevItems.filter(item => item.id !== recipeId));
+  };
   const tabs = isOwner
     ? ['recipes', 'favorites', 'followers', 'following']
     : ['recipes', 'followers'];
@@ -78,6 +81,8 @@ export const TabsList = ({ isOwner, id }) => {
                   key={item.id}
                   {...item}
                   isOwner={isOwner}
+                  onDelete={handleDeleteRecipe}
+                  activeTab={activeTab}
                 ></RecipePreview>
               );
               //  RECIPES PREVIEW

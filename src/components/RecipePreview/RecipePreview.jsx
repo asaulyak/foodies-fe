@@ -2,8 +2,17 @@ import css from './RecipePreview.module.css';
 import { Icon } from '../Icon/Icon.jsx';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { http } from '../../http/index.js';
 
-export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
+export const RecipePreview = ({
+  title,
+  description,
+  thumb,
+  id,
+  isOwner,
+  onDelete,
+  activeTab,
+}) => {
   const [maxLengthDescription, setMaxLengthDescription] = useState(50);
   const [maxLengthTitle, setMaxLengthTitle] = useState(13);
 
@@ -28,6 +37,19 @@ export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  const handleDelete = async () => {
+    try {
+      if (activeTab === 'recipes') {
+        await http.delete(`/recipes/${id}`);
+        onDelete(id);
+      } else if (activeTab === 'favorites') {
+        await http.delete(`/recipes/${id}/favorites`);
+        onDelete(id);
+      }
+    } catch (error) {
+      console.error('Failed to delete recipe', error);
+    }
+  };
   const truncatedDescriptionText =
     description?.length > maxLengthDescription
       ? description.substring(0, maxLengthDescription) + '...'
@@ -57,7 +79,7 @@ export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
           ></Icon>
         </NavLink>
         {isOwner ? (
-          <button className={css.recipePreviewBtn}>
+          <button onClick={handleDelete} className={css.recipePreviewBtn}>
             <Icon
               iconId="trash"
               className={css.recipePreviewIcon}
