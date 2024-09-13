@@ -4,27 +4,26 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
-  const [maxLengthDescription, setMaxLengthDescription] = useState(50); // дефолт для мобильных
-  const [maxLengthTitle, setMaxLengthTitle] = useState(13); // дефолт для мобильных
+  const [maxLengthDescription, setMaxLengthDescription] = useState(50);
+  const [maxLengthTitle, setMaxLengthTitle] = useState(13);
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 768) {
-        setMaxLengthDescription(50); // мобильные устройства
+        setMaxLengthDescription(50);
         setMaxLengthTitle(13);
       } else if (width >= 768 && width < 1440) {
-        setMaxLengthDescription(160); // планшеты
+        setMaxLengthDescription(160);
         setMaxLengthTitle(40);
       } else {
-        setMaxLengthDescription(160); // десктопы
+        setMaxLengthDescription(160);
         setMaxLengthTitle(70);
       }
     };
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    // удаляем обработчик при размонтировании компонента
     return () => {
       window.removeEventListener('resize', handleResize);
     };

@@ -27,7 +27,6 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
-  console.log(isLoading);
 
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
