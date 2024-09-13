@@ -26,37 +26,24 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
 
   const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
 
-  // recipesRouter.post('/:id/favorites', authMiddleware, addToFavorites);
-  // recipesRouter.delete('/:id/favorites', authMiddleware, removeFromFavorites);
-  //'/api/recipes'
-
   const handleClick = async e => {
     if (!isLoggedUser) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
 
     if (!isFavoriteRecipe) {
-      await http
-        .post(`/recipes/${recipeId}/favorites`)
-        .then(data => {
-          e.target.textContent = initBtnName[0];
-          dispatch(addToFavorites(recipeId));
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      await http.post(`/recipes/${recipeId}/favorites`).then(data => {
+        e.target.textContent = initBtnName[0];
+        dispatch(addToFavorites(recipeId));
+      });
+
       return;
     }
 
-    await http
-      .delete(`/recipes/${recipeId}/favorites`)
-      .then(data => {
-        e.target.textContent = initBtnName[1];
-        dispatch(removeFromFavorites(recipeId));
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    await http.delete(`/recipes/${recipeId}/favorites`).then(data => {
+      e.target.textContent = initBtnName[1];
+      dispatch(removeFromFavorites(recipeId));
+    });
   };
 
   return (
