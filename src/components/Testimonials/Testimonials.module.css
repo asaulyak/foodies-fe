@@ -4,13 +4,21 @@
 }
 
 .subheading {
-  color: #555;
-  font-size: 1.5rem;
+  font-family: Mulish;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .heading {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  font-family: Mulish;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 44px;
+  letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .slide {
@@ -18,11 +26,36 @@
 }
 
 .text {
-  font-size: 1.2rem;
-  font-style: italic;
+  font-family: Mulish;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: -0.02em;
+  text-align: center;
 }
 
 .author {
   font-weight: bold;
   margin-top: 1rem;
+  font-family: Mulish;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+}
+
+.testimonialContainer {
+  position: relative;
+}
+
+.quotesImage {
+  position: absolute;
+  top: -10%;
+  left: 9%;
+  float: left;
+  margin-right: 20px;
+  width: 59px;
+  height: 48px;
+  gap: 0px;
+  opacity: 0px;
 }
