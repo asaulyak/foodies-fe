@@ -47,6 +47,7 @@ export const Footer = () => {
           </li>
         </ul>
       </div>
+      <hr className={css.horizontal_line} />
       <div className={css.copyright}>
         <p>@{currentYear}, Foodies. All rights reserved</p>
       </div>
