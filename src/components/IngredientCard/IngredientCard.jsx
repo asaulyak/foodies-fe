@@ -1,4 +1,5 @@
 import css from './IngredientCard.module.css';
+import { Icon } from '../Icon/Icon';
 
 export const IngredientCard = ({ list, handleIngredientsDelete }) => {
   return (
@@ -16,12 +17,18 @@ export const IngredientCard = ({ list, handleIngredientsDelete }) => {
               </div>
               <span>{elem.quantity}</span>
             </div>
-            <span
+            <button
+              type="button"
               className={css.button}
               onClick={() => handleIngredientsDelete(elem.id)}
             >
-              x
-            </span>
+              <Icon
+                iconId={'close'}
+                width={16}
+                stroke={'#050505'}
+                height={16}
+              ></Icon>
+            </button>
           </li>
         );
       })}

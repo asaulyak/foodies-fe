@@ -5,7 +5,7 @@ import { closeModal } from '../../redux/modal/modal.slice';
 import { logoutUser } from '../../redux/user/user.actions';
 import { useNavigate } from 'react-router-dom';
 
-const LogoutModal = () => {
+export const LogoutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClose = () => dispatch(closeModal());
@@ -19,7 +19,7 @@ const LogoutModal = () => {
         onClose();
       });
   };
-  
+
   return (
     <div className={styles.container}>
       <Button onClick={handleLogout} className={styles.btnPrimary}>
@@ -29,5 +29,3 @@ const LogoutModal = () => {
     </div>
   );
 };
-
-export default LogoutModal;
