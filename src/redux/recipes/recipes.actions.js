@@ -48,6 +48,7 @@ export const fetchRecipes = createAsyncThunk(
       }
 
       const response = await http.get(`/recipes/search?${params.toString()}`);
+
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

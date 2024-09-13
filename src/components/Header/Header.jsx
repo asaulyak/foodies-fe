@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import css from './Header.module.css';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Logo } from '../Logo/Logo.jsx';
 import { ProfileWidget } from '../ProfileWidget/ProfileWidget.jsx';
@@ -13,6 +13,11 @@ export const Header = () => {
   const currentUser = useSelector(selectUser);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHome, setIsHome] = useState(true);
+
+  useEffect(() => {
+    setIsHome(location.pathname === '/');
+  }, [location.pathname]);
 
   const menu = useMemo(
     () => [
@@ -29,7 +34,7 @@ export const Header = () => {
   );
 
   const shouldHideMenu = useMemo(
-    () => location.pathname === '/' && !currentUser,
+    () => isHome && !currentUser,
     [location, currentUser]
   );
 
@@ -37,25 +42,18 @@ export const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavCLick = event => {
-    const target = event.currentTarget;
-
-    if (target?.classList.contains(css.side)) {
-      setIsMenuOpen(false);
-    }
+  const closeSideMenu = () => {
+    setIsMenuOpen(false);
   };
 
   return (
     <div className={css.section}>
-      <div className={clsx([css.header])}>
+      <div className={clsx(css.header, { [css.light]: !isHome })}>
         <Logo />
         {shouldHideMenu ? (
           ''
         ) : (
-          <nav
-            className={clsx(css.nav, { [css.side]: isMenuOpen })}
-            onClick={handleNavCLick}
-          >
+          <nav className={clsx(css.nav, css.main)}>
             {menu.map(item => (
               <NavLink
                 key={item.link}
@@ -87,6 +85,24 @@ export const Header = () => {
           )}
         </div>
       </div>
+
+      <nav
+        className={clsx(css.nav, css['side-menu'], { [css.open]: isMenuOpen })}
+      >
+        <div className={css.close} onClick={closeSideMenu}>
+          <Icon iconId="close" width={24} height={24} stroke="#fff" />
+        </div>
+        {menu.map(item => (
+          <NavLink
+            key={item.link}
+            to={item.link}
+            onClick={closeSideMenu}
+            className={({ isActive }) => (isActive ? css.active : undefined)}
+          >
+            {item.title}
+          </NavLink>
+        ))}
+      </nav>
     </div>
   );
 };
