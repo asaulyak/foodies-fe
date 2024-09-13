@@ -7,37 +7,29 @@ export const TabsList = ({ isOwner, id }) => {
   const [activeTab, setActiveTab] = useState(isOwner ? 'recipes' : 'info');
   const [page, setPage] = useState(1);
   const [listItems, setListItems] = useState([]);
-  const tabsMap = {
-    recipes: 'My Recipes',
-    favorites: 'My Favorite',
-    followers: 'Followers',
-    following: 'Following',
-    info: 'Recipes',
-    // other tabs go here
-  };
-  const tabs = isOwner
-    ? ['recipes', 'favorites', 'followers', 'following']
-    : ['info', 'followers'];
 
   useEffect(() => {
+    console.log(isOwner);
+
     if (isOwner) {
       const fetchData = async () => {
-        const { data } = await http.get(`/users/${activeTab}`, page);
+        console.log(activeTab);
 
-        if (data) {
-          setListItems(data.data);
+        if (activeTab === 'following' || activeTab === 'favorites') {
+          const { data } = await http.get(`/users/${activeTab}/${id}`);
+          if (data) {
+            setListItems(data.data);
+          } else {
+            setListItems([]);
+          }
         } else {
-          setListItems([]);
-        }
-      };
-      fetchData();
-    } else {
-      const fetchData = async () => {
-        const { data } = await http.get(`/users/${id}/${activeTab}`);
-        if (data) {
-          setListItems(data.data);
-        } else {
-          setListItems([]);
+          const { data } = await http.get(`/users/${activeTab}/${id}`);
+
+          if (data) {
+            setListItems(data.data);
+          } else {
+            setListItems([]);
+          }
         }
       };
       fetchData();
@@ -48,6 +40,16 @@ export const TabsList = ({ isOwner, id }) => {
     setActiveTab(tab);
     setPage(1);
   };
+  const tabsMap = {
+    recipes: isOwner ? 'My Recipes' : 'Recipes',
+    favorites: 'My Favorite',
+    followers: 'Followers',
+    following: 'Following',
+    // other tabs go here
+  };
+  const tabs = isOwner
+    ? ['recipes', 'favorites', 'followers', 'following']
+    : ['recipes', 'followers'];
 
   return (
     <div className={css.tabsContainer}>
