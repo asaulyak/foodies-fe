@@ -32,6 +32,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
+
+  color: var(--white);
 }
 
 .profile {
@@ -65,6 +67,7 @@
   cursor: pointer;
 
   background-color: var(--black-light);
+  color: var(--white);
 }
 
 .user-icon {
