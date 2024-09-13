@@ -5,6 +5,7 @@ import styles from './Recipes.module.css';
 import MainTitle from '../MainTitle/MainTitle';
 import styles from '../MainTitle/MainTitle.module.css';
 import Subtitle from '../SubTitle/SubTitle';
+import { useDispatch } from 'react-redux';
 
 export const Recipes = () => {
   const dispatch = useDispatch();
@@ -25,15 +26,11 @@ export const Recipes = () => {
           <span>Back</span>
         </NavLink>
         <MainTitle>Category</MainTitle>
-        {/* <MainTitle>{category.name}</MainTitle> */}
-        <SubTitle>
+        <Subtitle>
           Go on a taste journey, where every sip is a sophisticated creative
           chord, and every dessert is an expression of the most refined
           gastronomic desires.
-        </SubTitle>
-        {/* <SubTitle>
-         {category.description}
-        </SubTitle> */}
+        </Subtitle>
       </div>
 
       <div className={styles.recipesListWrap}>
