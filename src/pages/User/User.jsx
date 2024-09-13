@@ -36,7 +36,6 @@ export const User = () => {
   return (
     <>
       <div className="container">
-        {/* Component TITLE  */}
         <PathInfo currentPageName="Profile"></PathInfo>
         <MainTitle> Profile</MainTitle>
         <SubTitle>
