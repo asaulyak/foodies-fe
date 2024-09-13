@@ -63,30 +63,15 @@ export const CategoryList = () => {
   console.log(categoriesRender);
 
   const processCategories = categories => {
-    return categories.map(category => processCategory(category));
+    return categories.map(category => (
+      <CategoryCard key={category.id} category={category} />
+    ));
   };
-
-  const processCategory = category => {
-    // console.log(category);
-
-    return <CategoryCard key={category.id} category={category} />;
-  };
-
-  // try {
-  //   for (const el = 0; el <= categories.length; el++) {
-  //     console.log(el);
-  //   }
-  // } catch (e) {
-  //   console.log(e);
-  // }
 
   return (
     <>
       <ul className={styles.category_list}>
-        {
-          categoriesRender && processCategories(categoriesRender)
-          // <CategoryCard key={category.id} category={category} />
-        }
+        {categoriesRender && processCategories(categoriesRender)}
       </ul>
     </>
   );
