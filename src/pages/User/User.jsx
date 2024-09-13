@@ -2,24 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import css from './User.module.css';
 import { useEffect } from 'react';
+import { fetchDetailInfoUser } from '../../redux/user/user.actions';
 import {
-  fetchCurrentUser,
-  fetchDetailInfoUser,
-} from '../../redux/user/user.actions';
-import { selectInfoUser, selectUser } from '../../redux/user/user.selectors';
+  selectInfoUser,
+  selectIsLoading,
+  selectUser,
+} from '../../redux/user/user.selectors';
 import { useParams } from 'react-router-dom';
 import { TabsList } from '../../components/TabsList/TabsList';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { PathInfo } from '../../components/PathInfo/PathInfo';
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { Button } from '../../components/Button/Button';
+import { Loader } from '../../components/Loader/Loader';
 
 export const User = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectInfoUser);
+  const owner = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    dispatch(fetchCurrentUser(id));
     dispatch(fetchDetailInfoUser(id));
   }, [dispatch]);
 
@@ -38,7 +41,11 @@ export const User = () => {
             <UserInfo {...currentUser}></UserInfo>
             <Button className={css.logOutBtn}>Log Out</Button>
           </div>
-          <TabsList isOwner id={id}></TabsList>
+          {isLoading ? (
+            <Loader></Loader>
+          ) : (
+            <TabsList isOwner={owner} id={id}></TabsList>
+          )}
         </div>
       </div>
     </>

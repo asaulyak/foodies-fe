@@ -16,7 +16,7 @@ export const TabsList = ({ isOwner, id }) => {
         console.log(activeTab);
 
         if (activeTab === 'following' || activeTab === 'favorites') {
-          const { data } = await http.get(`/users/${activeTab}/${id}`);
+          const { data } = await http.get(`/users/${activeTab}/`);
           if (data) {
             setListItems(data.data);
           } else {
