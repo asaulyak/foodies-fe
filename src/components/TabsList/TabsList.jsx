@@ -9,12 +9,8 @@ export const TabsList = ({ isOwner, id }) => {
   const [listItems, setListItems] = useState([]);
 
   useEffect(() => {
-    console.log(isOwner);
-
     if (isOwner) {
       const fetchData = async () => {
-        console.log(activeTab);
-
         if (activeTab === 'following' || activeTab === 'favorites') {
           const { data } = await http.get(`/users/${activeTab}/`);
           if (data) {
