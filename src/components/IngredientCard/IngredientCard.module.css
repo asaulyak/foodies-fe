@@ -1,0 +1,74 @@
+.list_ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.card_ingredients {
+  display: flex;
+  gap: 6px;
+  width: calc((100% - 16px) / 2);
+  position: relative;
+  text-align: center;
+}
+.image_item {
+  border: 1px solid var(--grey);
+  border-radius: 15px;
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card_info {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.image_item img {
+  width: 55px;
+  height: 55px;
+}
+.name {
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+}
+@media only screen and (max-width: 360px) {
+  .name {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .list_ingredients {
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .card_ingredients {
+    gap: 14px;
+    width: calc((100% - 28px) / 2);
+  }
+  .image_item {
+    width: 90px;
+    height: 90px;
+  }
+  .card_info {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

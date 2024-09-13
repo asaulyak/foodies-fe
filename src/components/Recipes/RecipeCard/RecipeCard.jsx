@@ -1,42 +1,55 @@
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa6';
-import { HiMiniArrowUpRight } from 'react-icons/hi2';
+import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import styles from './RecipeCard.module.css';
+import avatar from '/public/avatar.png';
 
-export const RecipeCard = ({ recipe, className }) => {
+export const RecipeCard = ({ recipe }) => {
   const { id, title, user, description, thumb } = recipe;
 
   return (
-    <>
-      <li className={clsx([styles.recipeCard, className])}>
-        <Link to={`/recipe/${id}`}>
-          <img src={thumb} alt={title} className={styles.recipeImage} />
-        </Link>
+    <li className={clsx([styles.recipeCard, styles.card])}>
+      <Link to={`/recipe/${id}`}>
+        <img
+          src={thumb}
+          alt={title || 'Untitled Recipe'}
+          className={styles.recipeImage}
+        />
+      </Link>
+      <div className={styles.cardContent}>
         <div className={styles.textWrap}>
-          <h3 className={styles.headerCard}>{title}</h3>
-          <p className={styles.recipeDescription}>{description}</p>
+          <h3 className={styles.headerCard}>{title || 'Untitled Recipe'}</h3>
+          <p className={styles.recipeDescription}>
+            {description || 'No description'}
+          </p>
         </div>
-        <div>
-          <Link to={`/user/${user.id}`} className={styles.avatarWrapper}>
-            <img
-              src={user.avatar}
-              alt={`${user.name} avatar`}
-              className={styles.avatar}
-            />
-          </Link>
+        <div className={styles.avatarIconsRow}>
+          <div className={styles.userWrapper}>
+            <span>
+              <Link to={`/user/${user?.id}`}>
+                <img
+                  src={user?.avatar || avatar}
+                  alt={`${user?.name || 'User'} avatar`}
+                  className={styles.avatar}
+                />
+              </Link>
+            </span>
+            <p className={styles.userName}>{user.name}</p>
+          </div>
+
           <ul className={styles.iconList}>
-            <li>
+            <li className={styles.iconWrapper}>
               <FaRegHeart size={18} />
             </li>
             <li>
               <Link to={`/recipe/${id}`} className={styles.iconWrapper}>
-                <HiMiniArrowUpRight size={18} />
+                <MdArrowOutward size={18} />
               </Link>
             </li>
           </ul>
         </div>
-      </li>
-    </>
+      </div>
+    </li>
   );
 };

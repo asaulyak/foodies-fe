@@ -19,10 +19,20 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {
     info: null,
-    isLoading: false,
+    isLoading: true,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addToFavorites(state, action) {
+      state.info.favoriteRecipes.push(action.payload);
+    },
+    removeFromFavorites(state, action) {
+      const index = state.info.favoriteRecipes.findIndex(
+        e => e === action.payload
+      );
+      state.info.favoriteRecipes.splice(index, 1);
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchCurrentUser.pending, handlePending)
@@ -33,17 +43,12 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCurrentUser.rejected, handleRejected)
-      .addCase(logoutUser.pending, state => {
-        state.loading = true;
-      })
+      .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.fulfilled, state => {
-        state.loading = false;
+        state.isLoading = false;
         state.info = null;
       })
-      .addCase(logoutUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+      .addCase(logoutUser.rejected, handleRejected);
   },
 });
 
@@ -76,3 +81,4 @@ const userInfoSlice = createSlice({
 });
 export const userReducer = userSlice.reducer;
 export const userInfoReducer = userInfoSlice.reducer;
+export const { addToFavorites, removeFromFavorites } = userSlice.actions;
