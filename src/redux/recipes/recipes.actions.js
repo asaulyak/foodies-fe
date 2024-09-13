@@ -31,6 +31,8 @@ export const fetchRecipes = createAsyncThunk(
     try {
       const params = new URLSearchParams();
 
+      console.log(params);
+
       if (data.categoryId) {
         params.append('categoryId', data.categoryId);
       }
@@ -48,6 +50,9 @@ export const fetchRecipes = createAsyncThunk(
       }
 
       const response = await http.get(`/recipes/search?${params.toString()}`);
+
+      console.log(response);
+
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
