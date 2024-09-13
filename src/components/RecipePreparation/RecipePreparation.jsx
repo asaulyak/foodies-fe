@@ -36,6 +36,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
         e.target.textContent = initBtnName[0];
         dispatch(addToFavorites(recipeId));
       });
+      //TODO: add loader to btn
 
       return;
     }
@@ -44,6 +45,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
       e.target.textContent = initBtnName[1];
       dispatch(removeFromFavorites(recipeId));
     });
+    //TODO: add loader to btn
   };
 
   return (
