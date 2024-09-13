@@ -52,7 +52,7 @@ export const RecipePreview = ({ title, description, thumb, id }) => {
         </p>
       </div>
       <div className={css.recipePreviewWrapperIcon}>
-        <NavLink className={css.recipePreviewBtn} to="/">
+        <NavLink className={css.recipePreviewBtn} to={`/recipe/${id}`}>
           <Icon
             iconId="arrow-recipes"
             className={css.recipePreviewIcon}

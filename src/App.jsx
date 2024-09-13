@@ -27,7 +27,7 @@ function App() {
             <Route index element={<Home />} />
 
             <Route path="/user/:id" element={<User />} />
-            <Route path="recipe/:id" element={<RecipePage />} />
+            <Route path="/recipe/:id" element={<RecipePage />} />
             <Route
               path="/recipe/add"
               element={
