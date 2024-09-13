@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import { Loader } from '../Loader/Loader.jsx';
 import { Header } from '../Header/Header.jsx';
 import { Footer } from '../Footer/Footer.jsx';
-import { UserCard } from '../UserCard/UserCard.jsx';
+import { Modal } from '../Modal/Modal.jsx';
+import { SignModal } from '../SignModal/SignModal.jsx';
 
 export const Layout = () => {
   return (
@@ -16,6 +17,7 @@ export const Layout = () => {
       </Suspense>
       <UserCard /> {/*Temp*/}
       <Footer />
+      <Modal children={<SignModal />} />
     </>
   );
 };

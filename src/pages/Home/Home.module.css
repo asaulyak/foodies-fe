@@ -1,0 +1,16 @@
+.homeBody {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+@media only screen and (min-width: 768px) {
+  .homeBody {
+    padding: 0 16px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .homeBody {
+    padding: 0 20px;
+  }
+}

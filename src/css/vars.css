@@ -6,4 +6,6 @@
   --white: #ffffff;
   --transition-fast: ease-in-out 200ms;
   --hoverInput: #454545;
+  --cardOverlay: rgba(5, 5, 5, 0.2);
+  --cardTagBackground: rgba(255, 255, 255, 0.2);
 }

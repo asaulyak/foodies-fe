@@ -4,6 +4,7 @@ import { modalReducer } from './modal/modal.slice.js';
 import { categoriesReducer } from './categories/categories.slice.js';
 import { ingredientsReducer } from './ingredients/ingredients.slice.js';
 import { areasReducer } from './areas/areas.slice.js';
+import { recipeReducer } from './recipes/recipes.slice.js';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     categories: categoriesReducer,
     ingredients: ingredientsReducer,
     areas: areasReducer,
+    recipes: recipeReducer,
   },
 });

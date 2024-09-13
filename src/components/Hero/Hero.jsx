@@ -22,7 +22,7 @@ const Hero = () => {
   const handleAddRecipeClick = () => {
     if (isAuthenticated) {
       // Redirect to Add Recipe Page
-      navigate('/create');
+      navigate('/recipe/add');
     } else {
       // Show sign-in modal if the user is not authenticated
       dispatch(openModal());

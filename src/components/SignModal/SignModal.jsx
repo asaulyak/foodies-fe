@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './SignModal.module.css';
-import SignForm from '../SignForm/SignForm.jsx';
-import LogoutModal from '../LogoutModal/LogoutModal.jsx';
+import { SignForm } from '../SignForm/SignForm.jsx';
+import { LogoutModal } from '../LogoutModal/LogoutModal.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectModalType } from '../../redux/modal/modal.selectors.js';
 import { switchTypeModal } from '../../redux/modal/modal.slice';
 import { MODAL_TYPE } from '../../utils/constants.js';
 
-const SignModal = () => {
+export const SignModal = () => {
   const dispatch = useDispatch();
   const modalType = useSelector(selectModalType);
   const { signup, signin, logout } = MODAL_TYPE;
@@ -77,5 +77,3 @@ const SignModal = () => {
     </>
   );
 };
-
-export default SignModal;
