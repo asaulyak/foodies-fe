@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 32px;
 
-  margin: 0 8px;
+  margin: 0 auto;
 
   max-width: 343px;
 }
@@ -20,8 +20,6 @@
   .categories {
     gap: 40px;
 
-    margin: 0 16px;
-
     max-width: 704px;
   }
 
@@ -34,8 +32,6 @@
 
 @media only screen and (min-width: 1440px) {
   .categories {
-    margin: 0 60px;
-
     max-width: 1280px;
   }
 }
