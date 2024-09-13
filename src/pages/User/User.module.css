@@ -26,4 +26,7 @@
   .userWrapper {
     display: flex;
   }
+  .userInfoButtonWrapper {
+    margin-right: 40px;
+  }
 }

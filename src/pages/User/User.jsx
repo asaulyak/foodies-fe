@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import css from './User.module.css';
 import { useEffect } from 'react';
-import { fetchDetailInfoUser } from '../../redux/user/user.actions';
+import {
+  fetchCurrentUser,
+  fetchDetailInfoUser,
+} from '../../redux/user/user.actions';
 import {
   selectInfoUser,
   selectIsLoading,
@@ -24,9 +27,11 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+  console.log(isLoading);
 
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
+    dispatch(fetchCurrentUser());
   }, [dispatch]);
 
   return (
