@@ -1,14 +1,20 @@
 import { RecipeCard } from '../RecipeCard/RecipeCard';
 import styles from './RecipeList.module.css';
+import { useSelector } from 'react-redux';
+import { selectRecipesState } from '../../../redux/recipes/recipes.selectors';
 
-export const RecipeList = ({ recipes }) => {
-  const { data } = recipes;
+export const RecipeList = () => {
+  const recipes = useSelector(selectRecipesState);
+
+  if (!recipes || !recipes.recipes.data) {
+    return <div>No recipes available</div>;
+  }
 
   return (
     <ul className={styles.recipesListWrap}>
-      {data.map(recipe => {
-        return <RecipeCard key={recipe.id} recipe={recipe} />;
-      })}
+      {recipes.recipes.data.map(recipe => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ))}
     </ul>
   );
 };
