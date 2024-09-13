@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout.jsx';
 
-import { lazy ,Suspense} from 'react';
+import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
@@ -21,33 +21,30 @@ function App() {
   const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
 
   return (
-
     <>
+      <Suspense fallback={<Loader full />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            {/*<Route path="/create" element={<CreateRecipe />} />*/}
 
-    <Suspense fallback={<Loader full />}>
+            <Route path="/user/:id" element={<User />} />
+            <Route path="recipe/:id" element={<RecipePage />} />
+            <Route
+              path="/recipe/add"
+              element={
+                <PrivateRoute
+                  element={<AddRecipe />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
 
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          {/*<Route path="/create" element={<CreateRecipe />} />*/}
-
-          <Route path="/user/:id" element={<User />} />
-          <Route path="recipe/:id" element={<RecipePage />} />
-          <Route
-            path="/recipe/add"
-            element={
-              <PrivateRoute
-                element={<AddRecipe />}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          />
-
-          <Route path="*" element={<Home />} />
-      </Routes>
-      <ToastContainer />
-    </Suspense>
-
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
+        <ToastContainer />
+      </Suspense>
     </>
   );
 }
