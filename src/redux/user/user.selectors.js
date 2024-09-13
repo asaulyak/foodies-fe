@@ -1,9 +1,7 @@
 export const selectUser = state => {
   return state.user.info;
 };
-export const selectInfoUserOwner = state => {
-  return state.userInfo.isOwner;
-};
+
 export const selectInfoUser = state => {
   return state.userInfo.info;
 };
