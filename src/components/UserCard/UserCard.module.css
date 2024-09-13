@@ -1,0 +1,126 @@
+.userCardItem {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    justify-content: space-between;
+    padding-bottom: 40px;
+  }
+}
+.userCardItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  border-bottom: 1px solid var(--grey);
+}
+
+.userName {
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+  text-transform: uppercase;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+}
+
+.userDescription {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.24px;
+  color: var(--grey);
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: -0.28px;
+  }
+}
+
+.userInfo {
+  display: flex;
+  gap: 16px;
+  margin-right: auto;
+  @media screen and (min-width: 768px) {
+    margin-right: 0;
+  }
+}
+
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--grey);
+  @media screen and (min-width: 768px) {
+    width: 85px;
+    height: 85px;
+  }
+}
+.recipeImageList {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 12px;
+  }
+}
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 15px;
+  background-color: var(--grey);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .imageItem:last-child {
+    display: none;
+  }
+}
+.mainBtn {
+  padding: 8px 16px;
+  height: 38px;
+  color: var(--grey);
+  border-radius: 30px;
+  border: 1px solid var(--grey);
+  text-transform: uppercase;
+  @media screen and (min-width: 768px) {
+    padding: 10px 24px;
+    height: 46px;
+  }
+  @media screen and (min-width: 1440px) {
+    color: var(--black);
+  }
+}
+
+.secondaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--grey);
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  @media screen and (min-width: 768px) {
+    width: 42px;
+    height: 42px;
+  }
+}
