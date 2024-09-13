@@ -1,17 +1,17 @@
 import css from './ProfileWidget.module.css';
 import { selectUser } from '../../redux/user/user.selectors.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCurrentUser, logoutUser } from '../../redux/user/user.actions.js';
+import { fetchCurrentUser } from '../../redux/user/user.actions.js';
 import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button.jsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Icon } from '../Icon/Icon.jsx';
 import clsx from 'clsx';
 import { openModal } from '../../redux/modal/modal.slice.js';
+import { MODAL_TYPE } from '../../utils/constants.js';
 
 export const ProfileWidget = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -24,16 +24,12 @@ export const ProfileWidget = () => {
     setProfileVisible(prevState => !prevState);
   };
 
-  const openModalSign = () => {
-    dispatch(openModal());
+  const onOpenModal = type => {
+    dispatch(openModal(type));
   };
 
-  const handleLogout = e => {
-    e.stopPropagation();
-
-    dispatch(logoutUser())
-      .unwrap()
-      .then(() => navigate('/'));
+  const handleLogout = () => {
+    onOpenModal(MODAL_TYPE.logout);
   };
 
   if (user) {
@@ -86,7 +82,7 @@ export const ProfileWidget = () => {
 
   return (
     <>
-      <Button onClick={openModalSign} variant="light">
+      <Button onClick={() => onOpenModal(MODAL_TYPE.signin)} variant="light">
         SIGNIN
       </Button>
     </>

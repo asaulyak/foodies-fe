@@ -5,7 +5,8 @@ import css from './RecipeMainInfo.module.css';
 import { RecipeHero } from '../RecipeHero/RecipeHero.jsx';
 import { Button } from '../Button/Button.jsx';
 import { openModal } from '../../redux/modal/modal.slice.js';
-import { selectInfoUser } from '../../redux/user/user.selectors.js';
+import { selectUser } from '../../redux/user/user.selectors.js';
+import { MODAL_TYPE } from '../../utils/constants.js';
 
 export const RecipeMainInfo = ({
   children,
@@ -18,13 +19,13 @@ export const RecipeMainInfo = ({
   authorName = 'John',
   authorAvatar = '',
 }) => {
-  const isLoggedUser = useSelector(selectInfoUser);
+  const isLoggedUser = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (!isLoggedUser) {
-      return dispatch(openModal()); //TODO: must open signin modal
+      return dispatch(openModal(MODAL_TYPE.signin));
     }
     navigate(`/user/${id}`);
   };

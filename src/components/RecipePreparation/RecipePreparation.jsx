@@ -1,29 +1,51 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Button } from '../Button/Button.jsx';
-import { selectInfoUser } from '../../redux/user/user.selectors.js';
+import { selectUser } from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
+import { MODAL_TYPE } from '../../utils/constants.js';
+import { openModal } from '../../redux/modal/modal.slice.js';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../redux/user/user.slice.js';
+import { http } from '../../http/index.js';
+
+const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
 export const RecipePreparation = ({ preparation, recipeId }) => {
+  const isLoggedUser = useSelector(selectUser);
+
   const dispatch = useDispatch();
-  const isLoggedUser = useSelector(selectInfoUser);
-  // const favoritesReceipts=useSelector(selectFavoritesReceipts);//TODO: uncomment when using store
-  // const isFavoriteRecipe = favoritesReceipts.includes(recipeId); //TODO: uncomment when using store
-  const isFavoriteRecipe = false; //TODO: delete when using store
 
-  const btnTextContent = isFavoriteRecipe
-    ? 'Remove from favorites'
-    : 'Add to favorites';
+  let isFavoriteRecipe = false;
 
-  const handleClick = () => {
+  if (isLoggedUser) {
+    isFavoriteRecipe = isLoggedUser.favoriteRecipes.includes(recipeId);
+  }
+
+  const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
+
+  const handleClick = async e => {
     if (!isLoggedUser) {
-      return dispatch(openModal());
+      return dispatch(openModal(MODAL_TYPE.signin));
     }
+
     if (!isFavoriteRecipe) {
-      // return dispatch(addToFavorites(recipeId));//TODO:  uncomment when using dispatch and add to favorites action
-      return; //TODO: delete when using dispatch
+      await http.post(`/recipes/${recipeId}/favorites`).then(data => {
+        e.target.textContent = initBtnName[0];
+        dispatch(addToFavorites(recipeId));
+      });
+      //TODO: add loader to btn
+
+      return;
     }
-    // return dispatch(removeFromFavorites(recipeId));//TODO:  uncomment when using dispatch and remove from favorites action
-    return; //TODO: delete when using dispatch
+
+    await http.delete(`/recipes/${recipeId}/favorites`).then(data => {
+      e.target.textContent = initBtnName[1];
+      dispatch(removeFromFavorites(recipeId));
+    });
+    //TODO: add loader to btn
   };
 
   return (

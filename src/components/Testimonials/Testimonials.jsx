@@ -9,11 +9,10 @@ import css from './Testimonials.module.css';
 
 export const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
-
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const { data } = await http.get('/testimonials');
+        const { data } = await http.get('/reviews');
         setTestimonials(data);
       } catch (error) {
         console.error('Error fetching testimonials:', error);
@@ -39,10 +38,8 @@ export const Testimonials = () => {
       >
         {testimonials.map(testimonial => (
           <SwiperSlide key={testimonial.id}>
-            {' '}
             <div className={css.slide}>
-              <p className={css.text}>"{testimonial.text}"</p>
-              <p className={css.author}>- {testimonial.author}</p>
+              <p className={css.text}>{testimonial.testimonial}</p>
             </div>
           </SwiperSlide>
         ))}
