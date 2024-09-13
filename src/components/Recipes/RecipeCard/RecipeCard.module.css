@@ -3,9 +3,11 @@
   @media screen and (min-width: 768px) {
     width: calc((100% - 20px) / 2);
   }
-  @media screen and (min-width: 1440px) {
-    width: calc((100% - (20px * 2)) / 3);
-  }
+}
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .headerCard {
@@ -21,77 +23,87 @@
   border-radius: 20px;
   margin-bottom: 16px;
   object-fit: cover;
+  @media screen and (min-width: 768px) {
+    height: 275px;
+  }
 }
 
 .textWrap {
   margin-bottom: 8px;
-  height: 72px;
 }
 
 .recipeDescription {
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
-  line-height: 1.6;
-  white-space: normal;
+  line-height: 1.4em;
+  max-height: 2.8em;
+  display: block;
+  white-space: nowrap;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 }
 
 .avatarIconsRow {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
-.avatarWrapper {
+.userWrapper {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
+  @media screen and (min-width: 768px) {
+    gap: 10px;
+  }
 }
 
 .avatar {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+
+  @media screen and (min-width: 768px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.userName {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: bold;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 }
 
 .iconList {
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  margin-left: auto;
+  align-items: center;
+  gap: 4px;
 }
 
 .iconWrapper {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  background-color: transparent;
-  border-radius: 50%;
-  outline: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  border: 1px solid var(--grey);
 
-@media screen and (min-width: 768px) {
-  .recipeDescription {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .recipeImage {
-    height: 275px;
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-  }
-  .iconWrapper {
+  @media screen and (min-width: 768px) {
     width: 42px;
     height: 42px;
   }

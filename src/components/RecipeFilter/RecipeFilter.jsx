@@ -28,12 +28,10 @@ export const RecipeFilter = ({ handleSelectChange }) => {
   }, [dispatch]);
 
   const handleIngredientChange = e => {
-    console.log(e.target.value);
     dispatch(setSelectedIngredientAction(e.target.value));
   };
 
   const handleAreaChange = e => {
-    console.log(e.target.value);
     dispatch(setSelectedAreaAction(e.target.value));
   };
 

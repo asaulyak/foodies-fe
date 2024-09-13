@@ -5,8 +5,8 @@ import { selectRecipesState } from '../../../redux/recipes/recipes.selectors';
 
 export const RecipeList = () => {
   const recipes = useSelector(selectRecipesState);
-  console.log(recipes);
-  if (!recipes || !recipes.data) {
+
+  if (!recipes || !recipes.recipes.data) {
     return <div>No recipes available</div>;
   }
 
