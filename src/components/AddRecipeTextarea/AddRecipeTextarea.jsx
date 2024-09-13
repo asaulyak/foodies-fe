@@ -16,8 +16,8 @@ export const AddRecipeTextarea = ({
   maxLength,
   register,
   error,
+  setText,
 }) => {
-  const [text, setText] = useState('');
   const [hasTyped, setHasTyped] = useState(false);
 
   const handleInput = e => {
@@ -41,7 +41,7 @@ export const AddRecipeTextarea = ({
     if (textarea) {
       adjustTextareaHeight(textarea);
     }
-  }, [text, id]);
+  }, [value, id]);
 
   return (
     <div className={parentClassName}>
@@ -56,6 +56,7 @@ export const AddRecipeTextarea = ({
           placeholder={placeholder}
           className={clsx([css.textarea, className])}
           rows={1}
+          value={value}
           maxLength={maxLength}
           disabled={disabled}
           {...register(name, {
@@ -63,8 +64,8 @@ export const AddRecipeTextarea = ({
           })}
         />
         <div className={css.count}>
-          <span className={clsx({ [css.count_bold]: hasTyped })}>
-            {text.length}
+          <span className={clsx({ [css.count_bold]: hasTyped && value })}>
+            {value.length}
           </span>
           /{maxLength}
         </div>

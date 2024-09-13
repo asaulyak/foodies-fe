@@ -1,0 +1,147 @@
+.all_categories_card {
+  width: 343px;
+  height: 250px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 30px;
+
+  background-color: var(--black);
+  overflow: hidden;
+}
+
+.all_categories_card_text_link {
+  color: var(--white);
+  font-family: Mulish;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  text-transform: uppercase;
+}
+
+.category_card {
+  width: 343px;
+  height: 250px;
+
+  display: flex;
+  position: relative;
+
+  border-radius: 30px;
+
+  overflow: hidden;
+}
+
+.category_card::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    var(--cardOverlay) 0%,
+    var(--cardOverlay) 100%
+  );
+}
+
+.card_image {
+  object-fit: cover;
+}
+
+.card_textbox {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  color: white;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+}
+
+.card_text {
+  padding: 10px 14px;
+
+  border: 1px solid var(--cardTagBackground);
+  border-radius: 30px;
+  background: var(--cardTagBackground);
+}
+
+.card_button {
+  display: flex;
+  padding: 13px;
+  align-items: flex-start;
+  gap: 10px;
+
+  border-radius: 30px;
+  border: 1px solid var(--cardTagBackground);
+}
+
+.card_button:hover {
+  background: var(--cardTagBackground);
+}
+
+.category_card:nth-child(8) {
+  width: 704px;
+}
+
+@media only screen and (min-width: 768px) {
+  .category_card {
+    width: 342px;
+    height: 369px;
+
+    transition: transform 200ms ease-in;
+  }
+
+  .category_card:hover {
+    transform: scale(1.04);
+  }
+
+  .all_categories_card {
+    width: 342px;
+    height: 369px;
+
+    transition: transform 200ms ease-in;
+  }
+
+  .all_categories_card:hover {
+    transform: scale(1.04);
+  }
+
+  .category_card:nth-child(3),
+  .category_card:nth-child(8) {
+    width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .category_card {
+    width: 325px;
+    height: 369px;
+  }
+
+  .all_categories_card {
+    width: 325px;
+    height: 369px;
+  }
+
+  .category_card:nth-child(3),
+  .category_card:nth-child(4),
+  .category_card:nth-child(8),
+  .category_card:nth-child(10) {
+    width: 590px;
+  }
+}

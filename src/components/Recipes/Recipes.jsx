@@ -2,17 +2,9 @@ import { NavLink } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
-import { MainTitle } from '../MainTitle/MainTitle';
-import { SubTitle } from '../SubTitle/SubTitle';
-import { RecipeFilter } from '../RecipeFilter/RecipeFilter';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchRecipes } from '../../redux/recipes/recipes.actions';
-import {
-  selectSelectedAreaId,
-  selectSelectedIngredientId,
-} from '../../redux/recipes/recipes.selectors';
-import Pagination from '../../components/Pagination/Pagination';
+import MainTitle from '../MainTitle/MainTitle';
+import styles from '../MainTitle/MainTitle.module.css';
+import Subtitle from '../SubTitle/SubTitle';
 
 export const Recipes = () => {
   const dispatch = useDispatch();

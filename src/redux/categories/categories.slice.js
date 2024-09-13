@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCategoriesList } from './categories.actions.js';
+import { fetchCategoriesList } from './categories.actions';
 
 const handlePending = state => {
   state.isLoading = true;
 };
 
-const handleRejected = (state, action) => {
+const handleRejected = state => {
   state.isLoading = false;
   state.error = action.payload;
 };
@@ -21,12 +21,12 @@ const categoriesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchCategoriesList.pending, handlePending)
+      .addCase(fetchCategoriesList.rejected, handleRejected)
       .addCase(fetchCategoriesList.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.list = action.payload;
         state.error = null;
-      })
-      .addCase(fetchCategoriesList.rejected, handleRejected);
+        state.list = action.payload;
+      });
   },
 });
 
