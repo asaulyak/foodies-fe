@@ -40,8 +40,8 @@ export const Testimonials = () => {
             clickable: true,
           }}
           style={{
-            '--swiper-pagination-color': '#050505',
-            '--swiper-pagination-bullet-inactive-color': '#BFBEBE',
+            '--swiper-pagination-color': 'var(--black)',
+            '--swiper-pagination-bullet-inactive-color': 'var(--grey)',
             '--swiper-pagination-bullet-inactive-opacity': '1',
             '--swiper-pagination-bullet-size': '16px',
             '--swiper-pagination-bullet-horizontal-gap': '6px',
