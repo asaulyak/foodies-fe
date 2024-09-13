@@ -51,7 +51,6 @@ const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState: {
     info: null,
-    isOwner: true,
     isLoading: false,
     error: null,
   },

@@ -4,3 +4,10 @@
   align-items: center;
   justify-content: center;
 }
+.logOutBtn {
+  width: 100%;
+  background-color: var(--black);
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 64px;
+}
