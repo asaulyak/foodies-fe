@@ -27,7 +27,9 @@ const userSlice = createSlice({
       state.info.favoriteRecipes.push(action.payload);
     },
     removeFromFavorites(state, action) {
-      const index = state.info.favoriteRecipes.findIndex(action.payload);
+      const index = state.info.favoriteRecipes.findIndex(
+        e => e === action.payload
+      );
       state.info.favoriteRecipes.splice(index, 1);
     },
   },

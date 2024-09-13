@@ -9,48 +9,54 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/user/user.slice.js';
+import { http } from '../../http/index.js';
 
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
 export const RecipePreparation = ({ preparation, recipeId }) => {
   const isLoggedUser = useSelector(selectUser);
 
-  const [favorites, setFavorites] = useState([]);
-  const [btnName, setbtnName] = useState(initBtnName[0]);
-
   const dispatch = useDispatch();
 
-  const isFavoriteRecipe = favorites.includes(recipeId);
+  let isFavoriteRecipe = false;
+
+  if (isLoggedUser) {
+    isFavoriteRecipe = isLoggedUser.favoriteRecipes.includes(recipeId);
+  }
 
   const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
 
-  useEffect(() => {
-    setFavorites(isLoggedUser?.info?.favoriteRecipes || []);
-    setbtnName(btnTextContent);
-  }, []);
   // recipesRouter.post('/:id/favorites', authMiddleware, addToFavorites);
   // recipesRouter.delete('/:id/favorites', authMiddleware, removeFromFavorites);
   //'/api/recipes'
 
-  const handleClick = e => {
-    console.dir(favorites);
+  const handleClick = async e => {
     if (!isLoggedUser) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
-    console.log('first');
-    if (!favorites.includes(recipeId)) {
-      console.log('second');
-      setbtnName(initBtnName[1]);
-      setFavorites(prev => [...prev, recipeId]);
 
-      // return dispatch(addToFavorites(recipeId)); //TODO:  uncomment when using dispatch and add to favorites action
-    } else {
-      console.log('third');
-      setbtnName(initBtnName[0]);
-      setFavorites(prev => prev.filter(e => e !== recipeId));
-
-      // return dispatch(removeFromFavorites(recipeId)); //TODO:  uncomment when using dispatch and remove from favorites action
+    if (!isFavoriteRecipe) {
+      await http
+        .post(`/recipes/${recipeId}/favorites`)
+        .then(data => {
+          e.target.textContent = initBtnName[0];
+          dispatch(addToFavorites(recipeId));
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      return;
     }
+
+    await http
+      .delete(`/recipes/${recipeId}/favorites`)
+      .then(data => {
+        e.target.textContent = initBtnName[1];
+        dispatch(removeFromFavorites(recipeId));
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   return (
@@ -64,7 +70,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
         ))}
       </ul>
       <Button onClick={handleClick} className={css.btn}>
-        {btnName}
+        {btnTextContent}
       </Button>
     </section>
   );
