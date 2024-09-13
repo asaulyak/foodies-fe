@@ -48,7 +48,14 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.info = null;
       })
-      .addCase(logoutUser.rejected, handleRejected);
+      .addCase(logoutUser.rejected, handleRejected)
+      .addCase(patchAvatar.rejected, handleRejected)
+      .addCase(patchAvatar.pending, handlePending)
+      .addCase(patchAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.info.avatar = action.payload.avatar;
+        state.error = null;
+      });
   },
 });
 
@@ -69,16 +76,9 @@ const userInfoSlice = createSlice({
         state.info = action.payload;
         state.error = null;
       });
-    builder
-      .addCase(patchAvatar.rejected, handleRejected)
-      .addCase(patchAvatar.pending, handlePending)
-      .addCase(patchAvatar.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.info.avatar = action.payload;
-        state.error = null;
-      });
   },
 });
+
 export const userReducer = userSlice.reducer;
 export const userInfoReducer = userInfoSlice.reducer;
 export const { addToFavorites, removeFromFavorites } = userSlice.actions;
