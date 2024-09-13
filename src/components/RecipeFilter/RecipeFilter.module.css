@@ -5,37 +5,20 @@
   align-items: center;
   gap: 14px;
   margin-bottom: 32px;
-  @media screen and (min-width: 768px) {
+}
+.recipeFilterSelect {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .recipesFilterWrap {
     flex-direction: row;
     gap: 18px;
   }
-  @media screen and (min-width: 1440px) {
-    width: fit-content;
+}
+@media screen and (min-width: 1440px) {
+  .recipesFilterWrap {
+    width: 330px;
     flex-direction: column;
     gap: 14px;
   }
-}
-
-.recipeFilterSelect {
-  width: 100%;
-  max-width: 315px;
-  padding: 10px;
-  border-radius: 30px;
-  border: 1px solid var(--black-light);
-  font-size: 16px;
-  background-color: white;
-  color: var(--black);
-  appearance: none;
-  @media screen and (min-width: 768px) {
-    max-width: 345px;
-  }
-  @media screen and (min-width: 1440px) {
-    max-width: 330px;
-  }
-}
-
-.recipeFilterSelectFocus {
-  border-color: var(--black);
-  outline: none;
-  box-shadow: 0 0 0 1px var(--black-light);
 }
