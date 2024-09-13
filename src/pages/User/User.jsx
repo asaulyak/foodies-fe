@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import {
   fetchCurrentUser,
   fetchDetailInfoUser,
+  logoutUser,
 } from '../../redux/user/user.actions';
 import {
   selectInfoUser,
@@ -19,6 +20,9 @@ import { PathInfo } from '../../components/PathInfo/PathInfo';
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { Button } from '../../components/Button/Button';
 import { Loader } from '../../components/Loader/Loader';
+import { openModal } from '../../redux/modal/modal.slice';
+import { http } from '../../http';
+import { MODAL_TYPE } from '../../utils/constants';
 
 export const User = () => {
   const { id } = useParams();
@@ -27,8 +31,17 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
-  // console.log(owner);
+  const onOpenModal = type => {
+    dispatch(openModal(type));
+  };
+  const handleSubscribe = async () => {
+    await http.post(`/users/subscribe/`), { subscribedTo: id };
+    console.log('followed');
+  };
 
+  const handleLogout = () => {
+    onOpenModal(MODAL_TYPE.logout);
+  };
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
     dispatch(fetchCurrentUser());
@@ -48,20 +61,24 @@ export const User = () => {
             {userCardLoading || isLoading ? (
               <Loader></Loader>
             ) : (
-              <UserInfo {...currentUser} isOwner={owner.id === id}></UserInfo>
+              <UserInfo {...currentUser} isOwner={owner?.id === id}></UserInfo>
             )}
             {isLoading ? (
               <Loader></Loader>
-            ) : owner.id === id ? (
-              <Button className={css.logOutBtn}>Log Out</Button>
+            ) : owner?.id === id ? (
+              <Button onClick={handleLogout} className={css.logOutBtn}>
+                Log Out
+              </Button>
             ) : (
-              <Button className={css.logOutBtn}>Follow</Button>
+              <Button onClick={handleSubscribe} className={css.logOutBtn}>
+                Follow
+              </Button>
             )}
           </div>
           {isLoading ? (
             <Loader></Loader>
           ) : (
-            <TabsList isOwner={owner.id === id} id={id}></TabsList>
+            <TabsList isOwner={owner?.id === id} id={id}></TabsList>
           )}
         </div>
       </div>

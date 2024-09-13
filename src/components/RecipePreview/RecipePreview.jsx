@@ -29,11 +29,11 @@ export const RecipePreview = ({ title, description, thumb, id, isOwner }) => {
     };
   }, []);
   const truncatedDescriptionText =
-    description.length > maxLengthDescription
+    description?.length > maxLengthDescription
       ? description.substring(0, maxLengthDescription) + '...'
       : description;
   const truncatedTitleText =
-    title.length > maxLengthTitle
+    title?.length > maxLengthTitle
       ? title.substring(0, maxLengthTitle) + '...'
       : title;
 
