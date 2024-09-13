@@ -5,13 +5,13 @@ import Pagination from '../Pagination/Pagination';
 import { RecipePreview } from '../RecipePreview/RecipePreview';
 
 export const TabsList = ({ isOwner, id }) => {
-  const [activeTab, setActiveTab] = useState(isOwner ? 'recipes' : 'info');
+  const [activeTab, setActiveTab] = useState('recipes');
   const [page, setPage] = useState(1);
   const [listItems, setListItems] = useState([]);
 
   useEffect(() => {
-    if (isOwner) {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      if (isOwner) {
         if (activeTab === 'following' || activeTab === 'favorites') {
           const { data } = await http.get(`/users/${activeTab}/`);
           if (data) {
@@ -28,9 +28,17 @@ export const TabsList = ({ isOwner, id }) => {
             setListItems([]);
           }
         }
-      };
-      fetchData();
-    }
+      } else {
+        const { data } = await http.get(`/users/${activeTab}/${id}`);
+
+        if (data) {
+          setListItems(data.data);
+        } else {
+          setListItems([]);
+        }
+      }
+    };
+    fetchData();
   }, [activeTab, page]);
 
   const handleTabClick = tab => {
@@ -55,26 +63,28 @@ export const TabsList = ({ isOwner, id }) => {
     <div className={css.tabsContainer}>
       <div className={css.tabsContainerButton}>
         <div className={css.tabsList}>
-          {tabs.map(tab => (
-            <button
-              key={tab}
-              className={`${css.tabItem} ${activeTab === tab ? css.tabItemActive : ''}`}
-              onClick={() => handleTabClick(tab)}
-            >
-              {tabsMap[tab]}
-            </button>
-          ))}
+          {tabs.map(tab => {
+            return (
+              <button
+                key={tab}
+                className={`${css.tabItem} ${activeTab === tab ? css.tabItemActive : ''}`}
+                onClick={() => handleTabClick(tab)}
+              >
+                {tabsMap[tab]}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div className="list-items">
-        {listItems.length === 0 ? (
+        {listItems?.length === 0 ? (
           <p>
             Nothing has been added to your recipes list yet. Please browse our
             recipes and add your favorites for easy access in the future.
           </p>
         ) : (
-          listItems.map(item => {
+          listItems?.map(item => {
             if (activeTab === 'recipes' || activeTab === 'favorites') {
               return (
                 <RecipePreview

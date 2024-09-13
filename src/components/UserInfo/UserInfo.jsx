@@ -20,7 +20,6 @@ export const UserInfo = ({
   const dispatch = useDispatch();
   const handleFileChange = async e => {
     const file = e.target.files[0];
-
     if (!file) {
       return;
     }

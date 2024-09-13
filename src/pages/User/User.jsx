@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import css from './User.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   fetchCurrentUser,
   fetchDetailInfoUser,
-  logoutUser,
 } from '../../redux/user/user.actions';
 import {
   selectInfoUser,
@@ -31,20 +30,32 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const onOpenModal = type => {
     dispatch(openModal(type));
   };
   const handleSubscribe = async () => {
-    await http.post(`/users/subscribe/`), { subscribedTo: id };
-    console.log('followed');
+    await http.post(`/users/subscribe/`, { subscribedTo: id });
+    setIsSubscribed(true);
   };
-
+  const handleUnsubscribe = async () => {
+    await http.delete(`/users/unsubscribe/${id}`);
+    setIsSubscribed(false);
+  };
   const handleLogout = () => {
     onOpenModal(MODAL_TYPE.logout);
   };
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
     dispatch(fetchCurrentUser());
+    const fetchSubscribeUser = async () => {
+      const { data } = await http.get('/users/following');
+
+      const isUserSubscribed = data.data.some(user => user.id === id);
+
+      setIsSubscribed(isUserSubscribed);
+    };
+    fetchSubscribeUser();
   }, [dispatch, id]);
 
   return (
@@ -69,9 +80,13 @@ export const User = () => {
               <Button onClick={handleLogout} className={css.logOutBtn}>
                 Log Out
               </Button>
-            ) : (
+            ) : !isSubscribed ? (
               <Button onClick={handleSubscribe} className={css.logOutBtn}>
                 Follow
+              </Button>
+            ) : (
+              <Button onClick={handleUnsubscribe} className={css.logOutBtn}>
+                Following
               </Button>
             )}
           </div>

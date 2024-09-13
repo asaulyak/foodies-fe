@@ -25,6 +25,7 @@
 @media screen and (min-width: 1440px) {
   .userWrapper {
     display: flex;
+    align-items: flex-start;
   }
   .userInfoButtonWrapper {
     margin-right: 40px;
