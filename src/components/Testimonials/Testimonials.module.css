@@ -49,13 +49,26 @@
 }
 
 .quotesImage {
-  position: absolute;
-  top: -10%;
-  left: 9%;
-  float: left;
-  margin-right: 20px;
+  margin-top: 12px;
+  margin-left: 8px;
   width: 59px;
   height: 48px;
-  gap: 0px;
-  opacity: 0px;
+}
+
+@media only screen and (min-width: 768px) {
+  .quotesImage {
+    margin-top: -12px;
+    margin-left: 40px;
+    width: 59px;
+    height: 48px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .quotesImage {
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 59px;
+    height: 48px;
+  }
 }

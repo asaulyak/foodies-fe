@@ -36,7 +36,16 @@ export const Testimonials = () => {
           spaceBetween={50}
           slidesPerView={1}
           autoplay={{ delay: 5000 }}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+          }}
+          style={{
+            '--swiper-pagination-color': '#050505',
+            '--swiper-pagination-bullet-inactive-color': '#BFBEBE',
+            '--swiper-pagination-bullet-inactive-opacity': '1',
+            '--swiper-pagination-bullet-size': '16px',
+            '--swiper-pagination-bullet-horizontal-gap': '6px',
+          }}
         >
           {testimonials.map(testimonial => (
             <SwiperSlide key={testimonial.id}>
