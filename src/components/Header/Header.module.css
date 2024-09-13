@@ -1,5 +1,8 @@
 .section {
   padding: 8px 8px 0;
+
+  width: 359px;
+  margin: 0 auto;
 }
 
 .header {
@@ -76,6 +79,8 @@
 
   .section {
     padding: 16px 16px 0;
+
+    width: 736px;
   }
 
   .header {
@@ -90,6 +95,8 @@
 
   .section {
     padding: 20px 20px 0;
+
+    width: 1400px;
   }
 
   .header {

@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
-import MainTitle from '../MainTitle/MainTitle';
-import styles from '../MainTitle/MainTitle.module.css';
-import Subtitle from '../SubTitle/SubTitle';
+import { MainTitle } from '../MainTitle/MainTitle';
+import maintitle_styles from '../MainTitle/MainTitle.module.css';
+import { SubTitle } from '../SubTitle/SubTitle';
 import { useDispatch } from 'react-redux';
 
 export const Recipes = () => {
@@ -25,12 +25,12 @@ export const Recipes = () => {
           <FaArrowLeft size={18} />
           <span>Back</span>
         </NavLink>
-        <MainTitle>Category</MainTitle>
-        <Subtitle>
+        <MainTitle className={maintitle_styles.main_title}>Category</MainTitle>
+        <SubTitle>
           Go on a taste journey, where every sip is a sophisticated creative
           chord, and every dessert is an expression of the most refined
           gastronomic desires.
-        </Subtitle>
+        </SubTitle>
       </div>
 
       <div className={styles.recipesListWrap}>
