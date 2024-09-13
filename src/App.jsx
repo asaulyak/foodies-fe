@@ -1,10 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout.jsx';
-import { lazy } from 'react';
+
+import { lazy ,Suspense} from 'react';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
 import { User } from './pages/User/User.jsx';
+import { Loader } from './components/Loader/Loader.jsx';
 
 import { selectUser } from './redux/user/user.selectors.js';
 import PrivateRoute from './PrivateRoute.jsx';
@@ -19,11 +21,16 @@ function App() {
   const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
 
   return (
+
     <>
+
+    <Suspense fallback={<Loader full />}>
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           {/*<Route path="/create" element={<CreateRecipe />} />*/}
+
           <Route path="/user/:id" element={<User />} />
           <Route path="recipe/:id" element={<RecipePage />} />
           <Route
@@ -37,9 +44,10 @@ function App() {
           />
 
           <Route path="*" element={<Home />} />
-        </Route>
       </Routes>
       <ToastContainer />
+    </Suspense>
+
     </>
   );
 }
