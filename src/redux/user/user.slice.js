@@ -22,7 +22,17 @@ const userSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    addToFavorites(state, action) {
+      state.info.favoriteRecipes.push(action.payload);
+    },
+    removeFromFavorites(state, action) {
+      const index = state.info.favoriteRecipes.findIndex(
+        e => e === action.payload
+      );
+      state.info.favoriteRecipes.splice(index, 1);
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchCurrentUser.pending, handlePending)
@@ -71,3 +81,4 @@ const userInfoSlice = createSlice({
 });
 export const userReducer = userSlice.reducer;
 export const userInfoReducer = userInfoSlice.reducer;
+export const { addToFavorites, removeFromFavorites } = userSlice.actions;
