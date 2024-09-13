@@ -2,10 +2,17 @@ import { NavLink } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
-import MainTitle from '../MainTitle/MainTitle';
-import styles from '../MainTitle/MainTitle.module.css';
-import Subtitle from '../SubTitle/SubTitle';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectSelectedAreaId,
+  selectSelectedIngredientId,
+} from '../../redux/recipes/recipes.selectors.js';
+import { useEffect } from 'react';
+import { fetchRecipes } from '../../redux/recipes/recipes.actions.js';
+import { MainTitle } from '../MainTitle/MainTitle.jsx';
+import { RecipeFilter } from '../RecipeFilter/RecipeFilter.jsx';
+import Pagination from '../Pagination/Pagination.jsx';
+import { SubTitle } from '../SubTitle/SubTitle.jsx';
 
 export const Recipes = () => {
   const dispatch = useDispatch();
@@ -26,11 +33,11 @@ export const Recipes = () => {
           <span>Back</span>
         </NavLink>
         <MainTitle>Category</MainTitle>
-        <Subtitle>
+        <SubTitle>
           Go on a taste journey, where every sip is a sophisticated creative
           chord, and every dessert is an expression of the most refined
           gastronomic desires.
-        </Subtitle>
+        </SubTitle>
       </div>
 
       <div className={styles.recipesListWrap}>

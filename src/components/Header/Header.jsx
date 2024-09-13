@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import css from './Header.module.css';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Logo } from '../Logo/Logo.jsx';
 import { ProfileWidget } from '../ProfileWidget/ProfileWidget.jsx';
@@ -11,6 +11,8 @@ import { Icon } from '../Icon/Icon.jsx';
 export const Header = () => {
   const location = useLocation();
   const currentUser = useSelector(selectUser);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menu = useMemo(
     () => [
@@ -31,6 +33,18 @@ export const Header = () => {
     [location, currentUser]
   );
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavCLick = event => {
+    const target = event.currentTarget;
+
+    if (target?.classList.contains(css.side)) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <div className={css.section}>
       <div className={clsx([css.header])}>
@@ -38,7 +52,10 @@ export const Header = () => {
         {shouldHideMenu ? (
           ''
         ) : (
-          <nav className={css.nav}>
+          <nav
+            className={clsx(css.nav, { [css.side]: isMenuOpen })}
+            onClick={handleNavCLick}
+          >
             {menu.map(item => (
               <NavLink
                 key={item.link}
@@ -56,14 +73,18 @@ export const Header = () => {
         <div className={css.right}>
           <ProfileWidget />
 
-          <div className={css.menu}>
-            <Icon
-              iconId="burger"
-              width={21}
-              height={17}
-              className={css['menu-icon']}
-            />
-          </div>
+          {shouldHideMenu ? (
+            ''
+          ) : (
+            <div className={css.menu} onClick={toggleMenu}>
+              <Icon
+                iconId="burger"
+                width={21}
+                height={17}
+                className={css['menu-icon']}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

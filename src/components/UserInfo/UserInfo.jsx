@@ -1,9 +1,13 @@
 import { useDispatch } from 'react-redux';
 import css from './UserInfo.module.css';
-import { patchAvatar } from '../../redux/user/user.actions';
+import {
+  fetchDetailInfoUser,
+  patchAvatar,
+} from '../../redux/user/user.actions';
 import { Icon } from '../Icon/Icon.jsx';
 
 export const UserInfo = ({
+  id,
   name,
   email,
   avatar,
@@ -22,7 +26,9 @@ export const UserInfo = ({
     const formData = new FormData();
     formData.append('avatar', file);
 
-    await dispatch(patchAvatar(formData));
+    await dispatch(patchAvatar(formData))
+      .unwrap()
+      .then(() => dispatch(fetchDetailInfoUser(id)));
   };
 
   return (
