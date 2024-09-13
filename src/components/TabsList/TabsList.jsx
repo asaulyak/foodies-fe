@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { http } from '../../http';
 import css from './TabsList.module.css';
 import Pagination from '../Pagination/Pagination';
+import { RecipePreview } from '../RecipePreview/RecipePreview';
 
 export const TabsList = ({ isOwner, id }) => {
   const [activeTab, setActiveTab] = useState(isOwner ? 'recipes' : 'info');
@@ -76,7 +77,7 @@ export const TabsList = ({ isOwner, id }) => {
               activeTab === 'favorites' ||
               activeTab === 'info'
             ) {
-              return;
+              return <RecipePreview key={item.id} {...item}></RecipePreview>;
               //  RECIPES PREVIEW
             } else {
               return;
