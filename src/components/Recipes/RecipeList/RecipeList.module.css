@@ -1,13 +1,33 @@
 .recipesListWrap {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   margin-bottom: 32px;
 
   @media screen and (min-width: 768px) {
-    gap: 40px 20px;
+    gap: 40px;
+  }
+  @media screen and (min-width: 1440px) {
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
 }
+
+.recipesListContent {
+  width: 343px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: wrap;
+    width: 704px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 910px;
+  }
+}
+
 .noRecipesPlaceholder {
   font-weight: 500;
   font-size: 18px;
