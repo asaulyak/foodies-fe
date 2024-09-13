@@ -66,7 +66,7 @@ export const ProfileWidget = () => {
           })}
         >
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to={`/user/${user.id}`}>Profile</Link>
           </li>
           <li>
             <span className={css['icon-text']} onClick={handleLogout}>
