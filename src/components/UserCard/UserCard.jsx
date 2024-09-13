@@ -3,21 +3,13 @@ import css from './UserCard.module.css';
 import { MdArrowOutward } from 'react-icons/md';
 import { Button } from '../Button/Button.jsx';
 import { http } from '../../http/index.js';
+import { useNavigate } from 'react-router-dom';
 
 const initBtnName = ['follow', 'following'];
 
 export const UserCard = ({ user, activeTab, deleteCard = null }) => {
-  activeTab = 'followers';
-
+  const navigate = useNavigate();
   const btnName = activeTab === 'followers' ? initBtnName[0] : initBtnName[1];
-
-  const baseURL = import.meta.env.BASE_URL;
-  const images = [
-    'src/components/UserCard/tempImages/recipe1.jpg',
-    'src/components/UserCard/tempImages/recipe2.jpg',
-    'src/components/UserCard/tempImages/recipe3.jpg',
-    'src/components/UserCard/tempImages/recipe4.jpg',
-  ];
 
   const handleClick = async e => {
     if (e.target.textContent === initBtnName[0] && activeTab === 'followers') {
@@ -43,41 +35,60 @@ export const UserCard = ({ user, activeTab, deleteCard = null }) => {
     }
   };
 
+  const handleClickNavigate = () => {
+    navigate(`/user/${user.id}`);
+  };
+
   return (
-    <div className={css.UserCardSection}>
+    <li className={css.userCardItem}>
       <div className={css.userInfo}>
-        <img
-          className={css.UserAvatarImage}
-          src={`${baseURL}/src/components/UserCard/tempImages/userAvatar1.jpg`}
-          alt=""
-        />
+        <div className={css.avatarWrapper}>
+          <img
+            className={css.userAvatarImage}
+            src={user.avatar || ''}
+            alt="Avatar"
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src =
+                'https://placehold.co/85x85/BFBEBE/050505?text=Avatar';
+            }}
+            loading="lazy"
+          />
+        </div>
 
         <div className={css.userDetails}>
-          <h3>Victor</h3>
-          <p>"Own recipes: ${}"</p>
+          <h3 className={css.userName}>{user.name}r</h3>
+          <p
+            className={css.userDescription}
+          >{`Own recipes: ${user.ownsRecipes}`}</p>
           <Button onClick={handleClick} className={css.mainBtn}>
             {btnName}
           </Button>
         </div>
       </div>
-      <div className={css.recipeImageSection} hidden>
-        {images.map((image, index) => (
-          <img
-            className={css.recipeImage}
-            key={index}
-            src={`${baseURL}/${image}`}
-            alt={`Recipe ${index + 1}`}
-          />
+      <ul className={css.recipeImageList}>
+        {user.recipes.map(image => (
+          <li key={image.id} className={css.imageItem}>
+            <div className={css.imageWrapper}>
+              <img
+                className={css.recipeImage}
+                key={image.id}
+                src={image.thumb}
+                alt="Recipe img"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    'https://placehold.co/100x100/BFBEBE/050505?text=Recipe';
+                }}
+                loading="lazy"
+              />
+            </div>
+          </li>
         ))}
-      </div>
-      <a
-        href=""
-        target="_blank"
-        rel="noopener noreferrer"
-        className={css.networkLink}
-      >
+      </ul>
+      <Button onClick={handleClickNavigate} className={css.secondaryBtn}>
         <MdArrowOutward />
-      </a>
-    </div>
+      </Button>
+    </li>
   );
 };
