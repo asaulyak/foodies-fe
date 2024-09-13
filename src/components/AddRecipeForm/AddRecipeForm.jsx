@@ -22,6 +22,9 @@ import { IngredientCard } from '../IngredientCard/IngredientCard';
 import { http } from '../../http/index';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
+import { toast } from 'react-toastify';
+import { selectUser } from '../../redux/user/user.selectors.js';
+
 const schema = yup.object().shape({
   image: yup
     .mixed()
@@ -68,6 +71,7 @@ export const AddRecipeForm = () => {
     formState: { errors },
     setValue,
     getValues,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -86,12 +90,15 @@ export const AddRecipeForm = () => {
   const [ingredientsQuantity, setIngredientsQuantity] = useState(null);
   const [errorsQuantity, setErrorsQuantity] = useState({});
   const [errorIngredientsSelect, setErrorIngredientsSelect] = useState(false);
+  const [textAreaDescription, setTextAreaDescription] = useState('');
+  const [textAreaPreparation, setTextAreaPreparation] = useState('');
 
   const dispatch = useDispatch();
   const categories = useSelector(categoriesList);
   const ingredients = useSelector(ingredientsList);
   const areas = useSelector(areasList);
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(fetchCategoriesList());
@@ -148,15 +155,25 @@ export const AddRecipeForm = () => {
         areaId: area.value,
         ingredients: ingredientsFormData,
       };
-      const addRecipeResponse = await http.post('/recipes', addRecipeData, {});
-      // TODO: navigate to UserPage
-      // navigate('/user');
+      const addRecipeResponse = await http.post('/recipes', addRecipeData);
+      toast.success('New recipe added successfully!');
+      navigate(`/user/${user.id}`);
     } catch (error) {
-      // TODO: show errors to user
-      console.log(error);
+      toast.error('Something went wrong, please try again.');
     }
   };
-
+  const handleReset = () => {
+    setTextAreaDescription('');
+    setTextAreaPreparation('');
+    setSelectedOptionIngredients(null);
+    setSelectedListIngredients([]);
+    setSelectedImage(null);
+    setIngredientsQuantity(null);
+    setErrorsQuantity({});
+    setErrorIngredientsSelect(false);
+    setTime(0);
+    reset();
+  };
   const handleIncrease = () => {
     setTime(prevTime => prevTime + 10);
   };
@@ -166,7 +183,10 @@ export const AddRecipeForm = () => {
       setTime(prevTime => prevTime - 10);
     }
   };
-
+  const timeDisplayClass = clsx(css.time_display, {
+    [css.time_positive]: time > 1,
+    [css.time_base]: time <= 1,
+  });
   const handleSelectIngredients = () => {
     !ingredientsQuantity
       ? setErrorsQuantity({
@@ -206,10 +226,14 @@ export const AddRecipeForm = () => {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected
-        ? '#bfbebe29'
-        : provided.backgroundColor,
+      backgroundColor: state.isSelected ? '#bfbebe29' : '#fff',
       color: state.isSelected ? '#1a1a1a' : provided.color,
+      '&:active': {
+        backgroundColor: '#c0c0c0',
+      },
+      '&:hover': {
+        backgroundColor: '#bfbebe29',
+      },
     }),
   };
 
@@ -237,9 +261,11 @@ export const AddRecipeForm = () => {
         <AddRecipeTextarea
           name={'description'}
           type={'text'}
+          value={textAreaDescription}
           id={'description'}
           placeholder={'Enter a description of the dish'}
           maxLength={200}
+          setText={setTextAreaDescription}
           register={register}
           error={errors.description}
         ></AddRecipeTextarea>
@@ -290,7 +316,7 @@ export const AddRecipeForm = () => {
                         ></Icon>
                       </button>
 
-                      <span className={css.time_display}>{time} min</span>
+                      <span className={timeDisplayClass}>{time} min</span>
                       <button
                         type="button"
                         className={css.circle_button}
@@ -344,7 +370,7 @@ export const AddRecipeForm = () => {
               <div className="field">
                 <p className="form-label">Ingredients</p>
                 <Select
-                  defaultValue={selectedOptionIngredients}
+                  value={selectedOptionIngredients}
                   onChange={setSelectedOptionIngredients}
                   options={ingredientsOptions}
                   placeholder="Add the ingredient"
@@ -404,11 +430,24 @@ export const AddRecipeForm = () => {
           maxLength={200}
           parentClassName={css.textarea_bottom}
           className={css.input_bottom}
+          value={textAreaPreparation}
+          setText={setTextAreaPreparation}
           register={register}
           error={errors.preparation}
         ></AddRecipeTextarea>
         <div className={css.wrap_btn}>
-          <button className={css.circle_button}>+</button>
+          <button
+            className={clsx(css.circle_button, css.clear_button)}
+            type="button"
+            onClick={handleReset}
+          >
+            <Icon
+              iconId={'trash'}
+              width={20}
+              stroke={'#050505'}
+              height={20}
+            ></Icon>
+          </button>
           <Button
             type="submit"
             variant={'color'}
