@@ -48,7 +48,7 @@ export const ProfileWidget = () => {
             {user.name}{' '}
             <Icon
               iconId="triangle-down"
-              className={css['user-icon']}
+              className={clsx(css['user-icon'], { [css.down]: profileVisible })}
               width={9}
               height={5}
             />
@@ -71,7 +71,7 @@ export const ProfileWidget = () => {
                 iconId="arrow-up"
                 width={9}
                 height={9}
-                className={css['signout-icon']}
+                className={clsx(css['signout-icon'])}
               />
             </span>
           </li>
