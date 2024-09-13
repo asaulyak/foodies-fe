@@ -60,8 +60,6 @@ export const CategoryList = () => {
     }
   }, [categories, md, lg]);
 
-  console.log(categoriesRender);
-
   const processCategories = categories => {
     return categories.map(category => (
       <CategoryCard key={category.id} category={category} />
