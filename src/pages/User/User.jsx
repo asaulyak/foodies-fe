@@ -24,6 +24,7 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
   }, [dispatch]);
@@ -50,7 +51,7 @@ export const User = () => {
           {isLoading ? (
             <Loader></Loader>
           ) : (
-            <TabsList isOwner={owner} id={id}></TabsList>
+            <TabsList isOwner={owner.id === id} id={id}></TabsList>
           )}
         </div>
       </div>
