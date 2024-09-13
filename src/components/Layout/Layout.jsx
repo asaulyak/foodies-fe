@@ -15,7 +15,6 @@ export const Layout = () => {
           <Outlet />
         </div>
       </Suspense>
-      <UserCard /> {/*Temp*/}
       <Footer />
       <Modal children={<SignModal />} />
     </>
