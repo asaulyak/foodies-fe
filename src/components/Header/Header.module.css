@@ -24,9 +24,23 @@
 
 .nav {
   display: none;
-  gap: 16px;
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
+}
+
+.side {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--black);
+  z-index: 100000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .light {
@@ -75,6 +89,7 @@
 
   .nav {
     display: flex;
+    gap: 16px;
   }
 
   .section {
