@@ -20,7 +20,7 @@ export const Header = () => {
       },
       {
         title: 'Add recipe',
-        link: '/create-recipe',
+        link: '/recipe/add',
       },
     ],
     []

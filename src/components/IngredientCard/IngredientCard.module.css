@@ -41,9 +41,17 @@
   margin-bottom: 4px;
 }
 .button {
+  background-color: transparent;
+  border: none;
   position: absolute;
   top: 0;
   right: 0;
+  padding: 0;
+}
+@media only screen and (max-width: 360px) {
+  .name {
+    margin-top: 10px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
