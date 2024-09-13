@@ -4,6 +4,8 @@
   gap: 32px;
 
   margin: 0 8px;
+
+  max-width: 343px;
 }
 
 .text {
@@ -19,6 +21,8 @@
     gap: 40px;
 
     margin: 0 16px;
+
+    max-width: 704px;
   }
 
   .text {
@@ -31,5 +35,7 @@
 @media only screen and (min-width: 1440px) {
   .categories {
     margin: 0 60px;
+
+    max-width: 1280px;
   }
 }
