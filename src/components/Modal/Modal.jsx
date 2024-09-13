@@ -5,7 +5,7 @@ import { FiX } from 'react-icons/fi';
 import { closeModal } from '../../redux/modal/modal.slice';
 import clsx from 'clsx';
 
-const Modal = memo(({ children }) => {
+export const Modal = memo(({ children }) => {
   const dispatch = useDispatch();
   const isOpen = useSelector(state => state.modal.isOpen);
   const [show, setShow] = useState(false);
@@ -64,5 +64,3 @@ const Modal = memo(({ children }) => {
     </div>
   );
 });
-
-export default Modal;

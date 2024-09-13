@@ -12,7 +12,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import styles from './SignForm.module.css';
 import { ToastContainer, Zoom } from 'react-toastify';
 
-const SignForm = ({ modalType }) => {
+export const SignForm = ({ modalType }) => {
   const [showPassword, setShowPassword] = useState(false);
   const validationSchema = useMemo(() => {
     return modalType === 'signup'
@@ -79,5 +79,3 @@ const SignForm = ({ modalType }) => {
     </>
   );
 };
-
-export default SignForm;
