@@ -5,7 +5,7 @@ import css from './Categories.module.css';
 import clsx from 'clsx';
 import { selectError, selectIsLoading } from '../../redux/user/user.selectors';
 import { useEffect } from 'react';
-import { fetchCategories } from '../../redux/categories/categories.actions';
+import { fetchCategoriesList } from '../../redux/categories/categories.actions';
 import { CategoryList } from './CategoryList/CategoryList';
 import { Loader } from '../Loader/Loader';
 
@@ -15,7 +15,7 @@ export const Categories = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchCategoriesList());
   }, [dispatch]);
 
   return (

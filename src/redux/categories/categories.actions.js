@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { http } from '../../http';
 
-export const fetchCategories = createAsyncThunk(
-  'fetchCategories',
+export const fetchCategoriesList = createAsyncThunk(
+  'categories/fetchCategoriesList',
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await http.get('/categories');

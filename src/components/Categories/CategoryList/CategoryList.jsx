@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { fetchCategories } from '../../../redux/categories/categories.selectors';
+import { categoriesList } from '../../../redux/categories/categories.selectors';
 import { CategoryCard } from '../CategoryCard/CategoryCard';
 import styles from './CategoryList.module.css';
 import React, { useEffect, useMemo, useState } from 'react';
-import { v4 as uuidv4, v4 } from 'uuid';
+import { v4 } from 'uuid';
 
 const useMediaQuery = query => {
   const mediaQuery = useMemo(() => window.matchMedia(query), [query]);
@@ -28,7 +28,7 @@ const useMediaQueries = () => {
 };
 
 export const CategoryList = () => {
-  const categories = useSelector(fetchCategories);
+  const categories = useSelector(categoriesList);
   const { md, lg } = useMediaQueries();
 
   const [categoriesRender, setCategoriesRender] = useState([]);
