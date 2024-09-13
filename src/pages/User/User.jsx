@@ -6,6 +6,7 @@ import { fetchDetailInfoUser } from '../../redux/user/user.actions';
 import {
   selectInfoUser,
   selectIsLoading,
+  selectIsLoadingUserInfo,
   selectUser,
 } from '../../redux/user/user.selectors';
 import { useParams } from 'react-router-dom';
@@ -22,6 +23,7 @@ export const User = () => {
   const currentUser = useSelector(selectInfoUser);
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
+  const userCardLoading = useSelector(selectIsLoadingUserInfo);
   useEffect(() => {
     dispatch(fetchDetailInfoUser(id));
   }, [dispatch]);
@@ -38,7 +40,11 @@ export const User = () => {
         </SubTitle>
         <div className={css.userWrapper}>
           <div className={css.userInfoButtonWrapper}>
-            <UserInfo {...currentUser}></UserInfo>
+            {userCardLoading ? (
+              <Loader></Loader>
+            ) : (
+              <UserInfo {...currentUser}></UserInfo>
+            )}
             <Button className={css.logOutBtn}>Log Out</Button>
           </div>
           {isLoading ? (
