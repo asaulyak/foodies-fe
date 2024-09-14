@@ -38,6 +38,11 @@
 }
 .file_info {
   z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .upload_file {
   display: flex;
