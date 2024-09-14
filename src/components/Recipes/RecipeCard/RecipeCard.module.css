@@ -1,7 +1,11 @@
 .card {
-  width: 100%;
+  width: 343px;
+
   @media screen and (min-width: 768px) {
-    width: calc((100% - 20px) / 2);
+    width: 342px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 290px;
   }
 }
 .cardContent {
