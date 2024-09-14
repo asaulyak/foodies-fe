@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Logo } from '../Logo/Logo.jsx';
 import { ProfileWidget } from '../ProfileWidget/ProfileWidget.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/user/user.selectors.js';
 import { Icon } from '../Icon/Icon.jsx';
+import { openModal } from '../../redux/modal/modal.slice.js';
+import { MODAL_TYPE } from '../../utils/constants.js';
 
 export const Header = () => {
   const location = useLocation();
@@ -14,6 +16,8 @@ export const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHome, setIsHome] = useState(true);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsHome(location.pathname === '/');
@@ -28,9 +32,17 @@ export const Header = () => {
       {
         title: 'Add recipe',
         link: '/recipe/add',
+        action: () => {
+          if (!currentUser) {
+            dispatch(openModal(MODAL_TYPE.signin));
+            return true;
+          }
+
+          return false;
+        },
       },
     ],
-    []
+    [currentUser, dispatch]
   );
 
   const shouldHideMenu = useMemo(
@@ -46,6 +58,12 @@ export const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleNavLinkClick = (event, navItem) => {
+    if (navItem.action?.()) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div className={css.section}>
       <div className={clsx(css.header, { [css.light]: !isHome })}>
@@ -58,6 +76,7 @@ export const Header = () => {
               <NavLink
                 key={item.link}
                 to={item.link}
+                onClick={event => handleNavLinkClick(event, item)}
                 className={({ isActive }) =>
                   isActive ? css.active : undefined
                 }

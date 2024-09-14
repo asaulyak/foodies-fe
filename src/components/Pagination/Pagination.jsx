@@ -6,6 +6,8 @@ import css from './Pagination.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
 const Pagination = ({ total, limit = 10 }) => {
+  if (!total) return null;
+
   const [maxVisibleButtons, setMaxVisibleButtons] = useState(3);
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(total / limit);

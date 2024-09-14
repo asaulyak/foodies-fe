@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import css from './UploadFile.module.css';
 import clsx from 'clsx';
+import { Icon } from '../Icon/Icon.jsx';
 export const UploadFile = ({
   selectedImage,
   setSelectedImage,
@@ -26,15 +26,7 @@ export const UploadFile = ({
       <>
         <label htmlFor="input-file" className={css.label_upload}>
           <div className={css.file_info}>
-            {!selectedImage && (
-              <img
-                src={`${import.meta.env.BASE_URL}/upload-file.png`}
-                alt="upload-file"
-                width="64"
-                height="64"
-                className={css.default_img}
-              />
-            )}
+            {!selectedImage && <Icon iconId="camera" width={64} height={64} />}
             <span className={css.upload_description}>
               {selectedImage ? `Upload another photo` : `Upload a photo`}
             </span>

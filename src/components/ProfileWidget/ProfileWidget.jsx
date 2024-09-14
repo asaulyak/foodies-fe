@@ -38,7 +38,7 @@ export const ProfileWidget = () => {
         <div className={css.user}>
           <div className={css.avatar}>
             <img
-              src={user.avatar || `${import.meta.env.BASE_URL}/avatar.png`}
+              src={user.avatar || `https://www.gravatar.com/avatar`}
               alt={user.name}
               width="50"
               height="50"
