@@ -80,12 +80,19 @@
 }
 
 .signout-icon {
-  fill: var(--white);
+  fill: currentColor;
 }
 
 .icon-text {
   display: flex;
   align-items: center;
+
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: var(--white);
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 .containerSign {
