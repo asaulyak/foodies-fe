@@ -1,8 +1,5 @@
 .wrapper {
   padding-top: 16px;
-  @media screen and (min-width: 768px) {
-    padding-top: 20px;
-  }
 }
 
 .title {
@@ -12,11 +9,6 @@
   line-height: 1.333;
   letter-spacing: -0.36px;
   text-transform: uppercase;
-  @media screen and (min-width: 768px) {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.4px;
-  }
 }
 
 .list {
@@ -27,15 +19,6 @@
   font-weight: 500;
   line-height: 1.429;
   letter-spacing: -0.28px;
-
-  @media screen and (min-width: 768px) {
-    margin-bottom: 40px;
-    color: var(--black-light);
-
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: -0.32px;
-  }
 }
 
 .item:not(:last-child) {
@@ -48,8 +31,26 @@
 
   color: var(--grey);
   line-height: 1.429;
+}
 
-  @media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    padding-top: 20px;
+  }
+  .title {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+  .list {
+    margin-bottom: 40px;
+    color: var(--black-light);
+
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.32px;
+  }
+  .btn {
     padding: 16px 32px;
     line-height: 1.5;
   }

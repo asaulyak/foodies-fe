@@ -10,12 +10,12 @@
   margin-top: 64px;
   margin-bottom: 32px;
 }
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .pathInfo {
     margin-bottom: 40px;
   }
 }
-@media screen and (min-width: 1440px) {
+@media only screen and (min-width: 1440px) {
   .pathInfo {
     margin-top: 80px;
   }

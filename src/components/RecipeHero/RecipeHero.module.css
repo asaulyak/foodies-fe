@@ -1,11 +1,5 @@
 .hero {
   padding: 32px 0 16px;
-  @media screen and (min-width: 768px) {
-    padding: 40px 0 20px;
-  }
-  @media screen and (min-width: 1440px) {
-    padding-top: 0;
-  }
 }
 
 .imgWrapper {
@@ -21,13 +15,26 @@
   object-fit: cover;
   text-align: center;
   overflow: hidden;
+}
 
-  @media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
+  .hero {
+    padding: 40px 0 20px;
+  }
+
+  .imgWrapper {
     align-items: end;
     max-height: 100%;
     height: 400px;
   }
-  @media screen and (min-width: 1440px) {
+}
+
+@media only screen and (min-width: 1440px) {
+  .hero {
+    padding-top: 0;
+  }
+
+  .imgWrapper {
     min-width: 551px;
   }
 }
