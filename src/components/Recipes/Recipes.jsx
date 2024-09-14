@@ -48,8 +48,6 @@ export const Recipes = () => {
     dispatch(fetchRecipes(filter));
   }, [dispatch, filter]);
 
-  console.log(category);
-
   return (
     <section className={styles.categorySection}>
       <div className={styles.categoryInfoWrap}>

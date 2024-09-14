@@ -9,34 +9,32 @@ export const CategoryCard = ({ category }) => {
   return (
     <>
       {name === 'ALL CATEGORIES' ? (
-        <li className={styles.all_categories_card}>
-          <Link
-            to={`categories/${id}`}
-            className={styles.all_categories_card_text_link}
-          >
-            {name}
-          </Link>
-        </li>
+        <Link
+          to={`categories/${id}`}
+          className={styles.all_categories_card_text_link}
+        >
+          <li className={styles.all_categories_card}>{name}</li>
+        </Link>
       ) : (
-        <li className={styles.category_card}>
-          <img
-            className={styles.card_image}
-            srcSet={`
+        <Link to={`categories/${id}`}>
+          <li className={styles.category_card}>
+            <img
+              className={styles.card_image}
+              srcSet={`
                   ${import.meta.env.BASE_URL}/categoryImages/${name}.jpg 1x,
                   ${import.meta.env.BASE_URL}/categoryImages/${name}@2x.jpg 2x
                 `}
-            src={`${import.meta.env.BASE_URL}/categoryImages/${name}.png`}
-            alt={name}
-          />
-          <div className={styles.card_textbox}>
-            <h3 className={styles.card_text}>{name}</h3>
-            <button className={styles.card_button}>
-              <Link to={`categories/${id}`}>
+              src={`${import.meta.env.BASE_URL}/categoryImages/${name}.png`}
+              alt={name}
+            />
+            <div className={styles.card_textbox}>
+              <h3 className={styles.card_text}>{name}</h3>
+              <button className={styles.card_button}>
                 <MdArrowOutward size={18} />
-              </Link>
-            </button>
-          </div>
-        </li>
+              </button>
+            </div>
+          </li>
+        </Link>
       )}
     </>
   );
