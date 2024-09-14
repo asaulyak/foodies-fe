@@ -82,7 +82,11 @@ export const ProfileWidget = () => {
 
   return (
     <>
-      <Button onClick={() => onOpenModal(MODAL_TYPE.signin)} variant="light">
+      <Button
+        className={clsx([css.signin_btn, css.header_btn])}
+        onClick={() => onOpenModal(MODAL_TYPE.signin)}
+        variant="light"
+      >
         SIGNIN
       </Button>
     </>

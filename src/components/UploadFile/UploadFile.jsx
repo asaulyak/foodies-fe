@@ -51,7 +51,11 @@ export const UploadFile = ({
           })}
         />
       </>
-      {errors && <span className="error-form">{errors.message}</span>}
+      {errors && (
+        <span className={clsx([css.file_error, 'error-form'])}>
+          {errors.message}
+        </span>
+      )}
     </div>
   );
 };

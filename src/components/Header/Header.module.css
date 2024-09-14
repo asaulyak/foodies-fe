@@ -1,7 +1,7 @@
 .section {
-  padding: 8px 8px 0;
+  padding: 24px 16px 0;
 
-  width: 359px;
+  width: 100%;
   margin: 0 auto;
 
   --theme-border: rgba(255, 255, 255, 0.2);
@@ -19,7 +19,7 @@
   letter-spacing: -0.02em;
   line-height: 18px;
 
-  padding: 16px;
+  padding: 3px 0;
 
   background-color: var(--theme-black);
   color: var(--theme-white);
@@ -102,7 +102,11 @@
   right: 24px;
   top: 24px;
 }
-
+@media only screen and (min-width: 375px) {
+  .section {
+    width: 375px;
+  }
+}
 @media only screen and (min-width: 768px) {
   .menu {
     display: none;
@@ -117,13 +121,13 @@
   }
 
   .section {
-    padding: 16px 16px 0;
+    padding: 36px 32px 0;
 
-    width: 736px;
+    width: 768px;
   }
 
   .header {
-    padding: 20px 32px;
+    padding: 0px;
   }
 }
 
@@ -133,12 +137,12 @@
   }
 
   .section {
-    padding: 20px 20px 0;
+    padding: 20px 0px 0;
 
     width: 1400px;
   }
 
   .header {
-    padding: 20px 60px;
+    padding: 00px 60px;
   }
 }
