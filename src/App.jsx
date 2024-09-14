@@ -19,14 +19,10 @@ function App() {
   const isAuthenticated = useSelector(selectUser);
   // Add lazy loaded pages here
 
-  // -- Attempting to add lazy loading to the components however this results in an error
-  // ---- Cannot convert object to primitive value
-  //
-  // const Categories = lazy(
-  //   () => import('./components/Categories/Categories.jsx')
-  // );
-  // const Recipes = lazy(() => import('./components/Recipes/Recipes.jsx'));
-
+  const Categories = lazy(
+    () => import('./components/Categories/Categories.jsx')
+  );
+  const Recipes = lazy(() => import('./components/Recipes/Recipes.jsx'));
   const RecipePage = lazy(() => import('./pages/RecipePage/RecipePage.jsx'));
   const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
 

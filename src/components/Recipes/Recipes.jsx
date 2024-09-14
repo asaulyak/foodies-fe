@@ -29,8 +29,6 @@ export const Recipes = () => {
 
   useEffect(() => {
     if (categories) {
-      // categories.find(({ id }) => id === categoryId);
-
       if (categoryId !== 'all' && categoryId) {
         setCategory(categories.find(({ id }) => id === categoryId));
 
@@ -45,10 +43,6 @@ export const Recipes = () => {
       }
     }
   }, [categoryId]);
-
-  if (categoryId !== 'all' && categoryId) {
-    filter.categoryId = categoryId;
-  }
 
   useEffect(() => {
     dispatch(fetchRecipes(filter));
@@ -77,3 +71,5 @@ export const Recipes = () => {
     </section>
   );
 };
+
+export default Recipes;
