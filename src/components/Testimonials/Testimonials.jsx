@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import css from './Testimonials.module.css';
-import quotesImage from './quotes.png';
+import { Icon } from '../Icon/Icon';
 
 export const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -27,10 +27,17 @@ export const Testimonials = () => {
 
   return (
     <section className={css.testimonials}>
-      <h2 className={css.subheading}>What people say</h2>
-      <h1 className={css.heading}>TESTIMONIALS</h1>
       <div className={css.testimonialContainer}>
-        <img src={quotesImage} alt="quotesImage" className={css.quotesImage} />
+        <div className={css.headingGeneral}>
+          <h2 className={css.subheading}>What people say</h2>
+          <h1 className={css.heading}>TESTIMONIALS</h1>
+        </div>
+        <Icon
+          iconId="quotes"
+          width={59}
+          height={48}
+          className={css.quotesImage}
+        ></Icon>
         <Swiper
           modules={[Pagination, Autoplay]}
           spaceBetween={50}
