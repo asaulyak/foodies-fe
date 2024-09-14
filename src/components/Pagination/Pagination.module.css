@@ -3,6 +3,8 @@
   display: flex;
   justify-content: center;
   gap: 6px;
+  
+  color: var(--black-light);
   user-select: none;
 }
 
@@ -18,19 +20,22 @@
   }
 }
 
-/* TODO: finish styles */
 .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   width: 40px;
   height: 40px;
-
+  
   border: 1px solid transparent;
   border-radius: 100%;
 
+  line-height: 1.43;
+  
   background-color: transparent;
+  color: inherit;
+  
   opacity: 1;
   cursor: pointer;
   transition:
@@ -43,7 +48,7 @@
 }
 
 .active {
-  border: 1px solid var(--black);
+  border-color: var(--black);
 }
 
 .disabled {
