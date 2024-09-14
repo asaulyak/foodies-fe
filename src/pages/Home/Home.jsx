@@ -9,6 +9,6 @@ export const Home = () => (
     <Hero />
     <Categories />
     <Recipes />
-    <Testimonials />
+    {/* <Testimonials /> */}
   </div>
 );
