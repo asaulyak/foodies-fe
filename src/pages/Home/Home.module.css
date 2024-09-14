@@ -1,3 +1,12 @@
+.home_container {
+  width: 359px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
 .homeBody {
   max-width: 100%;
   margin: 0 auto;
@@ -5,11 +14,20 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .home_container {
+    width: 736px;
+    gap: 100px;
+  }
+
   .homeBody {
     padding: 0 16px;
   }
 }
 @media only screen and (min-width: 1440px) {
+  .home_container {
+    width: 1400px;
+    gap: 120px;
+  }
   .homeBody {
     padding: 0 20px;
   }

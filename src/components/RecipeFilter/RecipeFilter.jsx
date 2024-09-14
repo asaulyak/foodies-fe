@@ -14,6 +14,7 @@ import {
   setSelectedIngredient as setSelectedIngredientAction,
   setSelectedArea as setSelectedAreaAction,
 } from '../../redux/recipes/recipes.slice';
+import Select from 'react-select';
 
 export const RecipeFilter = ({ handleSelectChange }) => {
   const dispatch = useDispatch();
@@ -22,41 +23,60 @@ export const RecipeFilter = ({ handleSelectChange }) => {
   // const isLoading = useSelector(selectIsLoading);
   // const error = useSelector(selectError);
 
+  const ingredientsOptions = ingredients?.map(ingredient => ({
+    value: ingredient.id,
+    label: ingredient.name,
+  }));
+
+  const areasOptions = areas?.map(area => ({
+    value: area.id,
+    label: area.name,
+  }));
+
   useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(fetchAreas());
   }, [dispatch]);
 
   const handleIngredientChange = e => {
-    dispatch(setSelectedIngredientAction(e.target.value));
+    dispatch(setSelectedIngredientAction(e.value));
   };
 
   const handleAreaChange = e => {
-    dispatch(setSelectedAreaAction(e.target.value));
+    dispatch(setSelectedAreaAction(e.value));
+  };
+
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#bfbebe29' : '#fff',
+      color: state.isSelected ? '#1a1a1a' : provided.color,
+      '&:active': {
+        backgroundColor: '#c0c0c0',
+      },
+      '&:hover': {
+        backgroundColor: '#bfbebe29',
+      },
+    }),
   };
 
   return (
     <div className={styles.recipesFilterWrap}>
-      <select
+      <Select
+        options={ingredientsOptions}
+        placeholder="Ingredients"
+        styles={customStyles}
         onChange={handleIngredientChange}
         className={styles.recipeFilterSelect}
-      >
-        <option value="">Ingredients</option>
-        {ingredients.map(ingredient => (
-          <option key={ingredient.id} value={ingredient.id}>
-            {ingredient.name}
-          </option>
-        ))}
-      </select>
+      />
 
-      <select onChange={handleAreaChange} className={styles.recipeFilterSelect}>
-        <option value="">Areas</option>
-        {areas.map(area => (
-          <option key={area.id} value={area.id}>
-            {area.name}
-          </option>
-        ))}
-      </select>
+      <Select
+        options={areasOptions}
+        placeholder="Areas"
+        styles={customStyles}
+        onChange={handleAreaChange}
+        className={styles.recipeFilterSelect}
+      />
     </div>
   );
 };

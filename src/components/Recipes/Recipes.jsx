@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
+import list_styles from './RecipeList/RecipeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectSelectedAreaId,
@@ -40,10 +41,12 @@ export const Recipes = () => {
         </SubTitle>
       </div>
 
-      <div className={styles.recipesListWrap}>
+      <div className={list_styles.recipesListWrap}>
         <RecipeFilter />
-        <RecipeList />
-        <Pagination total={16} limit={8} />
+        <div className={list_styles.recipesListContent}>
+          <RecipeList />
+          <Pagination total={16} limit={8} />
+        </div>
       </div>
     </section>
   );
