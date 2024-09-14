@@ -21,6 +21,7 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={css.networkLink}
+              aria-label="Visit our Facebook page"
             >
               <ImFacebook className={css.iconImg} />
             </a>
@@ -31,6 +32,7 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={css.networkLink}
+              aria-label="Visit our instagram page"
             >
               <AiFillInstagram className={css.iconImg} />
             </a>
@@ -41,6 +43,7 @@ export const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               className={css.networkLink}
+              aria-label="Visit our youtube page"
             >
               <ImYoutube className={css.iconImg} />
             </a>
