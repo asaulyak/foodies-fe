@@ -37,7 +37,7 @@ export const fetchRecipes = createAsyncThunk(
       if (data.areaId) {
         params.append('areaId', data.areaId);
       }
-      if (data.ingredientIds) {
+      if (data.ingredientIds[0] != '') {
         data.ingredientIds.forEach(id => params.append('ingredientIds[]', id));
       }
       if (data.limit) {
