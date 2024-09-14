@@ -9,6 +9,7 @@
   scrollbar-width: thin;
   padding-bottom: 14px;
   scrollbar-color: var(--black) var(--grey);
+  margin-bottom: 32px;
 }
 .tabsList {
   display: inline-flex;

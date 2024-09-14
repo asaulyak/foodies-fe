@@ -4,8 +4,8 @@
   border-radius: 30px;
   height: 318px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 @media only screen and (min-width: 1440px) {
   .form_file {
@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 25px;
 }
 .upload_description {
   letter-spacing: -0.02em;
@@ -55,6 +56,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.file_error {
+  position: relative;
+  top: 30px;
 }
 @media only screen and (min-width: 768px) {
   .upload_img_block,

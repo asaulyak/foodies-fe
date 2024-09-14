@@ -28,7 +28,7 @@
   letter-spacing: -0.02em;
   color: var(--grey);
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   flex-direction: column;
 }
