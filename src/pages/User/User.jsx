@@ -116,7 +116,14 @@ export const User = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <TabsList isOwner={owner?.id === id} id={id} />
+            <TabsList
+              totalRecipes={currentUser?.totalRecipes}
+              totalFollowers={currentUser?.totalFollowers}
+              totalFollowings={currentUser?.totalFollowings}
+              totalFavoritesRecipes={currentUser?.totalFavoritesRecipes}
+              isOwner={owner?.id === id}
+              id={id}
+            />
           )}
         </div>
       </div>

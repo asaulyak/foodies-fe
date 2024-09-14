@@ -4,15 +4,23 @@ import css from './TabsList.module.css';
 import Pagination from '../Pagination/Pagination';
 import { RecipePreview } from '../RecipePreview/RecipePreview';
 import { UserCard } from '../UserCard/UserCard';
-import { selectIsLoading } from '../../redux/user/user.selectors';
 import { Loader } from '../Loader/Loader';
+import { useSearchParams } from 'react-router-dom';
 
-export const TabsList = ({ isOwner, id }) => {
+export const TabsList = ({
+  isOwner,
+  id,
+  totalRecipes,
+  totalFollowers,
+  totalFollowings,
+  totalFavoritesRecipes,
+}) => {
   const [activeTab, setActiveTab] = useState('recipes');
-  const [page, setPage] = useState(1);
   const [listItems, setListItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams] = useSearchParams();
 
+  let page = searchParams.get('page') || 1;
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -23,7 +31,12 @@ export const TabsList = ({ isOwner, id }) => {
             const response = await http.get(`/users/${activeTab}/`);
             data = response.data;
           } else {
-            const response = await http.get(`/users/${activeTab}/${id}`);
+            const response = await http.get(`/users/${activeTab}/${id}`, {
+              params: {
+                limit: 9,
+                page: page,
+              },
+            });
             data = response.data;
           }
         } else {
@@ -53,7 +66,6 @@ export const TabsList = ({ isOwner, id }) => {
   const handleTabClick = tab => {
     setListItems([]);
     setActiveTab(tab);
-    setPage(1);
   };
   const tabsMap = {
     recipes: isOwner ? 'My Recipes' : 'Recipes',
@@ -96,36 +108,48 @@ export const TabsList = ({ isOwner, id }) => {
             recipes and add your favorites for easy access in the future.
           </p>
         ) : (
-          listItems?.map(item => {
-            if (activeTab === 'recipes' || activeTab === 'favorites') {
-              return (
-                <RecipePreview
-                  key={item.id}
-                  {...item}
-                  isOwner={isOwner}
-                  onDelete={handleDeleteRecipe}
-                  activeTab={activeTab}
-                ></RecipePreview>
-              );
-              //  RECIPES PREVIEW
-            } else {
-              return (
-                <UserCard
-                  key={item.id}
-                  {...item}
-                  isOwner={isOwner}
-                  onDelete={handleDeleteRecipe}
-                  activeTab={activeTab}
-                ></UserCard>
-              );
-              //  FOLLOWERS FOLLOWING PREVIEW
-            }
-          })
+          <ul>
+            {listItems?.map(item => {
+              if (activeTab === 'recipes' || activeTab === 'favorites') {
+                return (
+                  <RecipePreview
+                    key={item.id}
+                    {...item}
+                    isOwner={isOwner}
+                    onDelete={handleDeleteRecipe}
+                    activeTab={activeTab}
+                  ></RecipePreview>
+                );
+                //  RECIPES PREVIEW
+              } else {
+                return (
+                  <UserCard
+                    key={item.id}
+                    {...item}
+                    isOwner={isOwner}
+                    onDelete={handleDeleteRecipe}
+                    activeTab={activeTab}
+                  ></UserCard>
+                );
+                //  FOLLOWERS FOLLOWING PREVIEW
+              }
+            })}
+          </ul>
         )}
       </div>
-
       {/* PAGINATION */}
-      <Pagination></Pagination>
+      <Pagination
+        total={
+          activeTab === 'recipes'
+            ? totalRecipes
+            : activeTab === 'favorites'
+              ? totalFavoritesRecipes
+              : activeTab === 'followers'
+                ? totalFollowers
+                : totalFollowings
+        }
+        limit={9}
+      ></Pagination>
     </div>
   );
 };
