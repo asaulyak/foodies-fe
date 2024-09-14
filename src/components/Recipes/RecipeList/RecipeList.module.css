@@ -17,7 +17,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px 20px;
+  gap: 32px 20px;
   margin-bottom: 32px;
 }
 
@@ -42,4 +42,9 @@
   letter-spacing: -0.02em;
   color: var(--grey);
   margin-bottom: 32px;
+}
+@media screen and (min-width: 768px) {
+  .recipesListWrap {
+    gap: 40px 20px;
+  }
 }
