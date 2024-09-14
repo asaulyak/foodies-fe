@@ -1,12 +1,6 @@
 .section {
   padding: 0px 0 32px;
-}
-
-.errorWrapper {
-  text-align: center;
-}
-@media only screen and (min-width: 768px) {
-  .section {
+  @media screen and (min-width: 768px) {
     padding: 0px 0 50px;
   }
 }

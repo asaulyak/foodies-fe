@@ -15,11 +15,11 @@ export const UserInfo = ({
   totalFollowers,
   totalFollowings,
   totalRecipes,
+  isOwner,
 }) => {
   const dispatch = useDispatch();
   const handleFileChange = async e => {
     const file = e.target.files[0];
-
     if (!file) {
       return;
     }
@@ -63,21 +63,32 @@ export const UserInfo = ({
             Added recipes:
             <span className={css.userDetailsInfoNumber}>{totalRecipes}</span>
           </li>
-          <li className={css.userDetailInfo}>
-            Favorites:
-            <span className={css.userDetailsInfoNumber}>
-              {totalFavoritesRecipes}
-            </span>
-          </li>
+          {isOwner ? (
+            <li className={css.userDetailInfo}>
+              Favorites:
+              <span className={css.userDetailsInfoNumber}>
+                {totalFavoritesRecipes}
+              </span>
+            </li>
+          ) : (
+            <></>
+          )}
+
           <li className={css.userDetailInfo}>
             Followers:
             <span className={css.userDetailsInfoNumber}>{totalFollowers}</span>
           </li>
 
-          <li className={css.userDetailInfo}>
-            Following:
-            <span className={css.userDetailsInfoNumber}>{totalFollowings}</span>
-          </li>
+          {isOwner ? (
+            <li className={css.userDetailInfo}>
+              Following:
+              <span className={css.userDetailsInfoNumber}>
+                {totalFollowings}
+              </span>
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
     </>

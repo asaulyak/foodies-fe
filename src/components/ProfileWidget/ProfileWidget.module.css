@@ -87,7 +87,9 @@
   display: flex;
   align-items: center;
 }
-
+.signin_btn.header_btn {
+  height: 46px;
+}
 @media only screen and (min-width: 768px) {
   .avatar {
     width: 50px;
