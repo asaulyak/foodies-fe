@@ -3,6 +3,11 @@
 
   width: 359px;
   margin: 0 auto;
+
+  --theme-border: rgba(255, 255, 255, 0.2);
+  --theme-black-light: var(--black-light);
+  --theme-white: var(--white);
+  --theme-black: var(--black);
 }
 
 .header {
@@ -16,49 +21,36 @@
 
   padding: 16px;
 
-  background-color: var(--black);
-  color: var(--white);
-
-  --border: rgba(255, 255, 255, 0.2);
+  background-color: var(--theme-black);
+  color: var(--theme-white);
 }
 
 .nav {
-  display: none;
+  display: flex;
   font-size: 12px;
   font-weight: 700;
 }
 
-.side {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  background-color: var(--black);
-  z-index: 100000;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.nav.main {
+  display: none;
 }
 
 .light {
-  --border: var(--grey);
-  --black-light: #ffffff;
-  --white: #050505;
-  --black: #ffffff;
+  --theme-border: var(--grey);
+  --theme-black-light: var(--white);
+  --theme-white: var(--black-light);
+  --theme-black: var(--white);
 }
 
 .nav a {
   text-decoration: none;
-  color: var(--white);
+  color: var(--theme-white);
   padding: 14px;
   text-transform: uppercase;
 }
 
 .active {
-  border: 1px solid var(--border);
+  border: 1px solid var(--theme-border);
   border-radius: 30px;
 }
 
@@ -73,7 +65,7 @@
 }
 
 .menu-icon {
-  stroke: var(--white);
+  stroke: var(--theme-white);
 }
 
 .right {
@@ -82,14 +74,46 @@
   align-items: center;
 }
 
+.side-menu {
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--theme-black);
+  z-index: 100000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  transform: translateX(100%);
+
+  transition: transform 0.3s ease-in-out;
+}
+
+.side-menu.open {
+  display: flex;
+  transform: translateX(0);
+}
+
+.close {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+
 @media only screen and (min-width: 768px) {
   .menu {
     display: none;
   }
 
   .nav {
-    display: flex;
     gap: 16px;
+  }
+
+  .nav.main {
+    display: flex;
   }
 
   .section {
