@@ -7,7 +7,6 @@
   font-weight: 700;
   letter-spacing: -0.24px;
   text-transform: uppercase;
-  /* margin-top: 64px; */
   margin-bottom: 32px;
 }
 @media only screen and (min-width: 768px) {
@@ -24,15 +23,16 @@
   font-weight: inherit;
   color: var(--grey);
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover,
-  &:focus {
-    color: var(--black);
-  }
-  &:focus {
-    outline-offset: 4px;
-  }
 }
+
+.link:hover,
+.link:focus {
+  color: var(--black);
+}
+.link:focus {
+  outline-offset: 4px;
+}
+
 .delimiter {
   color: var(--grey);
 }

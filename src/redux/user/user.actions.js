@@ -58,3 +58,26 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const addRecipeToFavorites = createAsyncThunk(
+  'user/addToFavorites',
+  async (recipeId, { rejectWithValue }) => {
+    try {
+      const res = await http.post(`/recipes/${recipeId}/favorites`);
+      return res.data.recipeId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeRecipeFromFavorites = createAsyncThunk(
+  'user/removeFromFavorites',
+  async (recipeId, { rejectWithValue }) => {
+    try {
+      await http.delete(`/recipes/${recipeId}/favorites`);
+      return recipeId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

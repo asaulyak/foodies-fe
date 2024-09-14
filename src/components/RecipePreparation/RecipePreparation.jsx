@@ -2,29 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from '../Button/Button.jsx';
-import { selectUser } from '../../redux/user/user.selectors.js';
+import {
+  selectFavoriteRecipes,
+  selectUser,
+} from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
 import { MODAL_TYPE } from '../../utils/constants.js';
 import { openModal } from '../../redux/modal/modal.slice.js';
 import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../redux/user/user.slice.js';
-import { http } from '../../http/index.js';
+  addRecipeToFavorites,
+  removeRecipeFromFavorites,
+} from '../../redux/user/user.actions.js';
 
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
 export const RecipePreparation = ({ preparation, recipeId }) => {
-  // const [loading, setLoading] = useState(false);
   const isLoggedUser = useSelector(selectUser);
+  const favoritesRecipes = useSelector(selectFavoriteRecipes);
 
   const dispatch = useDispatch();
 
-  let isFavoriteRecipe = false;
-
-  if (isLoggedUser) {
-    isFavoriteRecipe = isLoggedUser.favoriteRecipes.includes(recipeId);
-  }
+  const isFavoriteRecipe = favoritesRecipes.includes(recipeId);
 
   const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
 
@@ -34,29 +32,12 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     }
 
     if (!isFavoriteRecipe) {
-      // setLoading(true);
-      e.target.disabled = true;
-      await http
-        .post(`/recipes/${recipeId}/favorites`)
-        .then(data => {
-          e.target.textContent = initBtnName[0];
-          dispatch(addToFavorites(recipeId));
-        })
-        .catch()
-        .finally(data => {
-          e.target.disabled = false;
-          // setLoading(false);
-        });
-      //TODO: add loader to btn
-
-      return;
-    }
-
-    await http.delete(`/recipes/${recipeId}/favorites`).then(data => {
+      e.target.textContent = initBtnName[0];
+      dispatch(addRecipeToFavorites(recipeId));
+    } else {
       e.target.textContent = initBtnName[1];
-      dispatch(removeFromFavorites(recipeId));
-    });
-    //TODO: add loader to btn
+      dispatch(removeRecipeFromFavorites(recipeId));
+    }
   };
 
   return (

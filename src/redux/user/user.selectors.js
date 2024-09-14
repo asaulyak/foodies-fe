@@ -9,3 +9,5 @@ export const selectIsLoading = state => state.user.isLoading;
 export const selectIsLoadingUserInfo = state => state.userInfo.isLoading;
 
 export const selectError = state => state.user.error;
+
+export const selectFavoriteRecipes = state => state.user.userFavoriteRecipes;

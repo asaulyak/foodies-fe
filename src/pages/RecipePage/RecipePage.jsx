@@ -5,15 +5,21 @@ import { PathInfo } from '../../components/PathInfo/PathInfo.jsx';
 
 import css from './RecipePage.module.css';
 import { useNavigate } from 'react-router-dom';
+import { selectError } from '../../redux/user/user.selectors.js';
+import { useSelector } from 'react-redux';
 
 const RecipePage = () => {
-  const [breadCrumbs, setBreadCrumbs] = useState('');
-  const [errorText, setErrorText] = useState(true);
-  const [seconds, setSeconds] = useState(10);
-
+  const errorMessage = useSelector(selectError);
   const navigate = useNavigate();
 
+  const [breadCrumbs, setBreadCrumbs] = useState('');
+  const [seconds, setSeconds] = useState(10);
+  const [errorText, setErrorText] = useState(errorMessage);
+
   useEffect(() => {
+    if (!errorText) {
+      return;
+    }
     const timer = setInterval(() => {
       if (seconds <= 0) {
         navigate('/');
@@ -21,8 +27,12 @@ const RecipePage = () => {
       setSeconds(seconds - 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [navigate, seconds]);
-  console.log('red');
+  }, [navigate, seconds, errorText]);
+
+  // -----------------------------------------------------------------
+  console.log('rerender');
+  // -----------------------------------------------------------------
+
   return (
     <section className={css.section}>
       <div className="container">
