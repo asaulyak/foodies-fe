@@ -46,13 +46,7 @@ export const Testimonials = () => {
           pagination={{
             clickable: true,
           }}
-          style={{
-            '--swiper-pagination-color': 'var(--black)',
-            '--swiper-pagination-bullet-inactive-color': 'var(--grey)',
-            '--swiper-pagination-bullet-inactive-opacity': '1',
-            '--swiper-pagination-bullet-size': '16px',
-            '--swiper-pagination-bullet-horizontal-gap': '6px',
-          }}
+          className={css.swiper_custom_styles} 
         >
           {testimonials.map(testimonial => (
             <SwiperSlide key={testimonial.id}>
