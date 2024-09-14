@@ -1,4 +1,4 @@
-.recipesListWrap {
+.recipesSectionWrap {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -8,10 +8,17 @@
   @media screen and (min-width: 768px) {
     gap: 40px;
   }
+
   @media screen and (min-width: 1440px) {
-    flex-wrap: nowrap;
-    flex-direction: row;
   }
+}
+
+.recipesListWrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+  margin-bottom: 32px;
 }
 
 .recipesListContent {

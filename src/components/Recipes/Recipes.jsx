@@ -47,7 +47,7 @@ export const Recipes = () => {
         </SubTitle>
       </div>
 
-      <div className={list_styles.recipesListWrap}>
+      <div className={list_styles.recipesSectionWrap}>
         <RecipeFilter />
         <div className={list_styles.recipesListContent}>
           <RecipeList />
