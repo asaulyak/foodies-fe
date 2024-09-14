@@ -30,33 +30,57 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+
+  // Управляем состоянием подписки
   const [isSubscribed, setIsSubscribed] = useState(false);
+
   const onOpenModal = type => {
     dispatch(openModal(type));
   };
+
   const handleSubscribe = async () => {
-    await http.post(`/users/subscribe/`, { subscribedTo: id });
-    setIsSubscribed(true);
+    try {
+      await http.post(`/users/subscribe/`, { subscribedTo: id });
+      setIsSubscribed(true); // Устанавливаем состояние в true после успешной подписки
+    } catch (error) {
+      console.error('Ошибка при подписке:', error);
+    }
   };
+
   const handleUnsubscribe = async () => {
-    await http.delete(`/users/unsubscribe/${id}`);
-    setIsSubscribed(false);
+    try {
+      await http.delete(`/users/unsubscribe/${id}`);
+      setIsSubscribed(false); // Устанавливаем состояние в false после отмены подписки
+    } catch (error) {
+      console.error('Ошибка при отписке:', error);
+    }
   };
+
   const handleLogout = () => {
     onOpenModal(MODAL_TYPE.logout);
   };
+
   useEffect(() => {
-    dispatch(fetchDetailInfoUser(id));
-    dispatch(fetchCurrentUser());
+    if (id) {
+      dispatch(fetchDetailInfoUser(id));
+    }
+
+    if (!owner) {
+      dispatch(fetchCurrentUser());
+    }
+
     const fetchSubscribeUser = async () => {
-      const { data } = await http.get('/users/following');
-
-      const isUserSubscribed = data.data.some(user => user.id === id);
-
-      setIsSubscribed(isUserSubscribed);
+      try {
+        const { data } = await http.get('/users/following');
+        const isUserSubscribed = data.data.some(user => user.id === id);
+        setIsSubscribed(isUserSubscribed); // Обновляем состояние подписки
+      } catch (error) {
+        console.error('Ошибка при получении подписок:', error);
+      }
     };
+
     fetchSubscribeUser();
-  }, [dispatch, id]);
+  }, [dispatch, id, owner]);
 
   return (
     <>
@@ -70,30 +94,30 @@ export const User = () => {
         <div className={css.userWrapper}>
           <div className={css.userInfoButtonWrapper}>
             {userCardLoading || isLoading ? (
-              <Loader></Loader>
+              <Loader />
             ) : (
-              <UserInfo {...currentUser} isOwner={owner?.id === id}></UserInfo>
+              <UserInfo {...currentUser} isOwner={owner?.id === id} />
             )}
             {isLoading ? (
-              <Loader></Loader>
+              <Loader />
             ) : owner?.id === id ? (
               <Button onClick={handleLogout} className={css.logOutBtn}>
                 Log Out
               </Button>
-            ) : !isSubscribed ? (
-              <Button onClick={handleSubscribe} className={css.logOutBtn}>
-                Follow
-              </Button>
-            ) : (
+            ) : isSubscribed ? (
               <Button onClick={handleUnsubscribe} className={css.logOutBtn}>
                 Following
+              </Button>
+            ) : (
+              <Button onClick={handleSubscribe} className={css.logOutBtn}>
+                Follow
               </Button>
             )}
           </div>
           {isLoading ? (
-            <Loader></Loader>
+            <Loader />
           ) : (
-            <TabsList isOwner={owner?.id === id} id={id}></TabsList>
+            <TabsList isOwner={owner?.id === id} id={id} />
           )}
         </div>
       </div>

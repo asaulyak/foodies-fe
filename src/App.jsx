@@ -26,7 +26,15 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
 
-            <Route path="/user/:id" element={<User />} />
+            <Route
+              path="/user/:id"
+              element={
+                <PrivateRoute
+                  element={<User />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
             <Route path="/recipe/:id" element={<RecipePage />} />
             <Route
               path="/recipe/add"
