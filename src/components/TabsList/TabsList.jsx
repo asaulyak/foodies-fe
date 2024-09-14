@@ -3,45 +3,55 @@ import { http } from '../../http';
 import css from './TabsList.module.css';
 import Pagination from '../Pagination/Pagination';
 import { RecipePreview } from '../RecipePreview/RecipePreview';
+import { UserCard } from '../UserCard/UserCard';
+import { selectIsLoading } from '../../redux/user/user.selectors';
+import { Loader } from '../Loader/Loader';
 
 export const TabsList = ({ isOwner, id }) => {
   const [activeTab, setActiveTab] = useState('recipes');
   const [page, setPage] = useState(1);
   const [listItems, setListItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isOwner) {
-        if (activeTab === 'following' || activeTab === 'favorites') {
-          const { data } = await http.get(`/users/${activeTab}/`);
-          if (data) {
-            setListItems(data.data);
+      setIsLoading(true);
+      try {
+        let data;
+        if (isOwner) {
+          if (activeTab === 'following' || activeTab === 'favorites') {
+            const response = await http.get(`/users/${activeTab}/`);
+            data = response.data;
           } else {
-            setListItems([]);
+            const response = await http.get(`/users/${activeTab}/${id}`);
+            data = response.data;
           }
         } else {
-          const { data } = await http.get(`/users/${activeTab}/${id}`);
-
-          if (data) {
-            setListItems(data.data);
-          } else {
-            setListItems([]);
-          }
+          const response = await http.get(`/users/${activeTab}/${id}`);
+          data = response.data;
         }
-      } else {
-        const { data } = await http.get(`/users/${activeTab}/${id}`);
 
         if (data) {
           setListItems(data.data);
         } else {
           setListItems([]);
         }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setListItems([]);
+      } finally {
+        setIsLoading(false);
       }
     };
+
     fetchData();
-  }, [activeTab, page]);
+  }, [activeTab, page, id, isOwner]);
+  useEffect(() => {
+    setActiveTab('recipes');
+  }, [id]);
 
   const handleTabClick = tab => {
+    setListItems([]);
     setActiveTab(tab);
     setPage(1);
   };
@@ -78,7 +88,9 @@ export const TabsList = ({ isOwner, id }) => {
       </div>
 
       <div className="list-items">
-        {listItems?.length === 0 ? (
+        {isLoading ? (
+          <Loader />
+        ) : listItems?.length === 0 ? (
           <p>
             Nothing has been added to your recipes list yet. Please browse our
             recipes and add your favorites for easy access in the future.
@@ -97,7 +109,15 @@ export const TabsList = ({ isOwner, id }) => {
               );
               //  RECIPES PREVIEW
             } else {
-              return;
+              return (
+                <UserCard
+                  key={item.id}
+                  {...item}
+                  isOwner={isOwner}
+                  onDelete={handleDeleteRecipe}
+                  activeTab={activeTab}
+                ></UserCard>
+              );
               //  FOLLOWERS FOLLOWING PREVIEW
             }
           })
