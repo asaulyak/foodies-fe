@@ -38,7 +38,7 @@ export const ProfileWidget = () => {
         <div className={css.user}>
           <div className={css.avatar}>
             <img
-              src={user.avatar || `${import.meta.env.BASE_URL}/avatar.png`}
+              src={user.avatar || `https://www.gravatar.com/avatar`}
               alt={user.name}
               width="50"
               height="50"
@@ -81,10 +81,19 @@ export const ProfileWidget = () => {
   }
 
   return (
-    <>
-      <Button onClick={() => onOpenModal(MODAL_TYPE.signin)} variant="light">
+    <div className={css.containerSign}>
+      <Button
+        className={clsx([css.button, css.buttonSignin])}
+        onClick={() => onOpenModal(MODAL_TYPE.signin)}
+      >
         SIGNIN
       </Button>
-    </>
+      <Button
+        className={clsx([css.button, css.buttonSignup])}
+        onClick={() => onOpenModal(MODAL_TYPE.signup)}
+      >
+        SIGNUP
+      </Button>
+    </div>
   );
 };

@@ -9,6 +9,10 @@
   letter-spacing: -0.02em;
   color: var(--grey);
   transition: border 250ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
 }
 
 .input_form:hover {

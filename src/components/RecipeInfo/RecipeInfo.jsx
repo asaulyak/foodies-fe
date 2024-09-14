@@ -1,29 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
 import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
 import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 import { http } from '../../http/index.js';
+import { Loader } from '../Loader/Loader.jsx';
 
 export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const [recipe, setRecipe] = useState(null);
+  const [errorText, setErrorText] = useState(null);
+  const [loader, setLoader] = useState(true);
   const { id: recipeId } = useParams();
 
-  useEffect(() => {
-    async function fetchReceipt(id) {
-      const response = await http.get(`/recipes/${id}`);
-      return response.data;
-    }
+  const fetchFunc = useCallback(async id => await http.get(`/recipes/${id}`));
 
-    fetchReceipt(recipeId).then(data => {
-      setRecipe(data);
-      changeBreadCrumbs(data.title);
-    });
-    // .catch(e => console.log(e.message));//TODO: in development
-  }, [recipeId, changeBreadCrumbs]);
+  useEffect(() => {
+    if (recipe) {
+      return;
+    }
+    fetchFunc(recipeId)
+      .then(({ data }) => {
+        setRecipe(data);
+        changeBreadCrumbs(data.title);
+      })
+      .catch(e => setErrorText(e.message))
+      .finally(setLoader(false));
+  }, [recipeId, changeBreadCrumbs, fetchFunc, recipe]);
+
   return (
     <>
-      {!!recipe && (
+      {loader && <Loader />}
+      {errorText && (
+        <p>Something went wrong. Please try again after a few seconds.</p>
+      )}
+      {!!recipe && !errorText && !loader && (
         <RecipeMainInfo
           id={recipe.id}
           img={recipe.thumb}

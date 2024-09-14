@@ -13,6 +13,7 @@ const RecipePage = () => {
       <div className="container">
         <h1 className="visually-hidden">Recipe Page</h1>
         <PathInfo currentPageName={breadCrumbs} />
+
         <RecipeInfo changeBreadCrumbs={setBreadCrumbs} />
         <PopularRecipes />
       </div>

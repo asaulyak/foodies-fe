@@ -1,25 +1,10 @@
 .wrapper {
-  padding-bottom: 32px;
-  @media screen and (min-width: 768px) {
-    padding-bottom: 50px;
-  }
-  @media screen and (min-width: 1440px) {
-    display: flex;
-    gap: 80px;
-    padding: 40px 0 60px;
-  }
+  margin-bottom: 64px;
 }
 
 .infoSection {
-  padding: 16px 0;
+  margin-bottom: 34px;
   color: var(--grey);
-  @media screen and (min-width: 768px) {
-    padding: 20px 0;
-    color: var(--black-light);
-  }
-  @media screen and (min-width: 1440px) {
-    padding-top: 0;
-  }
 }
 
 .title {
@@ -32,12 +17,6 @@
 
   color: var(--black);
   text-transform: uppercase;
-
-  @media screen and (min-width: 768px) {
-    font-size: 24px;
-    line-height: 1.167;
-    letter-spacing: -0.48px;
-  }
 }
 .thumb {
   display: flex;
@@ -52,6 +31,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px;
+  max-height: 38px;
   border-radius: 20px;
   border: 1px solid var(--grey);
   color: var(--grey);
@@ -67,12 +47,6 @@
   font-weight: 500;
   line-height: 1.429;
   letter-spacing: -0.28px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
-    letter-spacing: -0.32px;
-    color: var(--black-light);
-  }
 }
 
 .btn {
@@ -85,14 +59,14 @@
   background-color: transparent;
   height: 34px;
   text-transform: none;
-  @media screen and (min-width: 768px) {
-    height: 50px;
-  }
-  &:hover .accentText,
-  &:focus .accentText,
-  &:focus-visible .accentText {
-    color: var(--grey);
-  }
+}
+
+.btn:hover,
+.btn:focus,
+.btn:focus-visible {
+  box-shadow:
+    -2.179px -2.179px 6.537px 0px #fff,
+    2.179px 2.179px 6.537px 0px rgba(62, 62, 64, 0.4);
 }
 
 .btnWrapper {
@@ -104,36 +78,74 @@
   border-radius: 50%;
   background-color: var(--grey);
   overflow: hidden;
-
-  @media screen and (min-width: 768px) {
-    width: 50px;
-    height: 50px;
-  }
 }
 .btnThumb {
   color: var(--grey);
   text-align: start;
 }
 .text {
+  display: block;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.24px;
-  @media screen and (min-width: 768px) {
-    font-size: 14px;
-    line-height: 1.429;
-    letter-spacing: -0.28px;
-  }
 }
 .accentText {
+  display: block;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.429;
   letter-spacing: -0.28px;
+}
 
-  @media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-bottom: 100px;
+  }
+  .infoSection {
+    margin-bottom: 40px;
+    color: var(--black-light);
+  }
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 1.167;
+    letter-spacing: -0.48px;
+  }
+
+  .description {
+    font-size: 16px;
+    letter-spacing: -0.32px;
+    color: var(--black-light);
+  }
+
+  .btn {
+    height: 50px;
+  }
+
+  .btnWrapper {
+    width: 50px;
+    height: 50px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: -0.28px;
+  }
+
+  .accentText {
     color: var(--black-light);
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: -0.32px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 120px;
   }
 }
