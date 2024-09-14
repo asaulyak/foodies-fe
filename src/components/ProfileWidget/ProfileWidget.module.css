@@ -97,6 +97,7 @@
   background-color: var(--black-light);
   color: var(--white);
   border-color: var(--grey);
+   height: 46px;
 }
 
 .button.buttonSignup:hover {
@@ -108,6 +109,7 @@
 .button.buttonSignin {
   border-color: var(--white);
   margin-right: -24px;
+  height: 46px;
 }
 
 @media only screen and (min-width: 768px) {
