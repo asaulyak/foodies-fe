@@ -19,7 +19,7 @@
 
 @media only screen and (min-width: 768px) {
   .hero {
-    padding: 40px 0 20px;
+    margin-bottom: 40px;
   }
 
   .imgWrapper {
@@ -30,10 +30,6 @@
 }
 
 @media only screen and (min-width: 1440px) {
-  .hero {
-    padding-top: 0;
-  }
-
   .imgWrapper {
     min-width: 551px;
   }

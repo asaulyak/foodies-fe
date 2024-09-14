@@ -29,10 +29,6 @@ const RecipePage = () => {
     return () => clearInterval(timer);
   }, [navigate, seconds, errorText]);
 
-  // -----------------------------------------------------------------
-  console.log('rerender');
-  // -----------------------------------------------------------------
-
   return (
     <section className={css.section}>
       <div className="container">

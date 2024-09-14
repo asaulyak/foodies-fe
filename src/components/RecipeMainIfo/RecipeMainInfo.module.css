@@ -1,10 +1,10 @@
 .wrapper {
-  margin-bottom: 32px;
+  margin-bottom: 64px;
 }
 
 .infoSection {
-  color: var(--grey);
   margin-bottom: 34px;
+  color: var(--grey);
 }
 
 .title {
@@ -61,10 +61,12 @@
   text-transform: none;
 }
 
-.btn:hover .accentText,
-.btn:focus .accentText,
-.btn:focus-visible .accentText {
-  color: var(--grey);
+.btn:hover,
+.btn:focus,
+.btn:focus-visible {
+  box-shadow:
+    -2.179px -2.179px 6.537px 0px #fff,
+    2.179px 2.179px 6.537px 0px rgba(62, 62, 64, 0.4);
 }
 
 .btnWrapper {
@@ -82,11 +84,13 @@
   text-align: start;
 }
 .text {
+  display: block;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.24px;
 }
 .accentText {
+  display: block;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.429;
@@ -95,14 +99,15 @@
 
 @media only screen and (min-width: 768px) {
   .wrapper {
-    padding-bottom: 50px;
+    margin-bottom: 100px;
   }
   .infoSection {
-    padding: 20px 0;
+    margin-bottom: 40px;
     color: var(--black-light);
   }
 
   .title {
+    margin-bottom: 20px;
     font-size: 24px;
     line-height: 1.167;
     letter-spacing: -0.48px;
@@ -137,13 +142,10 @@
   }
 }
 
-@media only screen and (min-width: 1440x) {
+@media only screen and (min-width: 1440px) {
   .wrapper {
     display: flex;
     gap: 80px;
-    padding: 40px 0 60px;
-  }
-  .infoSection {
-    padding-top: 0;
+    margin-bottom: 120px;
   }
 }

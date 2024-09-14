@@ -41,23 +41,26 @@ export const RecipeMainInfo = ({
             <p className={css.info}>{time} min</p>
           </div>
           <p className={css.description}>{description}</p>
-          <Button type="button" className={css.btn} onClick={handleClick}>
-            <div className={css.btnWrapper}>
-              <img
-                src={!authorAvatar ? '' : authorAvatar}
-                alt="User Avatar"
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src =
-                    'https://placehold.co/50x50/BFBEBE/050505?text=Image';
-                }}
-              />
-            </div>
-            <div className={css.btnThumb}>
-              <p className={css.text}>Created by:</p>
-              <p className={css.accentText}>{authorName}</p>
-            </div>
-          </Button>
+
+          <button type="button" className={css.btn} onClick={handleClick}>
+            <>
+              <span className={css.btnWrapper}>
+                <img
+                  src={!authorAvatar ? '' : authorAvatar}
+                  alt="User Avatar"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src =
+                      'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+                  }}
+                />
+              </span>
+              <span className={css.btnThumb}>
+                <span className={css.text}>Created by:</span>
+                <span className={css.accentText}>{authorName}</span>
+              </span>
+            </>
+          </button>
         </section>
         {children}
       </div>

@@ -1,6 +1,3 @@
-.wrapper {
-}
-
 .title {
   margin-bottom: 20px;
   font-size: 18px;
@@ -32,18 +29,18 @@
   color: var(--grey);
   line-height: 1.429;
 }
+.btn:disabled {
+  filter: blur(0px);
+}
 
 .spinner {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(calc(-50% - 20px), calc(-50% + 4px));
+  transform: translate(calc(-50% - 30px), calc(-50% + 4px));
 }
 
 @media only screen and (min-width: 768px) {
-  .wrapper {
-    padding-top: 20px;
-  }
   .title {
     font-size: 20px;
     line-height: 1.2;

@@ -4,6 +4,7 @@ import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from '../Button/Button.jsx';
 import {
   selectFavoriteRecipes,
+  selectIsLoading,
   selectUser,
 } from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
@@ -17,19 +18,25 @@ import {
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
 export const RecipePreparation = ({ preparation, recipeId }) => {
+  const dispatch = useDispatch();
   const isLoggedUser = useSelector(selectUser);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
-
-  const dispatch = useDispatch();
+  const loading = useSelector(selectIsLoading);
+  const [showSpinner, setShowSpinner] = useState(loading);
 
   const isFavoriteRecipe = favoritesRecipes.includes(recipeId);
-
   const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
 
   const handleClick = async e => {
+    e.target.disabled = true;
+    setShowSpinner(true);
     if (!isLoggedUser) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
+    setTimeout(() => {
+      e.target.disabled = false;
+      setShowSpinner(false);
+    }, 800);
 
     if (!isFavoriteRecipe) {
       e.target.textContent = initBtnName[0];
@@ -52,7 +59,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
       </ul>
       <Button onClick={handleClick} className={css.btn}>
         {btnTextContent}
-        {/* {loading && (
+        {showSpinner && (
           <span className={css.spinner}>
             <InfinitySpin
               visible={loading}
@@ -61,7 +68,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
               ariaLabel="infinity-spin-loading"
             />
           </span>
-        )} */}
+        )}
       </Button>
     </section>
   );
