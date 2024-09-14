@@ -3,13 +3,12 @@ import { FaRegHeart } from 'react-icons/fa6';
 import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import styles from './RecipeCard.module.css';
-import avatar from '/public/avatar.png';
 
 export const RecipeCard = ({ recipe }) => {
   const { id, title, user, description, thumb } = recipe;
 
   return (
-    <li className={clsx([styles.recipeCard, styles.card])}>
+    <li className={clsx([styles.card])}>
       <Link to={`/recipe/${id}`}>
         <img
           src={thumb}
@@ -27,10 +26,10 @@ export const RecipeCard = ({ recipe }) => {
         <div className={styles.avatarIconsRow}>
           <div className={styles.userWrapper}>
             <span>
-              <Link to={`/user/${user?.id}`}>
+              <Link to={`/user/${user.id}`}>
                 <img
-                  src={user?.avatar || avatar}
-                  alt={`${user?.name || 'User'} avatar`}
+                  src={user.avatar || `https://www.gravatar.com/avatar`}
+                  alt={`${user.name} avatar`}
                   className={styles.avatar}
                 />
               </Link>
