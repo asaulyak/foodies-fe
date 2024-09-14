@@ -80,14 +80,31 @@
   background: var(--cardTagBackground);
 }
 
+a {
+  border: 0;
+  padding: 0;
+}
+
+svg {
+  border: 0;
+  padding: 0;
+}
+
 .card_button {
   display: flex;
-  padding: 13px;
-  align-items: flex-start;
-  gap: 10px;
-
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   border-radius: 30px;
   border: 1px solid var(--cardTagBackground);
+  background-color: transparent;
+  color: var(--white);
+
+  @media screen and (min-width: 768px) {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .card_button:hover {

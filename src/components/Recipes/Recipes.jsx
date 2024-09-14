@@ -8,21 +8,43 @@ import {
   selectSelectedAreaId,
   selectSelectedIngredientId,
 } from '../../redux/recipes/recipes.selectors.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchRecipes } from '../../redux/recipes/recipes.actions.js';
 import { MainTitle } from '../MainTitle/MainTitle.jsx';
 import { RecipeFilter } from '../RecipeFilter/RecipeFilter.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
 import { SubTitle } from '../SubTitle/SubTitle.jsx';
+import { categoriesList } from '../../redux/categories/categories.selectors.js';
 
 export const Recipes = () => {
   const { id: categoryId } = useParams();
+  const categories = useSelector(categoriesList);
+  const [category, setCategory] = useState();
 
   const dispatch = useDispatch();
   const filter = {
     areaId: useSelector(selectSelectedAreaId),
     ingredientIds: [useSelector(selectSelectedIngredientId)],
   };
+
+  useEffect(() => {
+    if (categories) {
+      // categories.find(({ id }) => id === categoryId);
+
+      if (categoryId !== 'all' && categoryId) {
+        setCategory(categories.find(({ id }) => id === categoryId));
+
+        filter.categoryId = categoryId;
+      } else {
+        setCategory({
+          id: 'all',
+          name: 'ALL CATEGORIES',
+          description:
+            'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
+        });
+      }
+    }
+  }, [categoryId]);
 
   if (categoryId !== 'all' && categoryId) {
     filter.categoryId = categoryId;
@@ -32,6 +54,8 @@ export const Recipes = () => {
     dispatch(fetchRecipes(filter));
   }, [dispatch, filter]);
 
+  console.log(category);
+
   return (
     <section className={styles.categorySection}>
       <div className={styles.categoryInfoWrap}>
@@ -39,12 +63,8 @@ export const Recipes = () => {
           <FaArrowLeft size={18} />
           <span>Back</span>
         </NavLink>
-        <MainTitle>Category</MainTitle>
-        <SubTitle>
-          Go on a taste journey, where every sip is a sophisticated creative
-          chord, and every dessert is an expression of the most refined
-          gastronomic desires.
-        </SubTitle>
+        <MainTitle>{category && category.name}</MainTitle>
+        <SubTitle>{category && category.description}</SubTitle>
       </div>
 
       <div className={list_styles.recipesSectionWrap}>

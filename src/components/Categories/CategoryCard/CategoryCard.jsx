@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './CategoryCard.module.css';
-import { LuArrowUpRight } from 'react-icons/lu';
+import { Button } from '../../Button/Button';
+import { MdArrowOutward } from 'react-icons/md';
 
 export const CategoryCard = ({ category }) => {
   const { id, name, description } = category;
@@ -29,9 +30,11 @@ export const CategoryCard = ({ category }) => {
           />
           <div className={styles.card_textbox}>
             <h3 className={styles.card_text}>{name}</h3>
-            <Link to={`categories/${id}`} className={styles.card_button}>
-              <LuArrowUpRight />
-            </Link>
+            <button className={styles.card_button}>
+              <Link to={`categories/${id}`}>
+                <MdArrowOutward size={18} />
+              </Link>
+            </button>
           </div>
         </li>
       )}

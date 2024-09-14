@@ -8,11 +8,9 @@ import { Outlet } from 'react-router-dom';
 export const Home = () => (
   <div className={css.home_container}>
     <Hero />
-    {/* <Categories /> */}
     <div>
       <Outlet />
     </div>
-    {/* <Recipes /> */}
     <Testimonials />
   </div>
 );
