@@ -27,13 +27,23 @@ export const RecipeCard = ({ recipe }) => {
         <div className={styles.avatarIconsRow}>
           <div className={styles.userWrapper}>
             <span>
-              <Link to={`/user/${user?.id}`}>
-                <img
-                  src={user?.avatar || avatar}
-                  alt={`${user?.name || 'User'} avatar`}
-                  className={styles.avatar}
-                />
-              </Link>
+              <Button type="button" className={css.btn} onClick={handleClick}>
+                <div className={css.btnWrapper}>
+                  <img
+                    src={user?.avatar || avatar}
+                    alt={`${user?.name || 'User'} avatar`}
+                    className={styles.avatar}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src =
+                        'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+                    }}
+                  />
+                </div>
+                <div className={css.btnThumb}>
+                  <p className={css.accentText}>{authorName}</p>
+                </div>
+              </Button>
             </span>
             <p className={styles.userName}>{user.name}</p>
           </div>

@@ -5,6 +5,7 @@ import styles from './Recipes.module.css';
 import list_styles from './RecipeList/RecipeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  selectRecipesState,
   selectSelectedAreaId,
   selectSelectedIngredientId,
 } from '../../redux/recipes/recipes.selectors.js';
@@ -16,6 +17,7 @@ import Pagination from '../Pagination/Pagination.jsx';
 import { SubTitle } from '../SubTitle/SubTitle.jsx';
 
 export const Recipes = () => {
+  const recipes = useSelector(selectRecipesState);
   const dispatch = useDispatch();
   const filter = {
     categoryId: '',
@@ -45,7 +47,7 @@ export const Recipes = () => {
         <RecipeFilter />
         <div className={list_styles.recipesListContent}>
           <RecipeList />
-          <Pagination total={16} limit={8} />
+          <Pagination total={recipes.total} limit={8} />
         </div>
       </div>
     </section>
