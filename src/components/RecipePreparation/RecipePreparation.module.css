@@ -1,10 +1,3 @@
-.wrapper {
-  padding-top: 16px;
-  @media screen and (min-width: 768px) {
-    padding-top: 20px;
-  }
-}
-
 .title {
   margin-bottom: 20px;
   font-size: 18px;
@@ -12,11 +5,6 @@
   line-height: 1.333;
   letter-spacing: -0.36px;
   text-transform: uppercase;
-  @media screen and (min-width: 768px) {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.4px;
-  }
 }
 
 .list {
@@ -27,15 +15,6 @@
   font-weight: 500;
   line-height: 1.429;
   letter-spacing: -0.28px;
-
-  @media screen and (min-width: 768px) {
-    margin-bottom: 40px;
-    color: var(--black-light);
-
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: -0.32px;
-  }
 }
 
 .item:not(:last-child) {
@@ -43,13 +22,39 @@
 }
 
 .btn {
+  position: relative;
   padding: 14px 20px;
   border: 1px solid var(--grey);
 
   color: var(--grey);
   line-height: 1.429;
+}
+.btn:disabled {
+  filter: blur(0px);
+}
 
-  @media screen and (min-width: 768px) {
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-50% - 30px), calc(-50% + 4px));
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+  .list {
+    margin-bottom: 40px;
+    color: var(--black-light);
+
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.32px;
+  }
+  .btn {
     padding: 16px 32px;
     line-height: 1.5;
   }

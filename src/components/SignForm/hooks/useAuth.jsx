@@ -22,9 +22,6 @@ const useAuth = (typeForm, reset) => {
         dispatch(fetchCurrentUser());
         reset();
         dispatch(closeModal());
-        toast.success(
-          `${typeForm === 'signup' ? 'Signup' : 'Signin'} successful!`
-        );
       }
     } catch (err) {
       if (err.response && err.response.status === 409) {
