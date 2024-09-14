@@ -81,10 +81,19 @@ export const ProfileWidget = () => {
   }
 
   return (
-    <>
-      <Button onClick={() => onOpenModal(MODAL_TYPE.signin)} variant="light">
+    <div className={css.containerSign}>
+      <Button
+        className={clsx([css.button, css.buttonSignin])}
+        onClick={() => onOpenModal(MODAL_TYPE.signin)}
+      >
         SIGNIN
       </Button>
-    </>
+      <Button
+        className={clsx([css.button, css.buttonSignup])}
+        onClick={() => onOpenModal(MODAL_TYPE.signup)}
+      >
+        SIGNUP
+      </Button>
+    </div>
   );
 };

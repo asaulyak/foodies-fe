@@ -88,6 +88,28 @@
   align-items: center;
 }
 
+.containerSign {
+  background-color: var(--white);
+  border-radius: 30px;
+}
+
+.button.buttonSignup {
+  background-color: var(--black-light);
+  color: var(--white);
+  border-color: var(--grey);
+}
+
+.button.buttonSignup:hover {
+  background-color: var(--white);
+  color: var(--black-light);
+  border-color: var(--grey);
+}
+
+.button.buttonSignin {
+  border-color: var(--white);
+  margin-right: -24px;
+}
+
 @media only screen and (min-width: 768px) {
   .avatar {
     width: 50px;
