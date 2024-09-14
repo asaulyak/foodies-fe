@@ -31,7 +31,6 @@ export const User = () => {
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
 
-  // Управляем состоянием подписки
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const onOpenModal = type => {
@@ -41,7 +40,7 @@ export const User = () => {
   const handleSubscribe = async () => {
     try {
       await http.post(`/users/subscribe/`, { subscribedTo: id });
-      setIsSubscribed(true); // Устанавливаем состояние в true после успешной подписки
+      setIsSubscribed(true);
     } catch (error) {
       console.error('Ошибка при подписке:', error);
     }
@@ -50,7 +49,7 @@ export const User = () => {
   const handleUnsubscribe = async () => {
     try {
       await http.delete(`/users/unsubscribe/${id}`);
-      setIsSubscribed(false); // Устанавливаем состояние в false после отмены подписки
+      setIsSubscribed(false);
     } catch (error) {
       console.error('Ошибка при отписке:', error);
     }
@@ -73,7 +72,7 @@ export const User = () => {
       try {
         const { data } = await http.get('/users/following');
         const isUserSubscribed = data.data.some(user => user.id === id);
-        setIsSubscribed(isUserSubscribed); // Обновляем состояние подписки
+        setIsSubscribed(isUserSubscribed);
       } catch (error) {
         console.error('Ошибка при получении подписок:', error);
       }
