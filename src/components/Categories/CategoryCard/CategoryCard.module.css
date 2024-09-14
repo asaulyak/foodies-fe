@@ -111,9 +111,9 @@ svg {
   background: var(--cardTagBackground);
 }
 
-/* .category_card:nth-child(8) {
+.category_card:nth-child(8) {
   width: 704px;
-} */
+}
 
 @media only screen and (min-width: 768px) {
   .category_card {
