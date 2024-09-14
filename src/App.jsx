@@ -11,6 +11,8 @@ import { Loader } from './components/Loader/Loader.jsx';
 import { selectUser } from './redux/user/user.selectors.js';
 import PrivateRoute from './PrivateRoute.jsx';
 import { ToastContainer } from 'react-toastify';
+import { Categories } from './components/Categories/Categories.jsx';
+import { Recipes } from './components/Recipes/Recipes.jsx';
 
 function App() {
   Modal.setAppElement('#modal-placeholder');
@@ -24,7 +26,10 @@ function App() {
       <Suspense fallback={<Loader full />}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route element={<Home />}>
+              <Route path="" element={<Categories />} />
+              <Route path="categories/:id" element={<Recipes />} />
+            </Route>
 
             <Route path="/user/:id" element={<User />} />
             <Route path="recipe/:id" element={<RecipePage />} />

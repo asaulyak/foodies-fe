@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
@@ -16,12 +16,18 @@ import Pagination from '../Pagination/Pagination.jsx';
 import { SubTitle } from '../SubTitle/SubTitle.jsx';
 
 export const Recipes = () => {
+  const { id: categoryId } = useParams();
+
   const dispatch = useDispatch();
   const filter = {
-    categoryId: '',
     areaId: useSelector(selectSelectedAreaId),
     ingredientIds: [useSelector(selectSelectedIngredientId)],
   };
+
+  if (categoryId !== 'all' && categoryId) {
+    filter.categoryId = categoryId;
+  }
+
   useEffect(() => {
     dispatch(fetchRecipes(filter));
   }, [dispatch, filter]);

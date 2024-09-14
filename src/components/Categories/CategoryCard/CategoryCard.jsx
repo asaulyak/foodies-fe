@@ -9,7 +9,10 @@ export const CategoryCard = ({ category }) => {
     <>
       {name === 'ALL CATEGORIES' ? (
         <li className={styles.all_categories_card}>
-          <Link to={`/`} className={styles.all_categories_card_text_link}>
+          <Link
+            to={`categories/${id}`}
+            className={styles.all_categories_card_text_link}
+          >
             {name}
           </Link>
         </li>
@@ -26,7 +29,7 @@ export const CategoryCard = ({ category }) => {
           />
           <div className={styles.card_textbox}>
             <h3 className={styles.card_text}>{name}</h3>
-            <Link to={`/${id}`} className={styles.card_button}>
+            <Link to={`categories/${id}`} className={styles.card_button}>
               <LuArrowUpRight />
             </Link>
           </div>

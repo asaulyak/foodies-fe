@@ -40,7 +40,7 @@ export const CategoryList = () => {
         setCategoriesRender([
           ...arr.slice(0, 11),
           {
-            id: v4(),
+            id: 'all',
             name: 'ALL CATEGORIES',
             description:
               'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
@@ -50,7 +50,7 @@ export const CategoryList = () => {
         setCategoriesRender([
           ...arr.slice(0, 7),
           {
-            id: v4(),
+            id: 'all',
             name: 'ALL CATEGORIES',
             description:
               'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
