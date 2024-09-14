@@ -27,10 +27,12 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
   const isFavoriteRecipe = favoritesRecipes.includes(recipeId);
   const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
 
-  const handleClick = async e => {
+  const handleClick = e => {
     e.target.disabled = true;
     setShowSpinner(true);
     if (!isLoggedUser) {
+      setShowSpinner(false);
+      e.target.disabled = false;
       return dispatch(openModal(MODAL_TYPE.signin));
     }
     setTimeout(() => {

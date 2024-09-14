@@ -4,9 +4,12 @@ import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
 import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
 import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 import { http } from '../../http/index.js';
+import { Loader } from '../Loader/Loader.jsx';
 
-export const RecipeInfo = ({ changeBreadCrumbs, changeError }) => {
+export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const [recipe, setRecipe] = useState(null);
+  const [errorText, setErrorText] = useState(null);
+  const [loader, setLoader] = useState(true);
   const { id: recipeId } = useParams();
 
   const fetchFunc = useCallback(async id => await http.get(`/recipes/${id}`));
@@ -20,12 +23,17 @@ export const RecipeInfo = ({ changeBreadCrumbs, changeError }) => {
         setRecipe(data);
         changeBreadCrumbs(data.title);
       })
-      .catch(e => changeError(e.message));
-  }, [recipeId, changeBreadCrumbs, fetchFunc, changeError, recipe]);
+      .catch(e => setErrorText(e.message))
+      .finally(setLoader(false));
+  }, [recipeId, changeBreadCrumbs, fetchFunc, recipe]);
 
   return (
     <>
-      {!!recipe && (
+      {loader && <Loader />}
+      {errorText && (
+        <p>Something went wrong. Please try again after a few seconds.</p>
+      )}
+      {!!recipe && !errorText && !loader && (
         <RecipeMainInfo
           id={recipe.id}
           img={recipe.thumb}
@@ -40,7 +48,6 @@ export const RecipeInfo = ({ changeBreadCrumbs, changeError }) => {
           <RecipePreparation
             preparation={recipe.instructions}
             recipeId={recipe.id}
-            changeError={changeError}
           />
         </RecipeMainInfo>
       )}
