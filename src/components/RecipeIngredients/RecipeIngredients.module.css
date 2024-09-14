@@ -1,8 +1,5 @@
 .wrapper {
-  padding: 16px 0;
-  @media screen and (min-width: 768px) {
-    padding: 20px 0;
-  }
+  margin-bottom: 32px;
 }
 
 .title {
@@ -13,32 +10,19 @@
   line-height: 1.333;
   letter-spacing: -0.36px;
   text-transform: uppercase;
-
-  @media screen and (min-width: 768px) {
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: -0.4px;
-  }
 }
 
 .list {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  @media screen and (min-width: 768px) {
-    gap: 20px;
-  }
 }
 
 .item {
   display: flex;
   align-items: center;
   gap: 10px;
-  max-width: 152px;
-  @media screen and (min-width: 768px) {
-    gap: 14px;
-    max-width: 180px;
-  }
+  width: 152px;
 }
 .imgWrapper {
   display: flex;
@@ -51,12 +35,6 @@
   border-radius: 15px;
   border: 1px solid var(--grey);
   font-size: 14px;
-
-  @media screen and (min-width: 768px) {
-    padding: 15px;
-    width: 90px;
-    height: 90px;
-  }
 }
 .img {
   border-radius: 4px;
@@ -69,12 +47,36 @@
   line-height: 1.429;
   letter-spacing: -0.28px;
   overflow: hidden;
-  @media screen and (min-width: 768px) {
+}
+.accentText {
+  color: var(--black);
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    margin-bottom: 40px;
+  }
+  .title {
+    margin-bottom: 18px;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+  }
+  .list {
+    gap: 20px;
+  }
+  .item {
+    gap: 14px;
+    width: 180px;
+  }
+  .imgWrapper {
+    padding: 15px;
+    width: 90px;
+    height: 90px;
+  }
+  .textWrapper {
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: -0.32px;
   }
-}
-.accentText {
-  color: var(--black);
 }

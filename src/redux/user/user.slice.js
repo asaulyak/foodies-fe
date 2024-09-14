@@ -4,6 +4,8 @@ import {
   fetchDetailInfoUser,
   logoutUser,
   patchAvatar,
+  addRecipeToFavorites,
+  removeRecipeFromFavorites,
 } from './user.actions.js';
 
 const handlePending = state => {
@@ -20,32 +22,24 @@ const userSlice = createSlice({
   initialState: {
     info: null,
     isLoading: true,
+    userFavoriteRecipes: [],
     error: null,
   },
-  reducers: {
-    addToFavorites(state, action) {
-      state.info.favoriteRecipes.push(action.payload);
-    },
-    removeFromFavorites(state, action) {
-      const index = state.info.favoriteRecipes.findIndex(
-        e => e === action.payload
-      );
-      state.info.favoriteRecipes.splice(index, 1);
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchCurrentUser.pending, handlePending)
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.info = action.payload;
-
+        state.userFavoriteRecipes = action.payload.favoriteRecipes;
         state.error = null;
       })
       .addCase(fetchCurrentUser.rejected, handleRejected)
       .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.fulfilled, state => {
         state.isLoading = false;
+        state.userFavoriteRecipes = [];
         state.info = null;
       })
       .addCase(logoutUser.rejected, handleRejected)
@@ -54,6 +48,23 @@ const userSlice = createSlice({
       .addCase(patchAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.info.avatar = action.payload.avatar;
+        state.error = null;
+      })
+      .addCase(addRecipeToFavorites.rejected, handleRejected)
+      .addCase(addRecipeToFavorites.pending, handlePending)
+      .addCase(addRecipeToFavorites.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userFavoriteRecipes.push(action.payload);
+        state.error = null;
+      })
+      .addCase(removeRecipeFromFavorites.rejected, handleRejected)
+      .addCase(removeRecipeFromFavorites.pending, handlePending)
+      .addCase(removeRecipeFromFavorites.fulfilled, (state, action) => {
+        const index = state.userFavoriteRecipes.findIndex(
+          e => e === action.payload
+        );
+        state.isLoading = false;
+        state.userFavoriteRecipes.splice(index, 1);
         state.error = null;
       });
   },
@@ -81,4 +92,3 @@ const userInfoSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const userInfoReducer = userInfoSlice.reducer;
-export const { addToFavorites, removeFromFavorites } = userSlice.actions;
