@@ -35,7 +35,11 @@ const userSlice = createSlice({
         state.userFavoriteRecipes = action.payload.favoriteRecipes;
         state.error = null;
       })
-      .addCase(fetchCurrentUser.rejected, handleRejected)
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
+        state.info = null;
+        state.error = action.payload;
+        state.isLoading = false;
+      })
       .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.fulfilled, state => {
         state.isLoading = false;

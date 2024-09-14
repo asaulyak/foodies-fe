@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 import css from './Header.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
@@ -11,7 +11,6 @@ import { openModal } from '../../redux/modal/modal.slice.js';
 import { MODAL_TYPE } from '../../utils/constants.js';
 
 export const Header = () => {
-  const location = useLocation();
   const currentUser = useSelector(selectUser);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,9 +18,12 @@ export const Header = () => {
 
   const dispatch = useDispatch();
 
+  const categoriesRouteMatch = useMatch('/categories/:id');
+  const homeRouteMatch = useMatch('/');
+
   useEffect(() => {
-    setIsHome(location.pathname === '/');
-  }, [location.pathname]);
+    setIsHome(!!homeRouteMatch || !!categoriesRouteMatch);
+  }, [homeRouteMatch, categoriesRouteMatch]);
 
   const menu = useMemo(
     () => [
@@ -47,7 +49,7 @@ export const Header = () => {
 
   const shouldHideMenu = useMemo(
     () => isHome && !currentUser,
-    [location, currentUser]
+    [isHome, currentUser]
   );
 
   const toggleMenu = () => {
