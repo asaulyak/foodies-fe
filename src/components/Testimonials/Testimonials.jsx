@@ -35,6 +35,7 @@ export const Testimonials = () => {
         slidesPerView={1}
         autoplay={{ delay: 5000 }}
         pagination={{ clickable: true }}
+        
       >
         {testimonials.map(testimonial => (
           <SwiperSlide key={testimonial.id}>
