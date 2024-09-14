@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from '../Button/Button.jsx';
 import { selectUser } from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
@@ -14,6 +15,7 @@ import { http } from '../../http/index.js';
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
 export const RecipePreparation = ({ preparation, recipeId }) => {
+  // const [loading, setLoading] = useState(false);
   const isLoggedUser = useSelector(selectUser);
 
   const dispatch = useDispatch();
@@ -32,10 +34,19 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     }
 
     if (!isFavoriteRecipe) {
-      await http.post(`/recipes/${recipeId}/favorites`).then(data => {
-        e.target.textContent = initBtnName[0];
-        dispatch(addToFavorites(recipeId));
-      });
+      // setLoading(true);
+      e.target.disabled = true;
+      await http
+        .post(`/recipes/${recipeId}/favorites`)
+        .then(data => {
+          e.target.textContent = initBtnName[0];
+          dispatch(addToFavorites(recipeId));
+        })
+        .catch()
+        .finally(data => {
+          e.target.disabled = false;
+          // setLoading(false);
+        });
       //TODO: add loader to btn
 
       return;
@@ -60,6 +71,16 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
       </ul>
       <Button onClick={handleClick} className={css.btn}>
         {btnTextContent}
+        {/* {loading && (
+          <span className={css.spinner}>
+            <InfinitySpin
+              visible={loading}
+              width="120"
+              color="#bfbebe"
+              ariaLabel="infinity-spin-loading"
+            />
+          </span>
+        )} */}
       </Button>
     </section>
   );

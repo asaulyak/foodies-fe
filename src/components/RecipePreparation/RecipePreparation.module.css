@@ -1,5 +1,4 @@
 .wrapper {
-  padding-top: 16px;
 }
 
 .title {
@@ -26,11 +25,19 @@
 }
 
 .btn {
+  position: relative;
   padding: 14px 20px;
   border: 1px solid var(--grey);
 
   color: var(--grey);
   line-height: 1.429;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-50% - 20px), calc(-50% + 4px));
 }
 
 @media only screen and (min-width: 768px) {

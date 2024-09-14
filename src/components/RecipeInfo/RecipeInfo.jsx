@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
 import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
@@ -7,23 +7,23 @@ import { http } from '../../http/index.js';
 
 export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const [recipe, setRecipe] = useState(null);
+  const [error, setError] = useState(null);
   const { id: recipeId } = useParams();
 
-  useEffect(() => {
-    async function fetchReceipt(id) {
-      const response = await http.get(`/recipes/${id}`);
-      return response.data;
-    }
+  const fetchFunc = useCallback(async id => await http.get(`/recipes1/${id}`));
 
-    fetchReceipt(recipeId).then(data => {
-      setRecipe(data);
-      changeBreadCrumbs(data.title);
-    });
-    // .catch(e => console.log(e.message));//TODO: in development
-  }, [recipeId, changeBreadCrumbs]);
+  useEffect(() => {
+    fetchFunc(recipeId)
+      .then(({ data }) => {
+        setRecipe(data);
+        changeBreadCrumbs(data.title);
+      })
+      .catch(e => setError(e.message));
+  }, [recipeId, changeBreadCrumbs, fetchFunc]);
+
   return (
     <>
-      {!!recipe && (
+      {!!recipe && !error && (
         <RecipeMainInfo
           id={recipe.id}
           img={recipe.thumb}

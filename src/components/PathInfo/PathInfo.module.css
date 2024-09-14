@@ -7,7 +7,7 @@
   font-weight: 700;
   letter-spacing: -0.24px;
   text-transform: uppercase;
-  margin-top: 64px;
+  /* margin-top: 64px; */
   margin-bottom: 32px;
 }
 @media only screen and (min-width: 768px) {

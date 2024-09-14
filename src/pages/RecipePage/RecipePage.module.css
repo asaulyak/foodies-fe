@@ -2,14 +2,17 @@
   padding: 40px 0 32px;
 }
 
+.errorWrapper {
+  text-align: center;
+}
 @media only screen and (min-width: 768px) {
   .section {
-    padding: 28px 0 50px;
+    padding-bottom: 50px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .section {
-    padding: 40px 0 60px;
+    padding-bottom: 60px;
   }
 }
