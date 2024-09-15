@@ -67,6 +67,8 @@
   left: 9%;
   float: left;
   margin-right: 20px;
+  width: 59px;
+  height: 48px;
 }
 
 @media screen and (max-width: 767px) {
@@ -77,6 +79,15 @@
     --swiper-pagination-bullet-size: 16px;
     --swiper-pagination-bullet-horizontal-gap: 8px;
   }
+  .quotesImage {
+  margin-left: 8px;
+  position: absolute;
+  left: 9%;
+  float: left;
+  margin-right: 20px;
+  object-fit: contain;
+  
+}
 }
 
 @media screen and (min-width: 768px) and (max-width: 1157px) {
@@ -90,7 +101,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1158px) {
   .text {
     font-size: 24px;
   }
@@ -102,4 +113,13 @@
     font-size: 40px;
     line-height: 1.1;
   }
+  .quotesImage {
+  margin-left: 8px;
+  position: absolute;
+  left: 9%;
+  float: left;
+  margin-right: 20px;
+  /* width: 59px; */
+  /* height: 48px; */
+}
 }
