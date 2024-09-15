@@ -22,6 +22,7 @@
 .recipePreviewWrapperIcon {
   margin-left: auto;
   display: flex;
+  gap: 4px;
 }
 .recipePreviewTitle {
   font-style: 16px;
