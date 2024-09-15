@@ -1,49 +1,91 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './RecipeFilter.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectAreas,
-  selectIngredients,
-} from '../../redux/recipes/recipes.selectors';
-import { selectError, selectIsLoading } from '../../redux/user/user.selectors';
-import {
-  fetchAreas,
-  fetchIngredients,
-} from '../../redux/recipes/recipes.actions';
-import {
-  setSelectedIngredient as setSelectedIngredientAction,
-  setSelectedArea as setSelectedAreaAction,
-} from '../../redux/recipes/recipes.slice';
 import Select from 'react-select';
+import { useSearchParams } from 'react-router-dom';
+import { http } from '../../http/index.js';
+import { Loader } from '../Loader/Loader.jsx';
 
-export const RecipeFilter = ({ handleSelectChange }) => {
-  const dispatch = useDispatch();
-  const ingredients = useSelector(selectIngredients);
-  const areas = useSelector(selectAreas);
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+export const RecipeFilter = () => {
+  const [ingredients, setIngredients] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const [currentIngredient, setCurrentIngredient] = useState();
+  const [currentArea, setCurrentArea] = useState();
+  const [isIngredientsLoading, setIsIngredientsLoading] = useState();
+  const [isAreasLoading, setIsAreasLoading] = useState();
 
-  const ingredientsOptions = ingredients?.map(ingredient => ({
-    value: ingredient.id,
-    label: ingredient.name,
-  }));
-
-  const areasOptions = areas?.map(area => ({
-    value: area.id,
-    label: area.name,
-  }));
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    dispatch(fetchIngredients());
-    dispatch(fetchAreas());
-  }, [dispatch]);
+    setIsIngredientsLoading(true);
+    setIsAreasLoading(true);
+
+    const fetchIngredients = async () => {
+      try {
+        const { data: response } = await http.get('/ingredients');
+
+        setIngredients(
+          [
+            {
+              value: 'all',
+              label: 'All',
+            },
+          ].concat(
+            response.map(ingredient => ({
+              value: ingredient.id,
+              label: ingredient.name,
+            }))
+          )
+        );
+      } catch (e) {
+        setIngredients([]);
+      } finally {
+        setIsIngredientsLoading(false);
+      }
+    };
+
+    const fetchAreas = async () => {
+      try {
+        const { data: response } = await http.get('/areas');
+
+        setAreas(
+          [
+            {
+              value: 'all',
+              label: 'All',
+            },
+          ].concat(
+            response.map(area => ({
+              value: area.id,
+              label: area.name,
+            }))
+          )
+        );
+      } catch (e) {
+        setAreas([]);
+      } finally {
+        setIsAreasLoading(false);
+      }
+    };
+
+    fetchIngredients();
+    fetchAreas();
+  }, []);
+
+  useEffect(() => {
+    setCurrentIngredient(searchParams.get('ingredient') || 'all');
+    setCurrentArea(searchParams.get('area') || 'all');
+  }, [searchParams]);
 
   const handleIngredientChange = e => {
-    dispatch(setSelectedIngredientAction(e.value));
+    searchParams.set('ingredient', e.value);
+
+    setSearchParams(searchParams);
   };
 
   const handleAreaChange = e => {
-    dispatch(setSelectedAreaAction(e.value));
+    searchParams.set('area', e.value);
+
+    setSearchParams(searchParams);
   };
 
   const customStyles = {
@@ -60,22 +102,28 @@ export const RecipeFilter = ({ handleSelectChange }) => {
     }),
   };
 
-  return (
+  return isIngredientsLoading || isAreasLoading ? (
+    <Loader />
+  ) : (
     <div className={styles.recipesFilterWrap}>
       <Select
-        options={ingredientsOptions}
+        options={ingredients}
         placeholder="Ingredients"
         styles={customStyles}
         onChange={handleIngredientChange}
         className={styles.recipeFilterSelect}
+        defaultValue={ingredients.find(
+          option => option.value === currentIngredient
+        )}
       />
 
       <Select
-        options={areasOptions}
+        options={areas}
         placeholder="Areas"
         styles={customStyles}
         onChange={handleAreaChange}
         className={styles.recipeFilterSelect}
+        defaultValue={areas.find(option => option.value === currentArea)}
       />
     </div>
   );
