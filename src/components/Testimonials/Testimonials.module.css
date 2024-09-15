@@ -86,8 +86,16 @@
   float: left;
   margin-right: 20px;
   object-fit: contain;
-  
-}
+ }
+ .text {
+  font-family: Mulish;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  text-align: center;
+
+ }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1157px) {
