@@ -29,6 +29,7 @@ export const Recipes = () => {
 
   useEffect(() => {
     if (!categories?.length) {
+      c;
       dispatch(fetchCategoriesList());
     }
   }, [dispatch]);
@@ -68,7 +69,6 @@ export const Recipes = () => {
     const fetchRecipes = async () => {
       setIsLoading(true);
 
-      console.log('filters', filters);
       try {
         const { data: response } = await http.get(`/recipes/search`, {
           params: filters,
