@@ -1,8 +1,8 @@
 .title {
   font-size: 28px;
   font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.64px;
+  line-height: 1.142;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   margin-bottom: 32px;
 }
@@ -10,18 +10,19 @@
 .titleLogout {
   font-size: 28px;
   font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.64px;
+  line-height: 1.142;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .logoutText {
-  font-size: 12px;
+  color: var(--grey);
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.28;
-  letter-spacing: -0.28px;
+  line-height: 1.429;
+  letter-spacing: -0.02em;
   text-align: center;
   margin-bottom: 32px;
 }
@@ -30,8 +31,8 @@
   color: var(--grey);
   font-size: 12px;
   font-weight: 500;
-  line-height: 1.28;
-  letter-spacing: -0.28px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
   text-align: center;
 }
 

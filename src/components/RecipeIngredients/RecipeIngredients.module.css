@@ -8,7 +8,7 @@
   font-size: 18px;
   font-weight: 800;
   line-height: 1.333;
-  letter-spacing: -0.36px;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
@@ -45,7 +45,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 1.429;
-  letter-spacing: -0.28px;
+  letter-spacing: -0.02em;
   overflow: hidden;
 }
 .accentText {
@@ -60,7 +60,7 @@
     margin-bottom: 18px;
     font-size: 20px;
     line-height: 1.2;
-    letter-spacing: -0.4px;
+    letter-spacing: -0.02em;
   }
   .list {
     gap: 20px;
@@ -77,6 +77,6 @@
   .textWrapper {
     font-size: 16px;
     line-height: 1.5;
-    letter-spacing: -0.32px;
+    letter-spacing: -0.02em;
   }
 }

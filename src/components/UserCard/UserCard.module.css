@@ -23,12 +23,12 @@
   font-style: normal;
   font-weight: 800;
   line-height: 1.5;
-  letter-spacing: -0.32px;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   @media screen and (min-width: 768px) {
     font-size: 20px;
     line-height: 1.2;
-    letter-spacing: -0.4px;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -37,12 +37,12 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
-  letter-spacing: -0.24px;
+  letter-spacing: -0.02em;
   color: var(--grey);
   @media screen and (min-width: 768px) {
     font-size: 14px;
     line-height: 1.429;
-    letter-spacing: -0.28px;
+    letter-spacing: -0.02em;
   }
 }
 
