@@ -26,14 +26,14 @@
 }
 .recipePreviewTitle {
   font-style: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   color: var(--black);
   font-weight: 700;
   text-transform: uppercase;
 }
 .recipePreviewDescription {
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.43;
   color: var(--grey);
   font-weight: 400;
 }

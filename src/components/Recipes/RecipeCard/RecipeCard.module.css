@@ -39,7 +39,7 @@
 
 .recipeDescription {
   font-size: 14px;
-  line-height: 1.4em;
+  line-height: 1.43;
   height: 2.8em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -156,7 +156,7 @@
   display: block;
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.429;
+  line-height: 1.43;
   letter-spacing: -0.02em;
 }
 
@@ -172,7 +172,7 @@
 
   .text {
     font-size: 14px;
-    line-height: 1.429;
+    line-height: 1.43;
     letter-spacing: -0.02em;
   }
 
@@ -180,6 +180,6 @@
     color: var(--black-light);
     font-size: 16px;
     line-height: 1.5;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.32px;
   }
 }
