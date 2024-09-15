@@ -65,7 +65,7 @@ export const ProfileWidget = () => {
             <Link to={`/user/${user.id}`}>Profile</Link>
           </li>
           <li>
-            <span className={css['icon-text']} onClick={handleLogout}>
+            <button className={css['icon-text']} onClick={handleLogout}>
               Log out{' '}
               <Icon
                 iconId="arrow-up"
@@ -73,7 +73,7 @@ export const ProfileWidget = () => {
                 height={9}
                 className={clsx(css['signout-icon'])}
               />
-            </span>
+            </button>
           </li>
         </ul>
       </div>
