@@ -12,19 +12,17 @@
 }
 
 .subheading {
-  font-family: Mulish;
   font-size: 14px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1.43;
   letter-spacing: -0.02em;
   text-align: center;
 }
 
 .heading {
-  font-family: Mulish;
   font-size: 28px;
   font-weight: 800;
-  line-height: 1.4;
+  line-height: 1.14;
   letter-spacing: -0.02em;
   text-align: center;
   margin-top: 16px;
@@ -36,7 +34,6 @@
 }
 
 .text {
-  font-family: Mulish;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.3;
@@ -50,10 +47,9 @@
 .author {
   font-weight: bold;
   margin-top: 1rem;
-  font-family: Mulish;
   font-size: 20px;
   font-weight: 800;
-  line-height: 24px;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   margin-top: 64px;
 }
@@ -90,10 +86,9 @@
     scale: 0.7;
   }
   .text {
-    font-family: Mulish;
     font-size: 18px;
     font-weight: 500;
-    line-height: 24px;
+    line-height: 1.33;
     letter-spacing: -0.02em;
     text-align: center;
   }
