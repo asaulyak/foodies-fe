@@ -21,10 +21,13 @@ import { Button } from '../../components/Button/Button';
 import { Loader } from '../../components/Loader/Loader';
 import { openModal } from '../../redux/modal/modal.slice';
 import { http } from '../../http';
-import { MODAL_TYPE } from '../../utils/constants';
+import { COLOR_CSS, MODAL_TYPE, SIZE } from '../../utils/constants';
 import { toast } from 'react-toastify';
 
-export const User = () => {
+const User = () => {
+  const [isLoadingUser, setIsloadingUser] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const currentUser = useSelector(selectInfoUser);
@@ -32,7 +35,9 @@ export const User = () => {
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
 
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  useEffect(() => {
+    setIsloadingUser(isLoading);
+  }, [isLoading]);
 
   const onOpenModal = type => {
     dispatch(openModal(type));
@@ -40,19 +45,27 @@ export const User = () => {
 
   const handleSubscribe = async () => {
     try {
+      setIsloadingUser(true);
       await http.post(`/users/subscribe/`, { subscribedTo: id });
       setIsSubscribed(true);
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsloadingUser(false);
+      dispatch(fetchDetailInfoUser(id));
     }
   };
 
   const handleUnsubscribe = async () => {
     try {
+      setIsloadingUser(true);
       await http.delete(`/users/unsubscribe/${id}`);
       setIsSubscribed(false);
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      setIsloadingUser(false);
+      dispatch(fetchDetailInfoUser(id));
     }
   };
 
@@ -94,23 +107,27 @@ export const User = () => {
         <div className={css.userWrapper}>
           <div className={css.userInfoButtonWrapper}>
             {userCardLoading || isLoading ? (
-              <Loader />
+              <div className={css.loaderWrapper}>
+                <Loader size={SIZE.large} />
+              </div>
             ) : (
               <UserInfo {...currentUser} isOwner={owner?.id === id} />
             )}
-            {isLoading ? (
-              <Loader />
-            ) : owner?.id === id ? (
+            {owner?.id === id ? (
               <Button onClick={handleLogout} className={css.logOutBtn}>
                 Log Out
               </Button>
             ) : isSubscribed ? (
               <Button onClick={handleUnsubscribe} className={css.logOutBtn}>
-                Following
+                {isLoadingUser ? (
+                  <Loader color={COLOR_CSS.white} />
+                ) : (
+                  'Following'
+                )}
               </Button>
             ) : (
               <Button onClick={handleSubscribe} className={css.logOutBtn}>
-                Follow
+                {isLoadingUser ? <Loader color={COLOR_CSS.white} /> : 'Follow'}
               </Button>
             )}
           </div>
@@ -131,3 +148,5 @@ export const User = () => {
     </>
   );
 };
+
+export default User;

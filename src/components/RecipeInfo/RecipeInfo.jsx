@@ -5,6 +5,7 @@ import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
 import { RecipePreparation } from '../RecipePreparation/RecipePreparation.jsx';
 import { http } from '../../http/index.js';
 import { Loader } from '../Loader/Loader.jsx';
+import { SIZE } from '../../utils/constants.js';
 
 export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const [recipe, setRecipe] = useState(null);
@@ -29,11 +30,10 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
 
   return (
     <>
-      {loader && <Loader />}
       {errorText && (
         <p>Something went wrong. Please try again after a few seconds.</p>
       )}
-      {!!recipe && !errorText && !loader && (
+      {loader ? <Loader size={SIZE.large} /> : !!recipe && !errorText && (
         <RecipeMainInfo
           id={recipe.id}
           img={recipe.thumb}

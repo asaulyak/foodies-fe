@@ -3,7 +3,6 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa6';
 import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './RecipeCard.module.css';
@@ -20,6 +19,7 @@ import {
   addRecipeToFavorites,
   removeRecipeFromFavorites,
 } from '../../../redux/user/user.actions.js';
+import { Loader } from '../../Loader/Loader.jsx';
 
 export const RecipeCard = ({ recipe, className, borderStyles }) => {
   const { id, title, user, description, thumb } = recipe;
@@ -34,14 +34,18 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
   const [loading, setLoading] = useState(isLoading);
 
-  const handleClickFavorites = e => {
+  const handleClickFavorites = (e, currentId) => {
     if (!isLogged || error?.includes(401)) {
       dispatch(openModal(MODAL_TYPE.signin));
       return;
     }
 
+    if (id === currentId) {
+      setLoading(true);
+    }
+
     e.target.disabled = true;
-    setLoading(true);
+
     if (favorites.includes(id)) {
       dispatch(removeRecipeFromFavorites(id))
         .then(data => {
@@ -49,8 +53,10 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
             isFavoriteRecipe = favorites.includes(id);
           }
         })
-        .finally(data => {
-          setLoading(false);
+        .finally(() => {
+          if (id === currentId) {
+            setLoading(false);
+          }
           e.target.disabled = false;
         });
       return;
@@ -61,8 +67,10 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
           isFavoriteRecipe = favorites.includes(id);
         }
       })
-      .finally(data => {
-        setLoading(false);
+      .finally(() => {
+        if (id === currentId) {
+          setLoading(false);
+        }
         e.target.disabled = false;
       });
   };
@@ -123,21 +131,14 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
               <button
                 type="button"
                 className={styles.iconWrapper}
-                onClick={handleClickFavorites}
+                onClick={e => handleClickFavorites(e, id)}
               >
-                {favorites.includes(id) && !loading && <FaHeart size={18} />}
-                {!favorites.includes(id) && !loading && (
+                {loading ? (
+                  <Loader size={18} />
+                ) : favorites.includes(id) ? (
+                  <FaHeart size={18} />
+                ) : (
                   <FaRegHeart size={18} />
-                )}
-                {loading && (
-                  <span className={styles.spinner}>
-                    <InfinitySpin
-                      visible={loading}
-                      width="80"
-                      color="#bfbebe"
-                      ariaLabel="infinity-spin-loading"
-                    />
-                  </span>
                 )}
               </button>
             </li>

@@ -11,6 +11,8 @@ import { Button } from '../Button/Button';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import styles from './SignForm.module.css';
 import { ToastContainer, Zoom } from 'react-toastify';
+import { Loader } from '../Loader/Loader.jsx';
+import { COLOR_CSS, SIZE } from '../../utils/constants.js';
 
 export const SignForm = ({ modalType }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +32,7 @@ export const SignForm = ({ modalType }) => {
   });
 
   useErrorHandling(errors);
-  const { onSubmit } = useAuth(modalType, reset);
+  const { onSubmit, isLoading: isLoadingAuth } = useAuth(modalType, reset);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
@@ -71,8 +73,18 @@ export const SignForm = ({ modalType }) => {
           </div>
         </div>
 
-        <Button type="submit" className={styles.button}>
-          {modalType === 'signup' ? 'Create Account' : 'Sign In'}
+        <Button
+          type="submit"
+          className={styles.button}
+          disabled={isLoadingAuth}
+        >
+          {isLoadingAuth ? (
+            <Loader color={COLOR_CSS.white} size={SIZE.small} />
+          ) : modalType === 'signup' ? (
+            'Create Account'
+          ) : (
+            'Sign In'
+          )}
         </Button>
       </form>
       <ToastContainer transition={Zoom} />

@@ -3,6 +3,7 @@ import { http } from '../../http/index.js';
 import { RecipeCard } from '../Recipes/RecipeCard/RecipeCard.jsx';
 import css from './PopularRecipes.module.css';
 import { Loader } from '../Loader/Loader.jsx';
+import { SIZE } from '../../utils/constants.js';
 
 export const PopularRecipes = () => {
   const [popularRecipes, setPopularRecipes] = useState([]);
@@ -28,7 +29,7 @@ export const PopularRecipes = () => {
   return (
     <section className={css.section}>
       <h2 className={css.sectionTitle}>Popular recipes</h2>
-      {loader && <Loader />}
+      {loader && <Loader size={SIZE.large} />}
       {errorText && (
         <p>Something went wrong. Please try again after a few seconds.</p>
       )}

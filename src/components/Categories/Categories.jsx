@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { fetchCategoriesList } from '../../redux/categories/categories.actions';
 import { CategoryList } from './CategoryList/CategoryList';
 import { Loader } from '../Loader/Loader';
+import { COLOR_CSS, SIZE } from '../../utils/constants';
 
 export const Categories = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,11 @@ export const Categories = () => {
           the kitchen.
         </SubTitle>
       </div>
-      {isLoading ? <Loader /> : <CategoryList />}
+      {isLoading ? (
+        <Loader size={SIZE.large} />
+      ) : (
+        <CategoryList />
+      )}
     </div>
   );
 };

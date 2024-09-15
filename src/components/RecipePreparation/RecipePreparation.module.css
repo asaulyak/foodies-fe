@@ -23,24 +23,9 @@
 
 .btn {
   position: relative;
-  padding: 14px 20px;
   border: 1px solid var(--grey);
-
+  min-width: 216px;
   color: var(--grey);
-  line-height: 1.429;
-}
-.btn:disabled {
-  filter: blur(0px);
-}
-.btnWrapper {
-  position: relative;
-  display: inline-block;
-}
-.spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(calc(-50% - 30px), calc(-50% + 4px));
 }
 
 @media only screen and (min-width: 768px) {
@@ -56,9 +41,5 @@
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: -0.32px;
-  }
-  .btn {
-    padding: 16px 32px;
-    line-height: 1.5;
   }
 }
