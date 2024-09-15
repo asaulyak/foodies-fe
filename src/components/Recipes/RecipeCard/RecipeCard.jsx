@@ -30,9 +30,8 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isFavoriteRecipe = !isLogged ? false : favorites.includes(id);
+  let isFavoriteRecipe = !isLogged ? false : favorites.includes(id);
 
-  const [favorite, setFavorite] = useState(isFavoriteRecipe);
   const [loading, setLoading] = useState(isLoading);
 
   const handleClickFavorites = e => {
@@ -43,23 +42,29 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
     e.target.disabled = true;
     setLoading(true);
-    if (favorite) {
+    if (favorites.includes(id)) {
       dispatch(removeRecipeFromFavorites(id))
-        .catch(e => {
-          dispatch(openModal(MODAL_TYPE.signin));
+        .then(data => {
+          if (!data.payload.type) {
+            isFavoriteRecipe = favorites.includes(id);
+          }
         })
         .finally(data => {
-          setFavorite(false);
           setLoading(false);
           e.target.disabled = false;
         });
       return;
     }
-    dispatch(addRecipeToFavorites(id)).finally(data => {
-      setFavorite(true);
-      setLoading(false);
-      e.target.disabled = false;
-    });
+    dispatch(addRecipeToFavorites(id))
+      .then(data => {
+        if (!data.payload.type) {
+          isFavoriteRecipe = favorites.includes(id);
+        }
+      })
+      .finally(data => {
+        setLoading(false);
+        e.target.disabled = false;
+      });
   };
 
   const handleClickToRecipe = () => {
@@ -120,8 +125,10 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
                 className={styles.iconWrapper}
                 onClick={handleClickFavorites}
               >
-                {favorite && !loading && <FaHeart size={18} />}
-                {!favorite && !loading && <FaRegHeart size={18} />}
+                {favorites.includes(id) && !loading && <FaHeart size={18} />}
+                {!favorites.includes(id) && !loading && (
+                  <FaRegHeart size={18} />
+                )}
                 {loading && (
                   <span className={styles.spinner}>
                     <InfinitySpin

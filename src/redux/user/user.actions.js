@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { http } from '../../http/index.js';
+import { openModal } from '../modal/modal.slice.js';
+import { MODAL_TYPE } from '../../utils/constants.js';
 
 export const fetchCurrentUser = createAsyncThunk(
   'user/fetchCurrentUser',
@@ -60,11 +62,14 @@ export const logoutUser = createAsyncThunk(
 
 export const addRecipeToFavorites = createAsyncThunk(
   'user/addToFavorites',
-  async (recipeId, { rejectWithValue }) => {
+  async (recipeId, { rejectWithValue, dispatch }) => {
     try {
       const res = await http.post(`/recipes/${recipeId}/favorites`);
       return res.data.recipeId;
     } catch (error) {
+      if (error.message.includes(401)) {
+        return dispatch(openModal(MODAL_TYPE.signin));
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -72,11 +77,14 @@ export const addRecipeToFavorites = createAsyncThunk(
 
 export const removeRecipeFromFavorites = createAsyncThunk(
   'user/removeFromFavorites',
-  async (recipeId, { rejectWithValue }) => {
+  async (recipeId, { rejectWithValue, dispatch }) => {
     try {
       await http.delete(`/recipes/${recipeId}/favorites`);
       return recipeId;
     } catch (error) {
+      if (error.message.includes(401)) {
+        return dispatch(openModal(MODAL_TYPE.signin));
+      }
       return rejectWithValue(error.message);
     }
   }

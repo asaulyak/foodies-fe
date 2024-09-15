@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RecipeIngredients } from '../RecipeIngredients/RecipeIngredients.jsx';
 import { RecipeMainInfo } from '../RecipeMainIfo/RecipeMainInfo.jsx';
@@ -12,12 +12,12 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
   const [loader, setLoader] = useState(true);
   const { id: recipeId } = useParams();
 
-  const fetchFunc = useCallback(async id => await http.get(`/recipes/${id}`));
-
   useEffect(() => {
-    if (recipe) {
+    if (recipe && recipeId === recipe.id) {
       return;
     }
+    const fetchFunc = async id => await http.get(`/recipes/${id}`);
+
     fetchFunc(recipeId)
       .then(({ data }) => {
         setRecipe(data);
@@ -25,7 +25,7 @@ export const RecipeInfo = ({ changeBreadCrumbs }) => {
       })
       .catch(e => setErrorText(e.message))
       .finally(setLoader(false));
-  }, [recipeId, changeBreadCrumbs, fetchFunc, recipe]);
+  }, [recipeId, changeBreadCrumbs, recipe]);
 
   return (
     <>
