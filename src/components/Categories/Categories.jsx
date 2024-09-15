@@ -13,7 +13,6 @@ import { COLOR_CSS, SIZE } from '../../utils/constants';
 export const Categories = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchCategoriesList());

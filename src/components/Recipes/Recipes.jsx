@@ -1,52 +1,91 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 import { RecipeList } from './RecipeList/RecipeList';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
 import list_styles from './RecipeList/RecipeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectSelectedAreaId,
-  selectSelectedIngredientId,
-} from '../../redux/recipes/recipes.selectors.js';
 import { useEffect, useState } from 'react';
-import { fetchRecipes } from '../../redux/recipes/recipes.actions.js';
 import { MainTitle } from '../MainTitle/MainTitle.jsx';
 import { RecipeFilter } from '../RecipeFilter/RecipeFilter.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
 import { SubTitle } from '../SubTitle/SubTitle.jsx';
 import { categoriesList } from '../../redux/categories/categories.selectors.js';
+import { http } from '../../http/index.js';
+import { Loader } from '../Loader/Loader.jsx';
+import { fetchCategoriesList } from '../../redux/categories/categories.actions.js';
 
 export const Recipes = () => {
   const { id: categoryId } = useParams();
+  const [searchParams] = useSearchParams();
+  const [filters, setFilters] = useState({});
+  const [recipes, setRecipes] = useState([]);
+  const [pagination, setPagination] = useState({ limit: 12, total: 0 });
+  const [isLoading, setIsLoading] = useState(false);
+  const [category, setCategory] = useState(null);
+
   const categories = useSelector(categoriesList);
-  const [category, setCategory] = useState();
 
   const dispatch = useDispatch();
-  const filter = {
-    areaId: useSelector(selectSelectedAreaId),
-    ingredientIds: [useSelector(selectSelectedIngredientId)],
-  };
 
   useEffect(() => {
-    if (categories) {
-      if (categoryId !== 'all' && categoryId) {
-        setCategory(categories.find(({ id }) => id === categoryId));
-
-        filter.categoryId = categoryId;
-      } else {
-        setCategory({
-          id: 'all',
-          name: 'ALL CATEGORIES',
-          description:
-            'Go on a taste journey, where every sip is a sophisticated creative chord, and every recipe is an expression of the most refined gastronomic desires.',
-        });
-      }
+    if (!categories?.length) {
+      dispatch(fetchCategoriesList());
     }
-  }, [categoryId]);
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchRecipes(filter));
-  }, [dispatch, filter]);
+    setCategory(categories?.find(item => item.id === categoryId) || null);
+  }, [categories, categoryId]);
+
+  useEffect(() => {
+    const ingredientId = searchParams.get('ingredient');
+    const areaId = searchParams.get('area');
+    const page = searchParams.get('page');
+
+    const updatedFilter = {
+      categoryId: categoryId === 'all' ? undefined : categoryId,
+    };
+
+    if (ingredientId) {
+      updatedFilter['ingredientIds[]'] =
+        ingredientId === 'all' ? undefined : ingredientId;
+    }
+
+    if (areaId) {
+      updatedFilter.areaId = areaId === 'all' ? undefined : areaId;
+    }
+
+    if (page) {
+      updatedFilter.page = page;
+    }
+
+    updatedFilter.limit = pagination.limit;
+
+    setFilters(updatedFilter);
+  }, [categoryId, searchParams]);
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      setIsLoading(true);
+
+      try {
+        const { data: response } = await http.get(`/recipes/search`, {
+          params: filters,
+        });
+
+        setRecipes(response.data);
+        setPagination(state => ({ ...state, total: response.total }));
+      } catch (e) {
+        setRecipes([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (Object.keys(filters).length) {
+      fetchRecipes();
+    }
+  }, [filters]);
 
   return (
     <section className={styles.categorySection}>
@@ -55,15 +94,25 @@ export const Recipes = () => {
           <FaArrowLeft size={18} />
           <span>Back</span>
         </NavLink>
-        <MainTitle>{category && category.name}</MainTitle>
-        <SubTitle>{category && category.description}</SubTitle>
+        {category && (
+          <>
+            <MainTitle>{category.name}</MainTitle>
+            <SubTitle>{category.description}</SubTitle>
+          </>
+        )}
       </div>
 
       <div className={list_styles.recipesSectionWrap}>
         <RecipeFilter />
         <div className={list_styles.recipesListContent}>
-          <RecipeList />
-          <Pagination total={16} limit={8} />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <RecipeList recipes={recipes} />
+              <Pagination total={pagination.total} limit={pagination.limit} />
+            </>
+          )}
         </div>
       </div>
     </section>
