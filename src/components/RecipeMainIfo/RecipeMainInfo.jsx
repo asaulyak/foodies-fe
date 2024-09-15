@@ -46,7 +46,11 @@ export const RecipeMainInfo = ({
             <>
               <span className={css.btnWrapper}>
                 <img
-                  src={!authorAvatar ? '' : authorAvatar}
+                  src={
+                    !authorAvatar
+                      ? `https://www.gravatar.com/avatar`
+                      : authorAvatar
+                  }
                   alt="User Avatar"
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;

@@ -57,18 +57,22 @@ const userSlice = createSlice({
       .addCase(addRecipeToFavorites.rejected, handleRejected)
       .addCase(addRecipeToFavorites.pending, handlePending)
       .addCase(addRecipeToFavorites.fulfilled, (state, action) => {
+        if (!action.payload.type) {
+          state.userFavoriteRecipes.push(action.payload);
+        }
         state.isLoading = false;
-        state.userFavoriteRecipes.push(action.payload);
         state.error = null;
       })
       .addCase(removeRecipeFromFavorites.rejected, handleRejected)
       .addCase(removeRecipeFromFavorites.pending, handlePending)
       .addCase(removeRecipeFromFavorites.fulfilled, (state, action) => {
-        const index = state.userFavoriteRecipes.findIndex(
-          e => e === action.payload
-        );
+        if (!action.payload.type) {
+          const index = state.userFavoriteRecipes.findIndex(
+            e => e === action.payload
+          );
+          state.userFavoriteRecipes.splice(index, 1);
+        }
         state.isLoading = false;
-        state.userFavoriteRecipes.splice(index, 1);
         state.error = null;
       });
   },

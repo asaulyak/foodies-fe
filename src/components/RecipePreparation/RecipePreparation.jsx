@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from '../Button/Button.jsx';
 import {
   selectFavoriteRecipes,
   selectIsLoading,
   selectUser,
+  selectError,
 } from '../../redux/user/user.selectors.js';
 import css from './RecipePreparation.module.css';
 import { MODAL_TYPE } from '../../utils/constants.js';
@@ -20,33 +21,47 @@ const initBtnName = ['Remove from favorites', 'Add to favorites'];
 export const RecipePreparation = ({ preparation, recipeId }) => {
   const dispatch = useDispatch();
   const isLoggedUser = useSelector(selectUser);
+  const error = useSelector(selectError);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
   const loading = useSelector(selectIsLoading);
+
   const [showSpinner, setShowSpinner] = useState(loading);
 
-  const isFavoriteRecipe = favoritesRecipes.includes(recipeId);
-  const btnTextContent = isFavoriteRecipe ? initBtnName[0] : initBtnName[1];
+  const btnTextContent = favoritesRecipes.includes(recipeId)
+    ? initBtnName[0]
+    : initBtnName[1];
 
   const handleClick = e => {
-    e.target.disabled = true;
-    setShowSpinner(true);
-    if (!isLoggedUser) {
-      setShowSpinner(false);
-      e.target.disabled = false;
+    if (!isLoggedUser || error?.includes(401)) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
-    setTimeout(() => {
-      e.target.disabled = false;
-      setShowSpinner(false);
-    }, 800);
 
-    if (!isFavoriteRecipe) {
-      e.target.textContent = initBtnName[0];
-      dispatch(addRecipeToFavorites(recipeId));
-    } else {
-      e.target.textContent = initBtnName[1];
-      dispatch(removeRecipeFromFavorites(recipeId));
+    e.target.disabled = true;
+    setShowSpinner(true);
+
+    if (!favoritesRecipes.includes(recipeId)) {
+      dispatch(addRecipeToFavorites(recipeId))
+        .then(data => {
+          if (!data.payload.type) {
+            e.target.textContent = initBtnName[0];
+          }
+        })
+        .finally(data => {
+          e.target.disabled = false;
+          setShowSpinner(false);
+        });
+      return;
     }
+    dispatch(removeRecipeFromFavorites(recipeId))
+      .then(data => {
+        if (!data.payload.type) {
+          e.target.textContent = initBtnName[1];
+        }
+      })
+      .finally(data => {
+        e.target.disabled = false;
+        setShowSpinner(false);
+      });
   };
 
   return (
@@ -59,19 +74,21 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
           </p>
         ))}
       </ul>
-      <Button onClick={handleClick} className={css.btn}>
-        {btnTextContent}
+      <div className={css.btnWrapper}>
+        <Button onClick={handleClick} className={css.btn}>
+          {btnTextContent}
+        </Button>
         {showSpinner && (
           <span className={css.spinner}>
             <InfinitySpin
-              visible={loading}
+              visible={showSpinner}
               width="120"
               color="#bfbebe"
               ariaLabel="infinity-spin-loading"
             />
           </span>
         )}
-      </Button>
+      </div>
     </section>
   );
 };

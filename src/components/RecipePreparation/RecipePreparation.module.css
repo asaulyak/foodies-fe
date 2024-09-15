@@ -32,7 +32,10 @@
 .btn:disabled {
   filter: blur(0px);
 }
-
+.btnWrapper {
+  position: relative;
+  display: inline-block;
+}
 .spinner {
   position: absolute;
   top: 50%;
