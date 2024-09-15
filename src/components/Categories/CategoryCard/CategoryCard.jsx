@@ -1,40 +1,43 @@
 import { Link } from 'react-router-dom';
-import styles from './CategoryCard.module.css';
-import { Button } from '../../Button/Button';
+import css from './CategoryCard.module.css';
 import { MdArrowOutward } from 'react-icons/md';
+import clsx from 'clsx';
 
 export const CategoryCard = ({ category }) => {
-  const { id, name, description } = category;
+  const { id, name } = category;
 
   return (
     <>
-      {name === 'ALL CATEGORIES' ? (
-        <Link
-          to={`categories/${id}`}
-          className={styles.all_categories_card_text_link}
-        >
-          <li className={styles.all_categories_card}>{name}</li>
-        </Link>
+      {id === 'all' ? (
+        <li className={css.all_categories_card}>
+          <Link
+            to={`categories/${id}`}
+            className={css.all_categories_card_text_link}
+          >
+            {name}
+          </Link>
+        </li>
       ) : (
-        <Link to={`categories/${id}`}>
-          <li className={styles.category_card}>
+        <li className={clsx(css.category_card)}>
+          <Link to={`categories/${id}`}>
             <img
-              className={styles.card_image}
+              className={css.card_image}
               srcSet={`
                   ${import.meta.env.BASE_URL}/categoryImages/${name}.jpg 1x,
                   ${import.meta.env.BASE_URL}/categoryImages/${name}@2x.jpg 2x
                 `}
-              src={`${import.meta.env.BASE_URL}/categoryImages/${name}.png`}
+              src={`${import.meta.env.BASE_URL}/categoryImages/${name}.jpg`}
               alt={name}
             />
-            <div className={styles.card_textbox}>
-              <h3 className={styles.card_text}>{name}</h3>
-              <button className={styles.card_button}>
-                <MdArrowOutward size={18} />
-              </button>
-            </div>
-          </li>
-        </Link>
+          </Link>
+
+          <div className={css.card_textbox}>
+            <h3 className={css.card_text}>{name}</h3>
+            <button className={css.card_button}>
+              <MdArrowOutward size={18} />
+            </button>
+          </div>
+        </li>
       )}
     </>
   );

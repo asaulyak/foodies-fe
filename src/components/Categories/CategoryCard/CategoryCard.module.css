@@ -35,23 +35,9 @@
   overflow: hidden;
 }
 
-.category_card::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    0deg,
-    var(--cardOverlay) 0%,
-    var(--cardOverlay) 100%
-  );
-}
-
 .card_image {
   object-fit: cover;
+  height: 100%;
 }
 
 .card_textbox {
@@ -148,6 +134,8 @@ svg {
   .category_card {
     width: 325px;
     height: 369px;
+
+    position: relative;
   }
 
   .all_categories_card {
