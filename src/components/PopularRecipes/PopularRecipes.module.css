@@ -7,7 +7,7 @@
   font-style: normal;
   font-weight: 800;
   line-height: 1.333;
-  letter-spacing: -0.36px;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
@@ -20,7 +20,7 @@
     margin-bottom: 40px;
     font-size: 24px;
     line-height: 1.167;
-    letter-spacing: -0.48px;
+    letter-spacing: -0.02em;
   }
   .list {
     display: flex;
