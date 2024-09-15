@@ -59,7 +59,7 @@ export const SignForm = ({ modalType }) => {
           <div className={styles.passwordContainer}>
             <input
               className={styles.inputField}
-              placeholder="Password"
+              placeholder="Password*"
               type={showPassword ? 'text' : 'password'}
               {...register('password')}
             />
