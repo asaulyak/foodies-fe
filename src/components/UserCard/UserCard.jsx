@@ -7,36 +7,42 @@ import { useNavigate } from 'react-router-dom';
 
 const initBtnName = ['follow', 'following'];
 
-export const UserCard = ({ user, activeTab, deleteCard = null }) => {
+export const UserCard = ({
+  avatar,
+  id,
+  name,
+  recipes,
+  activeTab,
+  ownsRecipes,
+  onDelete = null,
+}) => {
   const navigate = useNavigate();
   const btnName = activeTab === 'followers' ? initBtnName[0] : initBtnName[1];
 
   const handleClick = async e => {
     if (e.target.textContent === initBtnName[0] && activeTab === 'followers') {
-      await http
-        .post('/users/subscribe', { subscribedTo: user.id })
-        .then(data => {
-          e.target.textContent = initBtnName[1];
-        });
+      await http.post('/users/subscribe', { subscribedTo: id }).then(data => {
+        e.target.textContent = initBtnName[1];
+      });
       return;
     }
     if (e.target.textContent === initBtnName[1] && activeTab === 'followers') {
-      await http.delete(`/users/unsubscribe/${user.id}`).then(data => {
+      await http.delete(`/users/unsubscribe/${id}`).then(data => {
         e.target.textContent = initBtnName[0];
+        onDelete(id);
       });
       return;
     }
     if (e.target.textContent === initBtnName[1] && activeTab === 'following') {
-      await http.delete(`/users/unsubscribe/${user.id}`).then(data => {
-        if (!deleteCard) return;
-        deleteCard(user.id);
+      await http.delete(`/users/unsubscribe/${id}`).then(data => {
+        onDelete(id);
       });
       return;
     }
   };
 
   const handleClickNavigate = () => {
-    navigate(`/user/${user.id}`);
+    navigate(`/user/${id}`);
   };
 
   return (
@@ -45,7 +51,7 @@ export const UserCard = ({ user, activeTab, deleteCard = null }) => {
         <div className={css.avatarWrapper}>
           <img
             className={css.userAvatarImage}
-            src={user.avatar || ''}
+            src={avatar || ''}
             alt="Avatar"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
@@ -57,17 +63,15 @@ export const UserCard = ({ user, activeTab, deleteCard = null }) => {
         </div>
 
         <div className={css.userDetails}>
-          <h3 className={css.userName}>{user.name}r</h3>
-          <p
-            className={css.userDescription}
-          >{`Own recipes: ${user.ownsRecipes}`}</p>
+          <h3 className={css.userName}>{name}r</h3>
+          <p className={css.userDescription}>{`Own recipes: ${ownsRecipes}`}</p>
           <Button onClick={handleClick} className={css.mainBtn}>
             {btnName}
           </Button>
         </div>
       </div>
       <ul className={css.recipeImageList}>
-        {user.recipes.map(image => (
+        {recipes.map(image => (
           <li key={image.id} className={css.imageItem}>
             <div className={css.imageWrapper}>
               <img

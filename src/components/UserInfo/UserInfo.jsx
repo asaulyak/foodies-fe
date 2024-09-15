@@ -36,22 +36,26 @@ export const UserInfo = ({
       <div className={css.userWrap}>
         <div className={css.userImgWrap}>
           <img className={css.userImg} src={avatar} alt="" />
-          <div>
-            <input
-              id="file-upload"
-              type="file"
-              className={css.userImgInput}
-              onChange={handleFileChange}
-            />
-            <label htmlFor="file-upload" className={css.userImgBtn}>
-              <Icon
-                iconId="plus"
-                className={css.userImgBtnIcon}
-                width={17}
-                height={16}
+          {isOwner ? (
+            <div>
+              <input
+                id="file-upload"
+                type="file"
+                className={css.userImgInput}
+                onChange={handleFileChange}
               />
-            </label>
-          </div>
+              <label htmlFor="file-upload" className={css.userImgBtn}>
+                <Icon
+                  iconId="plus"
+                  className={css.userImgBtnIcon}
+                  width={17}
+                  height={16}
+                />
+              </label>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <p className={css.userName}>{name}</p>
         <ul className={css.userDetails}>

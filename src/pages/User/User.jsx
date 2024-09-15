@@ -22,6 +22,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { openModal } from '../../redux/modal/modal.slice';
 import { http } from '../../http';
 import { MODAL_TYPE } from '../../utils/constants';
+import { toast } from 'react-toastify';
 
 export const User = () => {
   const { id } = useParams();
@@ -30,33 +31,56 @@ export const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
+
   const [isSubscribed, setIsSubscribed] = useState(false);
+
   const onOpenModal = type => {
     dispatch(openModal(type));
   };
+
   const handleSubscribe = async () => {
-    await http.post(`/users/subscribe/`, { subscribedTo: id });
-    setIsSubscribed(true);
+    try {
+      await http.post(`/users/subscribe/`, { subscribedTo: id });
+      setIsSubscribed(true);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
+
   const handleUnsubscribe = async () => {
-    await http.delete(`/users/unsubscribe/${id}`);
-    setIsSubscribed(false);
+    try {
+      await http.delete(`/users/unsubscribe/${id}`);
+      setIsSubscribed(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
+
   const handleLogout = () => {
     onOpenModal(MODAL_TYPE.logout);
   };
+
   useEffect(() => {
-    dispatch(fetchDetailInfoUser(id));
-    dispatch(fetchCurrentUser());
+    if (id) {
+      dispatch(fetchDetailInfoUser(id));
+    }
+
+    if (!owner) {
+      dispatch(fetchCurrentUser());
+    }
+
     const fetchSubscribeUser = async () => {
-      const { data } = await http.get('/users/following');
-
-      const isUserSubscribed = data.data.some(user => user.id === id);
-
-      setIsSubscribed(isUserSubscribed);
+      try {
+        const { data } = await http.get('/users/following');
+        const isUserSubscribed = data.data.some(user => user.id === id);
+        setIsSubscribed(isUserSubscribed);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
     };
+
     fetchSubscribeUser();
-  }, [dispatch, id]);
+  }, [dispatch, id, owner]);
 
   return (
     <>
@@ -70,30 +94,37 @@ export const User = () => {
         <div className={css.userWrapper}>
           <div className={css.userInfoButtonWrapper}>
             {userCardLoading || isLoading ? (
-              <Loader></Loader>
+              <Loader />
             ) : (
-              <UserInfo {...currentUser} isOwner={owner?.id === id}></UserInfo>
+              <UserInfo {...currentUser} isOwner={owner?.id === id} />
             )}
             {isLoading ? (
-              <Loader></Loader>
+              <Loader />
             ) : owner?.id === id ? (
               <Button onClick={handleLogout} className={css.logOutBtn}>
                 Log Out
               </Button>
-            ) : !isSubscribed ? (
-              <Button onClick={handleSubscribe} className={css.logOutBtn}>
-                Follow
-              </Button>
-            ) : (
+            ) : isSubscribed ? (
               <Button onClick={handleUnsubscribe} className={css.logOutBtn}>
                 Following
+              </Button>
+            ) : (
+              <Button onClick={handleSubscribe} className={css.logOutBtn}>
+                Follow
               </Button>
             )}
           </div>
           {isLoading ? (
-            <Loader></Loader>
+            <Loader />
           ) : (
-            <TabsList isOwner={owner?.id === id} id={id}></TabsList>
+            <TabsList
+              totalRecipes={currentUser?.totalRecipes}
+              totalFollowers={currentUser?.totalFollowers}
+              totalFollowings={currentUser?.totalFollowings}
+              totalFavoritesRecipes={currentUser?.totalFavoritesRecipes}
+              isOwner={owner?.id === id}
+              id={id}
+            />
           )}
         </div>
       </div>

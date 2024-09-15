@@ -3,6 +3,7 @@ import { Icon } from '../Icon/Icon.jsx';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { http } from '../../http/index.js';
+import { MdArrowOutward } from 'react-icons/md';
 
 export const RecipePreview = ({
   title,
@@ -47,7 +48,7 @@ export const RecipePreview = ({
         onDelete(id);
       }
     } catch (error) {
-      console.error('Failed to delete recipe', error);
+      toast.error(error.response.data.message);
     }
   };
   const truncatedDescriptionText =
@@ -70,13 +71,7 @@ export const RecipePreview = ({
       </div>
       <div className={css.recipePreviewWrapperIcon}>
         <NavLink className={css.recipePreviewBtn} to={`/recipe/${id}`}>
-          <Icon
-            iconId="arrow-recipes"
-            className={css.recipePreviewIcon}
-            width={16}
-            height={16}
-            stroke={'#050505'}
-          ></Icon>
+          <MdArrowOutward />
         </NavLink>
         {isOwner ? (
           <button onClick={handleDelete} className={css.recipePreviewBtn}>

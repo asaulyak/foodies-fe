@@ -1,6 +1,9 @@
 .recipePreviewItem {
   display: flex;
 }
+.recipePreviewItem:not(:last-child) {
+  margin-bottom: 32px;
+}
 .recipePreviewImg {
   width: 75px;
   height: 75px;
@@ -19,6 +22,7 @@
 .recipePreviewWrapperIcon {
   margin-left: auto;
   display: flex;
+  gap: 4px;
 }
 .recipePreviewTitle {
   font-style: 16px;
@@ -52,5 +56,8 @@
   }
   .recipePreviewOverlay {
     gap: 10px;
+  }
+  .recipePreviewItem:not(:last-child) {
+    margin-bottom: 40px;
   }
 }
