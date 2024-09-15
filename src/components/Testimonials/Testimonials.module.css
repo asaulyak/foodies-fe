@@ -1,4 +1,3 @@
-
 .swiper_custom_styles {
   --swiper-pagination-color: var(--black);
   --swiper-pagination-bullet-inactive-color: var(--grey);
@@ -14,7 +13,7 @@
 
 .subheading {
   font-family: Mulish;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.02em;
@@ -23,11 +22,12 @@
 
 .heading {
   font-family: Mulish;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 800;
-  line-height: 44px;
+  line-height: 1.4;
   letter-spacing: -0.02em;
   text-align: center;
+  margin-top: 16px;
 }
 
 .slide {
@@ -36,7 +36,7 @@
 
 .text {
   font-family: Mulish;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 36px;
   letter-spacing: -0.02em;
@@ -71,16 +71,16 @@
 
 @media screen and (max-width: 767px) {
   .swiper_custom_styles {
-  --swiper-pagination-color: var(--black);
-  --swiper-pagination-bullet-inactive-color: var(--grey);
-  --swiper-pagination-bullet-inactive-opacity: 1;
-  --swiper-pagination-bullet-size: 16px;
-  --swiper-pagination-bullet-horizontal-gap: 8px;
-}
+    --swiper-pagination-color: var(--black);
+    --swiper-pagination-bullet-inactive-color: var(--grey);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-size: 16px;
+    --swiper-pagination-bullet-horizontal-gap: 8px;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1157px) {
-    .quotesImage {
+  .quotesImage {
     margin-top: -12px;
     margin-left: 40px;
   }
@@ -90,5 +90,16 @@
   }
 }
 
-@media screen and (min-width: 1158px) {
+@media screen and (min-width: 768px) {
+  .text {
+    font-size: 24px;
+  }
+  .subheading {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .heading {
+    font-size: 40px;
+    line-height: 1.1;
+  }
 }
