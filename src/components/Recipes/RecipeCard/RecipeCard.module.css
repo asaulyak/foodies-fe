@@ -15,10 +15,14 @@
 }
 
 .headerCard {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  margin-bottom: 8px;
+
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.333;
+  letter-spacing: -0.36px;
+  text-transform: uppercase;
 }
 
 .recipeImage {
@@ -29,21 +33,21 @@
   object-fit: cover;
   @media screen and (min-width: 768px) {
     height: 275px;
+    border-radius: 30px;
   }
 }
 
-.textWrap {
-  margin-bottom: 8px;
-}
-
 .recipeDescription {
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 14px;
   line-height: 1.4em;
-  max-height: 2.8em;
-  display: block;
-  white-space: nowrap;
+  height: 2.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;
@@ -58,38 +62,6 @@
   align-items: center;
 }
 
-.userWrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  @media screen and (min-width: 768px) {
-    gap: 10px;
-  }
-}
-
-.avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-
-  @media screen and (min-width: 768px) {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-.userName {
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: bold;
-
-  @media screen and (min-width: 768px) {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-}
-
 .iconList {
   list-style: none;
   display: flex;
@@ -99,6 +71,7 @@
 }
 
 .iconWrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,9 +79,100 @@
   height: 36px;
   border-radius: 100px;
   border: 1px solid var(--grey);
+  background-color: transparent;
+  transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 
-  @media screen and (min-width: 768px) {
+.iconWrapper:hover,
+.iconWrapper:focus {
+  transform: scale(1.1);
+}
+
+@media screen and (min-width: 768px) {
+  .iconWrapper {
     width: 42px;
     height: 42px;
+  }
+}
+.active {
+  fill: var(--black);
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% - 22px), calc(-50% + 3px));
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 0 0;
+  border-radius: 32px;
+  border: none;
+  background-color: transparent;
+  height: 32px;
+  text-transform: none;
+}
+
+.btn:hover,
+.btn:focus,
+.btn:focus-visible {
+  box-shadow:
+    -2.179px -2.179px 6.537px 0px #fff,
+    2.179px 2.179px 6.537px 0px rgba(62, 62, 64, 0.4);
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--grey);
+  overflow: hidden;
+}
+.btnThumb {
+  color: var(--grey);
+  text-align: start;
+}
+.text {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.24px;
+}
+.accentText {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.429;
+  letter-spacing: -0.28px;
+}
+
+@media only screen and (min-width: 768px) {
+  .btn {
+    height: 40px;
+  }
+
+  .btnWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.429;
+    letter-spacing: -0.28px;
+  }
+
+  .accentText {
+    color: var(--black-light);
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.32px;
   }
 }
