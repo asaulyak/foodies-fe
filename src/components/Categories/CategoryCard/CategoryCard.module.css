@@ -12,15 +12,20 @@
   overflow: hidden;
 }
 
-.all_categories_card_text_link {
+.all_categories_card_link {
   color: var(--white);
-  font-family: Mulish;
   font-size: 20px;
   font-style: normal;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.5;
   letter-spacing: -0.02em;
   text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .category_card {

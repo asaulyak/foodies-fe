@@ -12,7 +12,7 @@ export const CategoryCard = ({ category }) => {
         <li className={css.all_categories_card}>
           <Link
             to={`categories/${id}`}
-            className={css.all_categories_card_text_link}
+            className={css.all_categories_card_link}
           >
             {name}
           </Link>
