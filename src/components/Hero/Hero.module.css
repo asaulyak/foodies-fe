@@ -39,23 +39,23 @@
   font-size: 40px;
   font-style: normal;
   font-weight: 800;
-  line-height: 40px; /* 100% */
-  letter-spacing: -0.8px;
+  line-height: 1;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 
   @media screen and (min-width: 768px) {
     width: 678px;
 
     font-size: 70px;
-    line-height: 70px; /* 100% */
-    letter-spacing: -1.4px;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
   @media screen and (min-width: 1440px) {
     width: 875px;
 
     font-size: 90px;
-    line-height: 90px; /* 100% */
-    letter-spacing: -1.8px;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -66,20 +66,20 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.28px;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
 
   @media screen and (min-width: 768px) {
     width: 577px;
     margin-top: 40px;
 
     font-size: 16px;
-    line-height: 24px; /* 150% */
-    letter-spacing: -0.32px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
   }
   @media screen and (min-width: 1440px) {
     font-size: 16px;
-    line-height: 24px; /* 150% */
+    line-height: 1.5;
   }
 }
 
@@ -99,8 +99,8 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 142.857% */
-  letter-spacing: -0.28px;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 
   @media screen and (min-width: 768px) {
@@ -108,8 +108,8 @@
 
     padding: 16px 32px;
     font-size: 16px;
-    line-height: 24px; /* 150% */
-    letter-spacing: -0.32px;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -126,15 +126,15 @@
     width: 678px;
 
     font-size: 70px;
-    line-height: 70px; /* 100% */
-    letter-spacing: -1.4px;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
   @media screen and (min-width: 1440px) {
     width: 875px;
 
     font-size: 90px;
-    line-height: 90px; /* 100% */
-    letter-spacing: -1.8px;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 }
 
