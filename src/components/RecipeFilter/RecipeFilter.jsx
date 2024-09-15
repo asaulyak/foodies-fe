@@ -78,12 +78,14 @@ export const RecipeFilter = () => {
 
   const handleIngredientChange = e => {
     searchParams.set('ingredient', e.value);
+    searchParams.set('page', '1');
 
     setSearchParams(searchParams);
   };
 
   const handleAreaChange = e => {
     searchParams.set('area', e.value);
+    searchParams.set('page', '1');
 
     setSearchParams(searchParams);
   };
