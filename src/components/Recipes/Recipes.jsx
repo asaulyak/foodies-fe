@@ -19,7 +19,7 @@ export const Recipes = () => {
   const [searchParams] = useSearchParams();
   const [filters, setFilters] = useState({});
   const [recipes, setRecipes] = useState([]);
-  const [pagination, setPagination] = useState({ limit: 10, total: 0 });
+  const [pagination, setPagination] = useState({ limit: 12, total: 0 });
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState(null);
 
@@ -29,7 +29,6 @@ export const Recipes = () => {
 
   useEffect(() => {
     if (!categories?.length) {
-      c;
       dispatch(fetchCategoriesList());
     }
   }, [dispatch]);
@@ -48,7 +47,7 @@ export const Recipes = () => {
     };
 
     if (ingredientId) {
-      updatedFilter['ingredientId[]'] =
+      updatedFilter['ingredientIds[]'] =
         ingredientId === 'all' ? undefined : ingredientId;
     }
 

@@ -24,7 +24,7 @@ const Pagination = ({ total, limit = 10 }) => {
 
   // Update maxVisibleButtons on initial load and on window resize
   useEffect(() => {
-    if (!total) {
+    if (!total || total <= limit) {
       return;
     }
 
@@ -49,7 +49,7 @@ const Pagination = ({ total, limit = 10 }) => {
     }
   }, [currentPage, totalPages, setSearchParams]);
 
-  if (!total) {
+  if (!total || total <= limit) {
     return <></>;
   }
 
