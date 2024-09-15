@@ -102,6 +102,19 @@
 .time_base {
   color: var(--grey);
 }
+.form_btn {
+  position: relative;
+  min-width: 120px;
+}
+.spinner_active:hover {
+  background-color: #1a1a1a;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(calc(-50% - 20px), calc(-50% + 4px));
+}
 @media only screen and (max-width: 768px) {
   .clear_button svg {
     stroke: var(--grey);

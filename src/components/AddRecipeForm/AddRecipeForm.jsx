@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import { toast } from 'react-toastify';
 import { selectUser } from '../../redux/user/user.selectors.js';
+import { InfinitySpin } from 'react-loader-spinner';
 
 const schema = yup.object().shape({
   image: yup
@@ -99,6 +100,7 @@ export const AddRecipeForm = () => {
   const areas = useSelector(areasList);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCategoriesList());
@@ -140,6 +142,7 @@ export const AddRecipeForm = () => {
       quantity: ingredient.quantity,
     }));
     try {
+      setShowSpinner(true);
       const imageUrl = await http.post('/recipes/thumb', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -159,7 +162,10 @@ export const AddRecipeForm = () => {
       toast.success('New recipe added successfully!');
       navigate(`/user/${user.id}`);
     } catch (error) {
+      setShowSpinner(false);
       toast.error('Something went wrong, please try again.');
+    } finally {
+      setShowSpinner(false);
     }
   };
   const handleReset = () => {
@@ -451,9 +457,20 @@ export const AddRecipeForm = () => {
           <Button
             type="submit"
             variant={'color'}
-            children={'Publish'}
-            className={css.form_btn}
-          ></Button>
+            className={`${css.form_btn} ${showSpinner ? css.spinner_active : ''}`}
+          >
+            {!showSpinner && <span>Publish</span>}
+            {showSpinner && (
+              <span className={css.spinner}>
+                <InfinitySpin
+                  visible={showSpinner}
+                  width="120"
+                  color="#bfbebe"
+                  ariaLabel="infinity-spin-loading"
+                />
+              </span>
+            )}
+          </Button>
         </div>
       </div>
     </form>

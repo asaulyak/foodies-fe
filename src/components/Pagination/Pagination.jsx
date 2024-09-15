@@ -6,8 +6,6 @@ import css from './Pagination.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
 const Pagination = ({ total, limit = 10 }) => {
-  if (!total) return null;
-
   const [maxVisibleButtons, setMaxVisibleButtons] = useState(3);
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(total / limit);
@@ -26,6 +24,10 @@ const Pagination = ({ total, limit = 10 }) => {
 
   // Update maxVisibleButtons on initial load and on window resize
   useEffect(() => {
+    if (!total || total <= limit) {
+      return;
+    }
+
     setMaxVisibleButtons(getMaxVisibleButtons());
 
     const handleResize = () => {
@@ -42,13 +44,20 @@ const Pagination = ({ total, limit = 10 }) => {
   // Automatically redirect the user if the current page becomes invalid
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
-      setSearchParams({ page: totalPages });
+      searchParams.set('page', String(totalPages));
+      setSearchParams(searchParams);
     }
   }, [currentPage, totalPages, setSearchParams]);
 
+  if (!total || total <= limit) {
+    return <></>;
+  }
+
   const handlePageQuery = page => {
     if (page >= 1 && page <= totalPages) {
-      setSearchParams({ page: page });
+      searchParams.set('page', String(page));
+
+      setSearchParams(searchParams);
     }
   };
 
