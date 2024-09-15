@@ -16,7 +16,7 @@ export const Testimonials = () => {
         const { data } = await http.get('/reviews');
         setTestimonials(data);
       } catch (error) {
-        console.error('Error fetching testimonials:', error);
+        toast.error(error.response.data.message);
       }
     };
 
@@ -46,7 +46,7 @@ export const Testimonials = () => {
           pagination={{
             clickable: true,
           }}
-          className={css.swiper_custom_styles} 
+          className={css.swiper_custom_styles}
         >
           {testimonials.map(testimonial => (
             <SwiperSlide key={testimonial.id}>

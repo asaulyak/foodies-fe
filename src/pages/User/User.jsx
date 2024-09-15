@@ -22,6 +22,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { openModal } from '../../redux/modal/modal.slice';
 import { http } from '../../http';
 import { MODAL_TYPE } from '../../utils/constants';
+import { toast } from 'react-toastify';
 
 export const User = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ export const User = () => {
       await http.post(`/users/subscribe/`, { subscribedTo: id });
       setIsSubscribed(true);
     } catch (error) {
-      console.error('Ошибка при подписке:', error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -51,7 +52,7 @@ export const User = () => {
       await http.delete(`/users/unsubscribe/${id}`);
       setIsSubscribed(false);
     } catch (error) {
-      console.error('Ошибка при отписке:', error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -74,7 +75,7 @@ export const User = () => {
         const isUserSubscribed = data.data.some(user => user.id === id);
         setIsSubscribed(isUserSubscribed);
       } catch (error) {
-        console.error('Ошибка при получении подписок:', error);
+        toast.error(error.response.data.message);
       }
     };
 

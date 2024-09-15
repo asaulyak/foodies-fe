@@ -48,7 +48,7 @@ export const RecipePreview = ({
         onDelete(id);
       }
     } catch (error) {
-      console.error('Failed to delete recipe', error);
+      toast.error(error.response.data.message);
     }
   };
   const truncatedDescriptionText =
