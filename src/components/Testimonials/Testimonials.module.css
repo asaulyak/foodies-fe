@@ -8,7 +8,7 @@
 
 .testimonials {
   text-align: center;
-  padding: 2rem;
+  padding: 0 16px 80px;
 }
 
 .subheading {
@@ -31,14 +31,15 @@
 }
 
 .slide {
-  padding: 3rem;
+  padding: 64px 0rem 40px;
+  margin-bottom: 20px;
 }
 
 .text {
   font-family: Mulish;
   font-size: 18px;
   font-weight: 500;
-  line-height: 36px;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   text-align: center;
   display: flex;
@@ -67,6 +68,8 @@
   left: 9%;
   float: left;
   margin-right: 20px;
+  width: 59px;
+  height: 48px;
 }
 
 @media screen and (max-width: 767px) {
@@ -76,6 +79,23 @@
     --swiper-pagination-bullet-inactive-opacity: 1;
     --swiper-pagination-bullet-size: 16px;
     --swiper-pagination-bullet-horizontal-gap: 8px;
+  }
+  .quotesImage {
+    margin-left: 8px;
+    position: absolute;
+    left: 0;
+    float: left;
+    margin-right: 20px;
+    object-fit: contain;
+    scale: 0.7;
+  }
+  .text {
+    font-family: Mulish;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    text-align: center;
   }
 }
 
@@ -93,6 +113,7 @@
 @media screen and (min-width: 768px) {
   .text {
     font-size: 24px;
+    line-height: 1.5;
   }
   .subheading {
     font-size: 16px;
@@ -101,5 +122,25 @@
   .heading {
     font-size: 40px;
     line-height: 1.1;
+  }
+  .quotesImage {
+    margin-left: 8px;
+    position: absolute;
+    left: 9%;
+    float: left;
+    margin-right: 20px;
+  }
+  .slide {
+    padding: 80px 1rem 40px;
+    margin-bottom: 40px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .slide {
+    padding: 80px 15rem 40px;
+    margin-bottom: 40px;
+  }
+  .quotesImage {
+    left: 18%;
   }
 }

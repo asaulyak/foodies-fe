@@ -34,8 +34,6 @@ export const Testimonials = () => {
         </div>
         <Icon
           iconId="quotes"
-          width={59}
-          height={48}
           className={css.quotesImage}
         ></Icon>
         <Swiper
