@@ -22,6 +22,9 @@ export const fetchDetailInfoUser = createAsyncThunk(
     try {
       const { data } = await http.get(`${'/users/info/' + id}`);
 
+      console.log('id fetchDetailInfoUser', id);
+      console.log('data fetchDetailInfoUser', data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -6,6 +6,7 @@ import { RecipePreview } from '../RecipePreview/RecipePreview';
 import { UserCard } from '../UserCard/UserCard';
 import { Loader } from '../Loader/Loader';
 import { useSearchParams } from 'react-router-dom';
+import { SIZE } from '../../utils/constants';
 
 export const TabsList = ({
   isOwner,
@@ -43,6 +44,7 @@ export const TabsList = ({
           const response = await http.get(`/users/${activeTab}/${id}`);
           data = response.data;
         }
+        console.log('data.data', data.data);
 
         if (data) {
           setListItems(data.data);
@@ -58,7 +60,7 @@ export const TabsList = ({
     };
 
     fetchData();
-  }, [activeTab, page, id, isOwner]);
+  }, [activeTab, page, id, isOwner, totalFollowers]);
   useEffect(() => {
     setActiveTab('recipes');
   }, [id]);
@@ -101,7 +103,7 @@ export const TabsList = ({
 
       <div className="list-items">
         {isLoading ? (
-          <Loader />
+          <Loader size={SIZE.medium} />
         ) : listItems?.length === 0 ? (
           <p>
             Nothing has been added to your recipes list yet. Please browse our

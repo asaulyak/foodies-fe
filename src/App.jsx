@@ -5,7 +5,7 @@ import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
-import { User } from './pages/User/User.jsx';
+// import { User } from './pages/User/User.jsx';
 import { Loader } from './components/Loader/Loader.jsx';
 
 import { selectUser } from './redux/user/user.selectors.js';
@@ -25,6 +25,7 @@ function App() {
   const Recipes = lazy(() => import('./components/Recipes/Recipes.jsx'));
   const RecipePage = lazy(() => import('./pages/RecipePage/RecipePage.jsx'));
   const AddRecipe = lazy(() => import('./pages/AddRecipe/AddRecipe.jsx'));
+  const UserPage = lazy(() => import('./pages/User/User.jsx'));
 
   return (
     <>
@@ -40,7 +41,7 @@ function App() {
               path="/user/:id"
               element={
                 <PrivateRoute
-                  element={<User />}
+                  element={<UserPage />}
                   isAuthenticated={isAuthenticated}
                 />
               }

@@ -1,15 +1,17 @@
-// src/hooks/useAuth.js
 import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from '../../../redux/user/user.actions.js';
 import { closeModal } from '../../../redux/modal/modal.slice';
 import { http } from '../../../http/index.js';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const useAuth = (typeForm, reset) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = async body => {
     try {
+      setIsLoading(true);
       const requestData = { ...body };
       if (typeForm === 'signin') {
         delete requestData.name;
@@ -31,10 +33,12 @@ const useAuth = (typeForm, reset) => {
       } else {
         toast.error('Something went wrong, please try again.');
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { onSubmit };
+  return { onSubmit, isLoading };
 };
 
 export default useAuth;

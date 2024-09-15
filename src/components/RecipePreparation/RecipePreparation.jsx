@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
 import { Button } from '../Button/Button.jsx';
 import {
   selectFavoriteRecipes,
@@ -15,6 +13,7 @@ import {
   addRecipeToFavorites,
   removeRecipeFromFavorites,
 } from '../../redux/user/user.actions.js';
+import { Loader } from '../Loader/Loader.jsx';
 
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
@@ -24,8 +23,6 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
   const error = useSelector(selectError);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
   const loading = useSelector(selectIsLoading);
-
-  const [showSpinner, setShowSpinner] = useState(loading);
 
   const btnTextContent = favoritesRecipes.includes(recipeId)
     ? initBtnName[0]
@@ -37,31 +34,21 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     }
 
     e.target.disabled = true;
-    setShowSpinner(true);
 
     if (!favoritesRecipes.includes(recipeId)) {
-      dispatch(addRecipeToFavorites(recipeId))
-        .then(data => {
-          if (!data.payload.type) {
-            e.target.textContent = initBtnName[0];
-          }
-        })
-        .finally(data => {
-          e.target.disabled = false;
-          setShowSpinner(false);
-        });
+      dispatch(addRecipeToFavorites(recipeId)).then(data => {
+        if (!data.payload.type) {
+          e.target.textContent = initBtnName[0];
+        }
+      });
+
       return;
     }
-    dispatch(removeRecipeFromFavorites(recipeId))
-      .then(data => {
-        if (!data.payload.type) {
-          e.target.textContent = initBtnName[1];
-        }
-      })
-      .finally(data => {
-        e.target.disabled = false;
-        setShowSpinner(false);
-      });
+    dispatch(removeRecipeFromFavorites(recipeId)).then(data => {
+      if (!data.payload.type) {
+        e.target.textContent = initBtnName[1];
+      }
+    });
   };
 
   return (
@@ -74,20 +61,10 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
           </p>
         ))}
       </ul>
-      <div className={css.btnWrapper}>
-        <Button onClick={handleClick} className={css.btn}>
-          {btnTextContent}
+      <div>
+        <Button disabled={loading} onClick={handleClick} className={css.btn}>
+          {loading ? <Loader /> : btnTextContent}
         </Button>
-        {showSpinner && (
-          <span className={css.spinner}>
-            <InfinitySpin
-              visible={showSpinner}
-              width="120"
-              color="#bfbebe"
-              ariaLabel="infinity-spin-loading"
-            />
-          </span>
-        )}
       </div>
     </section>
   );
