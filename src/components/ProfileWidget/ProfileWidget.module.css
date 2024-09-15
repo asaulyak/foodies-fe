@@ -80,16 +80,19 @@
 }
 
 .signout-icon {
-  fill: currentColor;
+  stroke: currentColor;
 }
 
 .icon-text {
   display: flex;
   align-items: center;
+  gap: 2px;
 
-  background: none!important;
+  line-height: 1.5;
+
+  background: none !important;
   border: none;
-  padding: 0!important;
+  padding: 0 !important;
   color: var(--white);
   cursor: pointer;
   text-transform: uppercase;
@@ -104,7 +107,7 @@
   background-color: var(--black-light);
   color: var(--white);
   border-color: var(--grey);
-   height: 46px;
+  height: 46px;
 }
 
 .button.buttonSignup:hover {

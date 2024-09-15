@@ -66,11 +66,11 @@ export const ProfileWidget = () => {
           </li>
           <li>
             <button className={css['icon-text']} onClick={handleLogout}>
-              Log out{' '}
+              <span>Log out</span>
               <Icon
                 iconId="arrow-up"
-                width={9}
-                height={9}
+                width={18}
+                height={18}
                 className={clsx(css['signout-icon'])}
               />
             </button>
