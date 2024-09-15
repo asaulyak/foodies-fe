@@ -1,19 +1,85 @@
-import { Link } from 'react-router-dom';
-import { FaRegHeart } from 'react-icons/fa6';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaRegHeart, FaHeart } from 'react-icons/fa6';
 import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
+import { useState } from 'react';
+import { InfinitySpin } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styles from './RecipeCard.module.css';
 
-export const RecipeCard = ({ recipe }) => {
+import {
+  selectFavoriteRecipes,
+  selectUser,
+  selectIsLoading,
+  selectError,
+} from '../../../redux/user/user.selectors.js';
+import { openModal } from '../../../redux/modal/modal.slice.js';
+import { MODAL_TYPE } from '../../../utils/constants.js';
+import {
+  addRecipeToFavorites,
+  removeRecipeFromFavorites,
+} from '../../../redux/user/user.actions.js';
+
+export const RecipeCard = ({ recipe, className, borderStyles }) => {
   const { id, title, user, description, thumb } = recipe;
+  const favorites = useSelector(selectFavoriteRecipes);
+  const isLogged = useSelector(selectUser);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isFavoriteRecipe = !isLogged ? false : favorites.includes(id);
+
+  const [favorite, setFavorite] = useState(isFavoriteRecipe);
+  const [loading, setLoading] = useState(isLoading);
+
+  const handleClickFavorites = e => {
+    if (!isLogged || error?.includes(401)) {
+      dispatch(openModal(MODAL_TYPE.signin));
+      return;
+    }
+
+    e.target.disabled = true;
+    setLoading(true);
+    if (favorite) {
+      dispatch(removeRecipeFromFavorites(id))
+        .catch(e => {
+          dispatch(openModal(MODAL_TYPE.signin));
+        })
+        .finally(data => {
+          setFavorite(false);
+          setLoading(false);
+          e.target.disabled = false;
+        });
+      return;
+    }
+    dispatch(addRecipeToFavorites(id)).finally(data => {
+      setFavorite(true);
+      setLoading(false);
+      e.target.disabled = false;
+    });
+  };
+
+  const handleClickToRecipe = () => {
+    navigate(`/recipe/${id}`);
+  };
+
+  const handleClickUser = () => {
+    if (!isLogged || error?.includes(401)) {
+      return dispatch(openModal(MODAL_TYPE.signin));
+    }
+    navigate(`/user/${user.id}`);
+  };
 
   return (
-    <li className={clsx([styles.card])}>
+    <li className={clsx([styles.card, className])}>
       <Link to={`/recipe/${id}`}>
         <img
           src={thumb}
           alt={title || 'Untitled Recipe'}
-          className={styles.recipeImage}
+          className={clsx([styles.recipeImage, borderStyles])}
         />
       </Link>
       <div className={styles.cardContent}>
@@ -24,27 +90,58 @@ export const RecipeCard = ({ recipe }) => {
           </p>
         </div>
         <div className={styles.avatarIconsRow}>
-          <div className={styles.userWrapper}>
-            <span>
-              <Link to={`/user/${user.id}`}>
+          <button
+            type="button"
+            className={styles.btn}
+            onClick={handleClickUser}
+          >
+            <>
+              <span className={styles.btnWrapper}>
                 <img
                   src={user.avatar || `https://www.gravatar.com/avatar`}
-                  alt={`${user.name} avatar`}
-                  className={styles.avatar}
+                  alt="User Avatar"
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src =
+                      'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+                  }}
                 />
-              </Link>
-            </span>
-            <p className={styles.userName}>{user.name}</p>
-          </div>
+              </span>
+              <span className={styles.btnThumb}>
+                <span className={styles.accentText}>{user.name}</span>
+              </span>
+            </>
+          </button>
 
           <ul className={styles.iconList}>
-            <li className={styles.iconWrapper}>
-              <FaRegHeart size={18} />
+            <li>
+              <button
+                type="button"
+                className={styles.iconWrapper}
+                onClick={handleClickFavorites}
+              >
+                {favorite && !loading && <FaHeart size={18} />}
+                {!favorite && !loading && <FaRegHeart size={18} />}
+                {loading && (
+                  <span className={styles.spinner}>
+                    <InfinitySpin
+                      visible={loading}
+                      width="80"
+                      color="#bfbebe"
+                      ariaLabel="infinity-spin-loading"
+                    />
+                  </span>
+                )}
+              </button>
             </li>
             <li>
-              <Link to={`/recipe/${id}`} className={styles.iconWrapper}>
+              <button
+                type="button"
+                className={styles.iconWrapper}
+                onClick={handleClickToRecipe}
+              >
                 <MdArrowOutward size={18} />
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
