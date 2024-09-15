@@ -5,9 +5,7 @@ import { lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import { Home } from './pages/Home/Home.jsx';
-// import { User } from './pages/User/User.jsx';
 import { Loader } from './components/Loader/Loader.jsx';
-
 import { selectUser } from './redux/user/user.selectors.js';
 import PrivateRoute from './PrivateRoute.jsx';
 import { ToastContainer } from 'react-toastify';

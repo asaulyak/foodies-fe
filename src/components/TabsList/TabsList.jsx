@@ -44,7 +44,6 @@ export const TabsList = ({
           const response = await http.get(`/users/${activeTab}/${id}`);
           data = response.data;
         }
-        console.log('data.data', data.data);
 
         if (data) {
           setListItems(data.data);

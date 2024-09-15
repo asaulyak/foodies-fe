@@ -35,8 +35,6 @@ const User = () => {
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
 
-  console.log('currentUser', currentUser);
-
   useEffect(() => {
     setIsloadingUser(isLoading);
   }, [isLoading]);
