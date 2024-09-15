@@ -1,0 +1,1 @@
+import{j as i,c as e}from"./index-BXhOBMuo.js";const n="_main_title_r3oml_1",a={main_title:n},o=({children:t,className:s})=>i.jsx("h2",{className:e([a.main_title,s]),children:t}),l="_sub_title_qaqnc_1",_={sub_title:l},m=({children:t,className:s})=>i.jsx("p",{className:e([_.sub_title,s]),children:t});export{o as M,m as S};
