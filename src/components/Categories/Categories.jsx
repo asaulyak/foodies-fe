@@ -12,7 +12,6 @@ import { Loader } from '../Loader/Loader';
 export const Categories = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchCategoriesList());
