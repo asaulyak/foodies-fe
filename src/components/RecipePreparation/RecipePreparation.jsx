@@ -14,6 +14,7 @@ import {
   removeRecipeFromFavorites,
 } from '../../redux/user/user.actions.js';
 import { Loader } from '../Loader/Loader.jsx';
+import { useState } from 'react';
 
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
@@ -23,6 +24,8 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
   const error = useSelector(selectError);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
   const loading = useSelector(selectIsLoading);
+
+  const [isLoading, setIsLoading] = useState(loading);
 
   const btnTextContent = favoritesRecipes.includes(recipeId)
     ? initBtnName[0]
@@ -34,21 +37,25 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     }
 
     e.target.disabled = true;
-
+    setIsLoading(true);
     if (!favoritesRecipes.includes(recipeId)) {
-      dispatch(addRecipeToFavorites(recipeId)).then(data => {
-        if (!data.payload.type) {
-          e.target.textContent = initBtnName[0];
-        }
-      });
+      dispatch(addRecipeToFavorites(recipeId))
+        .then(data => {
+          if (!data.payload.type) {
+            e.target.textContent = initBtnName[0];
+          }
+        })
+        .finally(setIsLoading(false));
 
       return;
     }
-    dispatch(removeRecipeFromFavorites(recipeId)).then(data => {
-      if (!data.payload.type) {
-        e.target.textContent = initBtnName[1];
-      }
-    });
+    dispatch(removeRecipeFromFavorites(recipeId))
+      .then(data => {
+        if (!data.payload.type) {
+          e.target.textContent = initBtnName[1];
+        }
+      })
+      .finally(setIsLoading(false));
   };
 
   return (
@@ -62,8 +69,8 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
         ))}
       </ul>
       <div>
-        <Button disabled={loading} onClick={handleClick} className={css.btn}>
-          {loading ? <Loader /> : btnTextContent}
+        <Button disabled={isLoading} onClick={handleClick} className={css.btn}>
+          {isLoading ? <Loader /> : btnTextContent}
         </Button>
       </div>
     </section>

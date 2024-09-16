@@ -43,15 +43,10 @@
   background-color: var(--grey);
   overflow: hidden;
   object-fit: cover;
-  transition: transform 200ms ease-in;
   @media screen and (min-width: 768px) {
     height: 275px;
     border-radius: 30px;
   }
-}
-.recipeImage:hover,
-.recipeImage:focus {
-  transform: scale(1.05);
 }
 
 .image {
@@ -206,11 +201,29 @@
   }
 }
 
-.iconArrow {
+.iconArrow,
+.iconHeart {
   stroke: var(--black);
+  width: 18px;
+  height: 18px;
 }
 
 .iconWrapper:hover .iconArrow,
-.iconWrapper:focus .iconArrow {
+.iconWrapper:focus .iconArrow,
+.iconWrapper:hover .iconHeart,
+.iconWrapper:focus .iconHeart {
+  stroke: var(--white);
+}
+.iconHeart {
+  fill: transparent;
+}
+
+.iconHeartAccent {
+  fill: var(--black);
+}
+
+.iconWrapper:hover .iconHeartAccent,
+.iconWrapper:focus .iconHeartAccent {
+  fill: var(--white);
   stroke: var(--white);
 }

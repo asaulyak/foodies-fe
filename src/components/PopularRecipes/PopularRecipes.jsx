@@ -36,7 +36,12 @@ export const PopularRecipes = () => {
       {!!popularRecipes.length && !errorText && !loader && (
         <ul className={css.list}>
           {popularRecipes.map(recipe => (
-            <RecipeCard key={recipe.id} recipe={recipe} className={css.item} />
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              className={css.item}
+              borderStyles={css.itemBorder}
+            />
           ))}
         </ul>
       )}
