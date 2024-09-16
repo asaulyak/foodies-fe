@@ -239,6 +239,7 @@
 .iconWrapper:focus:not(:focus-visible) .iconHeartAccent {
   fill: var(--black);
 }
-.iconWrapper:focus:not(:focus-visible) .iconHeart {
+.iconWrapper:focus:not(:focus-visible) .iconHeart,
+.iconWrapper:focus:not(:focus-visible) .iconArrow {
   stroke: var(--black);
 }
