@@ -4,7 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import styles from './Recipes.module.css';
 import list_styles from './RecipeList/RecipeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MainTitle } from '../MainTitle/MainTitle.jsx';
 import { RecipeFilter } from '../RecipeFilter/RecipeFilter.jsx';
 import Pagination from '../Pagination/Pagination.jsx';
@@ -26,6 +26,14 @@ export const Recipes = () => {
   const categories = useSelector(categoriesList);
 
   const dispatch = useDispatch();
+
+  const recipesRef = useRef(null);
+
+  const scrollToTop = () => {
+    if (recipesRef.current) {
+      recipesRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   useEffect(() => {
     if (!categories?.length) {
@@ -74,6 +82,7 @@ export const Recipes = () => {
         });
 
         setRecipes(response.data);
+        scrollToTop();
         setPagination(state => ({ ...state, total: response.total }));
       } catch (e) {
         setRecipes([]);
@@ -104,13 +113,17 @@ export const Recipes = () => {
 
       <div className={list_styles.recipesSectionWrap}>
         <RecipeFilter />
-        <div className={list_styles.recipesListContent}>
+        <div ref={recipesRef} className={list_styles.recipesListContent}>
           {isLoading ? (
             <Loader />
           ) : (
             <>
               <RecipeList recipes={recipes} />
-              <Pagination total={pagination.total} limit={pagination.limit} />
+              <Pagination
+                total={pagination.total}
+                limit={pagination.limit}
+                onPageChange={scrollToTop}
+              />
             </>
           )}
         </div>
