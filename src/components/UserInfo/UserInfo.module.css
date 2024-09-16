@@ -42,7 +42,7 @@
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 18px;
-  line-height: 24px;
+  line-height: 1.5;
 }
 .userDetails {
   display: flex;
@@ -54,14 +54,14 @@
   align-items: center;
   color: var(--grey);
   font-size: 12px;
-  line-height: 18px;
+  line-height: 1.5;
   font-weight: 500;
 }
 .userDetailsInfoNumber {
   margin-left: 8px;
   font-weight: 700;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.43;
   color: var(--black);
 }
 
@@ -83,7 +83,7 @@
   }
   .userName {
     font-size: 20px;
-    line-height: 24px;
+    line-height: 1.2;
     margin-bottom: 20px;
   }
   .userDetails {
@@ -91,11 +91,11 @@
   }
   .userDetailInfo {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1.43;
   }
   .userDetailsInfoNumber {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
   }
 }
 .userImgInput {

@@ -12,7 +12,7 @@ export const CategoryCard = ({ category }) => {
         <li className={css.all_categories_card}>
           <Link
             to={`categories/${id}`}
-            className={css.all_categories_card_text_link}
+            className={css.all_categories_card_link}
           >
             {name}
           </Link>
@@ -32,10 +32,15 @@ export const CategoryCard = ({ category }) => {
           </Link>
 
           <div className={css.card_textbox}>
-            <h3 className={css.card_text}>{name}</h3>
-            <button className={css.card_button}>
-              <MdArrowOutward size={18} />
-            </button>
+            <Link to={`categories/${id}`}>
+              <h3 className={css.card_text}>{name}</h3>
+            </Link>
+
+            <Link to={`categories/${id}`}>
+              <button className={css.card_button}>
+                <MdArrowOutward size={18} />
+              </button>
+            </Link>
           </div>
         </li>
       )}
