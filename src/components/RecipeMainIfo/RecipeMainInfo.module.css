@@ -58,6 +58,7 @@
   border: none;
   background-color: transparent;
   height: 34px;
+  min-width: 145px;
   text-transform: none;
 }
 

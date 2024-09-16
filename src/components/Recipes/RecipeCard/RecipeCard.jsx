@@ -1,6 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FaRegHeart, FaHeart } from 'react-icons/fa6';
-import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +19,7 @@ import {
   removeRecipeFromFavorites,
 } from '../../../redux/user/user.actions.js';
 import { Loader } from '../../Loader/Loader.jsx';
+import { Icon } from '../../Icon/Icon.jsx';
 
 export const RecipeCard = ({ recipe, className, borderStyles }) => {
   const { id, title, user, description, thumb } = recipe;
@@ -88,13 +88,18 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
   return (
     <li className={clsx([styles.card, className])}>
-      <Link to={`/recipe/${id}`}>
+      <div className={clsx([styles.recipeImage, borderStyles])}>
         <img
           src={thumb}
           alt={title || 'Untitled Recipe'}
-          className={clsx([styles.recipeImage, borderStyles])}
+          className={styles.image}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src =
+              'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+          }}
         />
-      </Link>
+      </div>
       <div className={styles.cardContent}>
         <div className={styles.textWrap}>
           <h3 className={styles.headerCard}>{title || 'Untitled Recipe'}</h3>
@@ -134,11 +139,15 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
                 onClick={e => handleClickFavorites(e, id)}
               >
                 {loading ? (
-                  <Loader size={18} />
-                ) : favorites.includes(id) ? (
-                  <FaHeart size={18} />
+                  <Loader size={18} className={styles.loader} />
                 ) : (
-                  <FaRegHeart size={18} />
+                  <Icon
+                    iconId={'heart'}
+                    className={clsx(
+                      styles.iconHeart,
+                      favorites.includes(id) && styles.iconHeartAccent
+                    )}
+                  />
                 )}
               </button>
             </li>
@@ -148,7 +157,7 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
                 className={styles.iconWrapper}
                 onClick={handleClickToRecipe}
               >
-                <MdArrowOutward size={18} />
+                <Icon iconId={'arrow-up'} className={styles.iconArrow} />
               </button>
             </li>
           </ul>

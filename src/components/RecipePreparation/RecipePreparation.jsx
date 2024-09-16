@@ -14,6 +14,7 @@ import {
   removeRecipeFromFavorites,
 } from '../../redux/user/user.actions.js';
 import { Loader } from '../Loader/Loader.jsx';
+import { useState } from 'react';
 
 const initBtnName = ['Remove from favorites', 'Add to favorites'];
 
@@ -22,7 +23,10 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
   const isLoggedUser = useSelector(selectUser);
   const error = useSelector(selectError);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
+
   const loading = useSelector(selectIsLoading);
+
+  const [showSpinner, setShowSpinner] = useState(loading);
 
   const btnTextContent = favoritesRecipes.includes(recipeId)
     ? initBtnName[0]
@@ -32,23 +36,32 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     if (!isLoggedUser || error?.includes(401)) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
-
+    setShowSpinner(true);
     e.target.disabled = true;
-
     if (!favoritesRecipes.includes(recipeId)) {
-      dispatch(addRecipeToFavorites(recipeId)).then(data => {
-        if (!data.payload.type) {
-          e.target.textContent = initBtnName[0];
-        }
-      });
+      dispatch(addRecipeToFavorites(recipeId))
+        .then(data => {
+          if (!data.payload.type) {
+            e.target.textContent = initBtnName[0];
+          }
+        })
+        .finally(data => {
+          e.target.disabled = false;
+          setShowSpinner(false);
+        });
 
       return;
     }
-    dispatch(removeRecipeFromFavorites(recipeId)).then(data => {
-      if (!data.payload.type) {
-        e.target.textContent = initBtnName[1];
-      }
-    });
+    dispatch(removeRecipeFromFavorites(recipeId))
+      .then(data => {
+        if (!data.payload.type) {
+          e.target.textContent = initBtnName[1];
+        }
+      })
+      .finally(data => {
+        e.target.disabled = false;
+        setShowSpinner(false);
+      });
   };
 
   return (
@@ -61,10 +74,15 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
           </p>
         ))}
       </ul>
-      <div>
-        <Button disabled={loading} onClick={handleClick} className={css.btn}>
-          {loading ? <Loader /> : btnTextContent}
+      <div className={css.buttonWrapper}>
+        <Button onClick={handleClick} className={css.btn}>
+          {btnTextContent}
         </Button>
+        {showSpinner && (
+          <span className={css.spinner}>
+            <Loader />
+          </span>
+        )}
       </div>
     </section>
   );
