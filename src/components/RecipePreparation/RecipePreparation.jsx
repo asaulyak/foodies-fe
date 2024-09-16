@@ -23,9 +23,10 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
   const isLoggedUser = useSelector(selectUser);
   const error = useSelector(selectError);
   const favoritesRecipes = useSelector(selectFavoriteRecipes);
+
   const loading = useSelector(selectIsLoading);
 
-  const [isLoading, setIsLoading] = useState(loading);
+  const [showSpinner, setShowSpinner] = useState(loading);
 
   const btnTextContent = favoritesRecipes.includes(recipeId)
     ? initBtnName[0]
@@ -35,9 +36,8 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
     if (!isLoggedUser || error?.includes(401)) {
       return dispatch(openModal(MODAL_TYPE.signin));
     }
-
+    setShowSpinner(true);
     e.target.disabled = true;
-    setIsLoading(true);
     if (!favoritesRecipes.includes(recipeId)) {
       dispatch(addRecipeToFavorites(recipeId))
         .then(data => {
@@ -47,7 +47,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
         })
         .finally(data => {
           e.target.disabled = false;
-          setIsLoading(false);
+          setShowSpinner(false);
         });
 
       return;
@@ -60,7 +60,7 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
       })
       .finally(data => {
         e.target.disabled = false;
-        setIsLoading(false);
+        setShowSpinner(false);
       });
   };
 
@@ -74,15 +74,15 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
           </p>
         ))}
       </ul>
-      <div>
-        <Button
-          type="button"
-          disabled={isLoading}
-          onClick={handleClick}
-          className={css.btn}
-        >
-          {isLoading ? <Loader /> : btnTextContent}
+      <div className={css.buttonWrapper}>
+        <Button onClick={handleClick} className={css.btn}>
+          {btnTextContent}
         </Button>
+        {showSpinner && (
+          <span className={css.spinner}>
+            <Loader />
+          </span>
+        )}
       </div>
     </section>
   );

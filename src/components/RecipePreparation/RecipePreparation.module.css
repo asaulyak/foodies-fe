@@ -27,6 +27,16 @@
   min-width: 216px;
   color: var(--grey);
 }
+.buttonWrapper {
+  position: absolute;
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
 @media only screen and (min-width: 768px) {
   .title {
