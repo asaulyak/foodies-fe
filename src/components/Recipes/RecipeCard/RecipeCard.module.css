@@ -214,6 +214,11 @@
 .iconWrapper:focus .iconHeart {
   stroke: var(--white);
 }
+
+.iconWrapper:hover .loader {
+  border-color: var(--white) !important;
+}
+
 .iconHeart {
   fill: transparent;
 }

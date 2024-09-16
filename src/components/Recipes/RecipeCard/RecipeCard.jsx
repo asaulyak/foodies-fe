@@ -32,7 +32,7 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
   let isFavoriteRecipe = !isLogged ? false : favorites.includes(id);
 
-  const [loading, setLoading] = useState(isLoading);
+  const [loading, setLoading] = useState(true);
 
   const handleClickFavorites = (e, currentId) => {
     if (!isLogged || error?.includes(401)) {
@@ -138,7 +138,9 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
                 className={styles.iconWrapper}
                 onClick={e => handleClickFavorites(e, id)}
               >
-                {!loading && (
+                {loading ? (
+                  <Loader size={18} className={styles.loader} />
+                ) : (
                   <Icon
                     iconId={'heart'}
                     className={clsx(
