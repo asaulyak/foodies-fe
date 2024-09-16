@@ -32,7 +32,7 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
   let isFavoriteRecipe = !isLogged ? false : favorites.includes(id);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(isLoading);
 
   const handleClickFavorites = (e, currentId) => {
     if (!isLogged || error?.includes(401)) {
