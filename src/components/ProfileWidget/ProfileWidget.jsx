@@ -2,7 +2,7 @@ import css from './ProfileWidget.module.css';
 import { selectUser } from '../../redux/user/user.selectors.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from '../../redux/user/user.actions.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '../Button/Button.jsx';
 import { Link } from 'react-router-dom';
 import { Icon } from '../Icon/Icon.jsx';
@@ -13,6 +13,7 @@ import { MODAL_TYPE } from '../../utils/constants.js';
 export const ProfileWidget = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const profileRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
@@ -32,9 +33,30 @@ export const ProfileWidget = () => {
     onOpenModal(MODAL_TYPE.logout);
   };
 
+  const handleClickOutside = event => {
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setProfileVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (profileVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [profileVisible]);
+
   if (user) {
     return (
-      <div className={css.profile} onClick={() => handleUserClick()}>
+      <div
+        className={css.profile}
+        onClick={() => handleUserClick()}
+        ref={profileRef}
+      >
         <div className={css.user}>
           <div className={css.avatar}>
             <img

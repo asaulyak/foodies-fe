@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import css from './Pagination.module.css';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
 
-const Pagination = ({ total, limit = 10 }) => {
+const Pagination = ({ total, limit = 10, onPageChange }) => {
   const [maxVisibleButtons, setMaxVisibleButtons] = useState(3);
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(total / limit);
@@ -58,6 +58,10 @@ const Pagination = ({ total, limit = 10 }) => {
       searchParams.set('page', String(page));
 
       setSearchParams(searchParams);
+
+      if (onPageChange) {
+        onPageChange();
+      }
     }
   };
 
