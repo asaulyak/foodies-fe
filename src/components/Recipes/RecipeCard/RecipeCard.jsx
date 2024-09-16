@@ -88,11 +88,19 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
 
   return (
     <li className={clsx([styles.card, className])}>
-      <Link to={`/recipe/${id}`}>
+      <Link
+        to={`/recipe/${id}`}
+        className={clsx([styles.recipeImage, borderStyles])}
+      >
         <img
           src={thumb}
           alt={title || 'Untitled Recipe'}
-          className={clsx([styles.recipeImage, borderStyles])}
+          className={styles.image}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src =
+              'https://placehold.co/50x50/BFBEBE/050505?text=Image';
+          }}
         />
       </Link>
       <div className={styles.cardContent}>
