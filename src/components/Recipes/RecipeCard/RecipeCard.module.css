@@ -243,3 +243,19 @@
 .iconWrapper:focus:not(:focus-visible) .iconArrow {
   stroke: var(--black);
 }
+
+.iconWrapper:focus:not(:focus-visible):hover {
+  background-color: var(--black);
+}
+
+.iconWrapper:focus:not(:focus-visible):hover .iconArrow {
+  stroke: var(--white);
+}
+
+.iconWrapper:focus:not(:focus-visible):hover .iconHeart {
+  stroke: var(--white);
+}
+.iconWrapper:focus:not(:focus-visible):hover .iconHeartAccent {
+  fill: var(--white);
+  stroke: var(--white);
+}
