@@ -101,12 +101,12 @@
   border-radius: 100px;
   border: 1px solid var(--grey);
   background-color: transparent;
-  transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: background-color 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .iconWrapper:hover,
 .iconWrapper:focus {
-  transform: scale(1.1);
+  background-color: var(--black);
 }
 
 @media screen and (min-width: 768px) {
@@ -204,4 +204,13 @@
     line-height: 1.5;
     letter-spacing: -0.32px;
   }
+}
+
+.iconArrow {
+  stroke: var(--black);
+}
+
+.iconWrapper:hover .iconArrow,
+.iconWrapper:focus .iconArrow {
+  stroke: var(--white);
 }

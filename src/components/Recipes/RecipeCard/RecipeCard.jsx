@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegHeart, FaHeart } from 'react-icons/fa6';
-import { MdArrowOutward } from 'react-icons/md';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +19,7 @@ import {
   removeRecipeFromFavorites,
 } from '../../../redux/user/user.actions.js';
 import { Loader } from '../../Loader/Loader.jsx';
+import { Icon } from '../../Icon/Icon.jsx';
 
 export const RecipeCard = ({ recipe, className, borderStyles }) => {
   const { id, title, user, description, thumb } = recipe;
@@ -156,7 +156,7 @@ export const RecipeCard = ({ recipe, className, borderStyles }) => {
                 className={styles.iconWrapper}
                 onClick={handleClickToRecipe}
               >
-                <MdArrowOutward size={18} />
+                <Icon iconId={'arrow-up'} className={styles.iconArrow} />
               </button>
             </li>
           </ul>
