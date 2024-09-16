@@ -4,18 +4,20 @@
 .tabsContainerButton {
   width: 100%;
   overflow-x: auto;
-  overflow-y: visible;
+  overflow-y: hidden;
   white-space: nowrap;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   padding-bottom: 14px;
-  scrollbar-color: var(--black) var(--grey);
   margin-bottom: 32px;
+}
+.tabsContainerButton::-webkit-scrollbar {
+  display: none;
 }
 .tabsList {
   display: inline-flex;
   gap: 20px;
 }
-
 .tabItem {
   font-size: 18px;
   color: var(--grey);
@@ -46,4 +48,8 @@
 
 .tabItem:hover {
   color: var(--black);
+}
+
+.listReceipes {
+  margin-bottom: 30px;
 }
