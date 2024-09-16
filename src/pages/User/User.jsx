@@ -85,6 +85,8 @@ const User = () => {
     const fetchSubscribeUser = async () => {
       try {
         const { data } = await http.get('/users/following');
+        console.log(data);
+
         const isUserSubscribed = data.data.some(user => user.id === id);
         setIsSubscribed(isUserSubscribed);
       } catch (error) {
