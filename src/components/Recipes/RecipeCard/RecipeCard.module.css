@@ -43,10 +43,15 @@
   background-color: var(--grey);
   overflow: hidden;
   object-fit: cover;
+  transition: transform 200ms ease-in;
   @media screen and (min-width: 768px) {
     height: 275px;
     border-radius: 30px;
   }
+}
+.recipeImage:hover,
+.recipeImage:focus {
+  transform: scale(1.05);
 }
 
 .image {
@@ -137,6 +142,7 @@
   border: none;
   background-color: transparent;
   height: 32px;
+  min-width: 145px;
   text-transform: none;
 }
 
