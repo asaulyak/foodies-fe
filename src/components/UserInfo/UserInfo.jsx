@@ -43,6 +43,12 @@ export const UserInfo = ({
                 type="file"
                 className={css.userImgInput}
                 onChange={handleFileChange}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src =
+                    'https://placehold.co/120x120/BFBEBE/050505?text=Avatar';
+                }}
+                loading="lazy"
               />
               <label htmlFor="file-upload" className={css.userImgBtn}>
                 <Icon

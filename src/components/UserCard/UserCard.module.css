@@ -84,6 +84,10 @@
   background-color: var(--grey);
 }
 
+.recipeImage {
+  height: 100%;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1439px) {
   .imageItem:last-child {
     display: none;
