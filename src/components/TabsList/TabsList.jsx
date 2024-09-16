@@ -7,6 +7,7 @@ import { UserCard } from '../UserCard/UserCard';
 import { Loader } from '../Loader/Loader';
 import { useSearchParams } from 'react-router-dom';
 import { SIZE } from '../../utils/constants';
+import clsx from 'clsx';
 
 export const TabsList = ({
   isOwner,
@@ -100,7 +101,7 @@ export const TabsList = ({
         </div>
       </div>
 
-      <div className="list-items">
+      <div className={clsx('list-items', css.listReceipes)}>
         {isLoading ? (
           <Loader size={SIZE.medium} />
         ) : listItems?.length === 0 ? (
