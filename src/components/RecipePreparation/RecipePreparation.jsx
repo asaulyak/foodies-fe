@@ -45,7 +45,10 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
             e.target.textContent = initBtnName[0];
           }
         })
-        .finally(setIsLoading(false));
+        .finally(data => {
+          e.target.disabled = false;
+          setIsLoading(false);
+        });
 
       return;
     }
@@ -55,7 +58,10 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
           e.target.textContent = initBtnName[1];
         }
       })
-      .finally(setIsLoading(false));
+      .finally(data => {
+        e.target.disabled = false;
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -69,7 +75,12 @@ export const RecipePreparation = ({ preparation, recipeId }) => {
         ))}
       </ul>
       <div>
-        <Button disabled={isLoading} onClick={handleClick} className={css.btn}>
+        <Button
+          type="button"
+          disabled={isLoading}
+          onClick={handleClick}
+          className={css.btn}
+        >
           {isLoading ? <Loader /> : btnTextContent}
         </Button>
       </div>
