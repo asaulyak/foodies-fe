@@ -232,3 +232,13 @@
   fill: var(--white);
   stroke: var(--white);
 }
+
+.iconWrapper:focus:not(:focus-visible) {
+  background-color: transparent;
+}
+.iconWrapper:focus:not(:focus-visible) .iconHeartAccent {
+  fill: var(--black);
+}
+.iconWrapper:focus:not(:focus-visible) .iconHeart {
+  stroke: var(--black);
+}

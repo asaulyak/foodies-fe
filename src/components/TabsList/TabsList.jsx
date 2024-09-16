@@ -5,9 +5,10 @@ import Pagination from '../Pagination/Pagination';
 import { RecipePreview } from '../RecipePreview/RecipePreview';
 import { UserCard } from '../UserCard/UserCard';
 import { Loader } from '../Loader/Loader';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { SIZE } from '../../utils/constants';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 
 export const TabsList = ({
   isOwner,
@@ -22,8 +23,11 @@ export const TabsList = ({
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
 
+  const navigate = useNavigate();
+  const [listFollowers, setListFollowers] = useState([]);
   let page = searchParams.get('page') || 1;
   useEffect(() => {
+    setListItems([]);
     const fetchData = async () => {
       setIsLoading(true);
       try {
@@ -58,12 +62,27 @@ export const TabsList = ({
         setIsLoading(false);
       }
     };
-
+    const fetchSubscribeUser = async id => {
+      try {
+        const { data } = await http.get('/users/following');
+        if (data) {
+          setListFollowers(data.data);
+        }
+      } catch (error) {
+        toast.error(error.response);
+      }
+    };
+    fetchSubscribeUser();
     fetchData();
   }, [activeTab, page, id, isOwner, totalFollowers]);
   useEffect(() => {
     setActiveTab('recipes');
   }, [id]);
+  const handleClickNavigate = id => {
+    setActiveTab('recipes');
+
+    navigate(`/user/${id}`);
+  };
 
   const handleTabClick = tab => {
     setListItems([]);
@@ -131,6 +150,10 @@ export const TabsList = ({
                     isOwner={isOwner}
                     onDelete={handleDeleteRecipe}
                     activeTab={activeTab}
+                    subscribe={listFollowers.some(
+                      follower => follower.id === item.id
+                    )}
+                    handleClickNavigate={handleClickNavigate}
                   ></UserCard>
                 );
                 //  FOLLOWERS FOLLOWING PREVIEW

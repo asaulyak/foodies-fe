@@ -27,6 +27,7 @@ import { toast } from 'react-toastify';
 const User = () => {
   const [isLoadingUser, setIsloadingUser] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [listFollowers, setListFollowers] = useState(false);
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ const User = () => {
   const owner = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const userCardLoading = useSelector(selectIsLoadingUserInfo);
-
   useEffect(() => {
     setIsloadingUser(isLoading);
   }, [isLoading]);
@@ -82,19 +82,22 @@ const User = () => {
       dispatch(fetchCurrentUser());
     }
 
-    const fetchSubscribeUser = async () => {
+    const fetchSubscribeUser = async id => {
       try {
         const { data } = await http.get('/users/following');
-        console.log(data);
 
-        const isUserSubscribed = data.data.some(user => user.id === id);
+        if (data) {
+          setListFollowers(data.data);
+        }
+
+        const isUserSubscribed = listFollowers.some(user => user.id === id);
         setIsSubscribed(isUserSubscribed);
       } catch (error) {
-        toast.error(error.response.data.message);
+        toast.error(error.response);
       }
     };
 
-    fetchSubscribeUser();
+    fetchSubscribeUser(id);
   }, [dispatch, id, owner]);
 
   return (

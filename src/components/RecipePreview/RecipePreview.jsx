@@ -62,7 +62,17 @@ export const RecipePreview = ({
 
   return (
     <li className={css.recipePreviewItem}>
-      <img className={css.recipePreviewImg} src={thumb} alt="" />
+      <img
+        className={css.recipePreviewImg}
+        src={thumb}
+        alt="Recipe"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src =
+            'https://placehold.co/100x100/BFBEBE/050505?text=Recipe';
+        }}
+        loading="lazy"
+      />
       <div className={css.recipePreviewOverlay}>
         <p className={css.recipePreviewTitle}>{truncatedTitleText}</p>
         <p className={css.recipePreviewDescription}>
