@@ -85,6 +85,7 @@ const User = () => {
     const fetchSubscribeUser = async id => {
       try {
         const { data } = await http.get('/users/following');
+
         if (data) {
           setListFollowers(data.data);
         }
