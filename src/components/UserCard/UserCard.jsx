@@ -3,7 +3,6 @@ import css from './UserCard.module.css';
 import { MdArrowOutward } from 'react-icons/md';
 import { Button } from '../Button/Button.jsx';
 import { http } from '../../http/index.js';
-import { useNavigate } from 'react-router-dom';
 
 const initBtnName = ['follow', 'following'];
 
@@ -15,9 +14,10 @@ export const UserCard = ({
   activeTab,
   ownsRecipes,
   onDelete = null,
+  subscribe,
+  handleClickNavigate,
 }) => {
-  const navigate = useNavigate();
-  const btnName = activeTab === 'followers' ? initBtnName[0] : initBtnName[1];
+  const btnName = subscribe ? initBtnName[1] : initBtnName[0];
 
   const handleClick = async e => {
     if (e.target.textContent === initBtnName[0] && activeTab === 'followers') {
@@ -29,7 +29,6 @@ export const UserCard = ({
     if (e.target.textContent === initBtnName[1] && activeTab === 'followers') {
       await http.delete(`/users/unsubscribe/${id}`).then(data => {
         e.target.textContent = initBtnName[0];
-        onDelete(id);
       });
       return;
     }
@@ -39,10 +38,6 @@ export const UserCard = ({
       });
       return;
     }
-  };
-
-  const handleClickNavigate = () => {
-    navigate(`/user/${id}`);
   };
 
   return (
@@ -90,7 +85,10 @@ export const UserCard = ({
           </li>
         ))}
       </ul>
-      <Button onClick={handleClickNavigate} className={css.secondaryBtn}>
+      <Button
+        onClick={() => handleClickNavigate(id)}
+        className={css.secondaryBtn}
+      >
         <MdArrowOutward />
       </Button>
     </li>
