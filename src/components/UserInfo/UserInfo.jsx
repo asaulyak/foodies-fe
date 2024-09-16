@@ -46,7 +46,7 @@ export const UserInfo = ({
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
                   currentTarget.src =
-                    'https://placehold.co/120x120/BFBEBE/050505?text=Recipe';
+                    'https://placehold.co/120x120/BFBEBE/050505?text=Avatar';
                 }}
                 loading="lazy"
               />
